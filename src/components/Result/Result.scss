@@ -1,0 +1,158 @@
+@import "../../styles/global/variables.scss";
+
+.result {
+  width: 100%;
+  border-top: 1px solid $light;
+  position: relative;
+  height: 100%;
+  padding: 0 $spacer;
+
+  .result-title {
+    display: flex;
+    align-items: center;
+    height: $bottom-nav-height;
+  }
+
+  .result-content {
+    height: calc(100% - #{$bottom-nav-height});
+  }
+
+  .result-album {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: $spacer;
+    background-color: $white;
+    padding: 2rem;
+    padding-bottom: calc(2rem - 10px);
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 3px;
+      height: 100%;
+      background-color: $primary;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform-origin: center bottom;
+      transform: scaleY(0);
+      transition: transform $transition ease;
+    }
+
+    &:hover,
+    &.active {
+      &::after {
+        transform: scaleY(1);
+      }
+    }
+
+    h2 {
+      color: $dark;
+    }
+  }
+
+  .result-album-inner {
+    width: 100%;
+    border: 1px solid $light;
+    padding: $spacer;
+    background-color: $white;
+  }
+
+  .result-artist {
+    margin-top: 0;
+    background-color: $white;
+    margin-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .artist-name {
+    background-color: $light;
+    border-radius: 30px;
+    padding: 6px 16px;
+    margin-right: 10px;
+    color: $dark;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .result-tittle {
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $dark;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $light;
+
+    > * {
+      width: 40%;
+      padding: 0 10px;
+
+      &:first-child {
+        width: 20%;
+        padding: 0;
+      }
+      &:last-child {
+        padding: 0;
+      }
+    }
+  }
+  .result-track {
+    font-size: 1rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid $light;
+
+    > * {
+      width: 40%;
+      padding: 0 10px;
+
+      &:first-child {
+        width: 20%;
+        padding: 0;
+      }
+      &:last-child {
+        padding: 0;
+      }
+    }
+  }
+
+  .result-errors {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: danger;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: $danger;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+
+    .result-errors-count {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      margin-left: 10px;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      background-color: $danger;
+    }
+  }
+
+  @include media-breakpoint-down(md) { 
+    padding: 0;
+    height: 100vh;
+   }
+}

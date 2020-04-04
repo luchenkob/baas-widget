@@ -1,0 +1,49 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+$primary:                     #3697d9;
+$secondary:                   #88c217;
+$success:                     $secondary;
+$light:                       #f4f4f4;
+$warning:                     #ffc107;
+$info:                        #17a2b8;
+$danger:                      #ff0451;
+$white:                       #fff;
+$dark:                        #333333;
+$cover:                       #f9f9f9;
+$gray:                        #777777;
+
+$theme-colors: ();
+
+$theme-colors: map-merge(
+  (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark,
+    "cover":      $cover,
+  ),
+  $theme-colors
+);
+
+$spacer:                        2rem;
+$border-color:                  $light;
+
+$font-family-base:              "Roboto", sans-serif;
+$font-family-secondary:         "Raleway", sans-serif;
+$body-color:                    $gray;
+$headings-font-family:          $font-family-secondary;
+$headings-color:                $dark;
+$font-weight-base:              300;
+
+$bottom-nav-height:             100px;
+
+$transition:                    300ms;
+
+$lg:                            1140px;
+$md:                            991px;
