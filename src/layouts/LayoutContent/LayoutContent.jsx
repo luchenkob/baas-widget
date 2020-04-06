@@ -6,8 +6,8 @@ import "./LayoutContent.scss"
 const LayoutContent = ({ slots }) => {
 
   return (
-    <div className="lauout-content">
-      <div className="lauout-content-inner">
+    <div className="layout-content">
+      <div className="layout-content-inner">
         <Container className="h-100" fluid>
           <Row className="h-100">
             <Col className="h-100">
@@ -16,7 +16,7 @@ const LayoutContent = ({ slots }) => {
           </Row>
         </Container>
       </div>
-      <div className="lauout-content-nav">
+      <div className="layout-content-nav">
         <Container fluid>
           <Row>
             <Col className="text-md-right text-center">
