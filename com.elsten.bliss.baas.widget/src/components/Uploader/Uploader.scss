@@ -28,41 +28,4 @@
       color: $primary;
     }
   }
-
-  .uploader-processing {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    text-align: center;
-    width: 100vw;
-    height: 100vh;
-    transform: scaleY(0);
-    transform-origin: center bottom;
-    display: flex;
-    pointer-events: none;
-    align-items: center;
-    justify-content: center;
-    background-color: $light;
-    z-index: 1;
-    transition: opacity $transition ease, transform $transition*2 ease;
-
-    span {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all $transition ease;
-    }
-
-    &.active {
-      opacity: 1;
-      transform: scaleY(1);
-
-      span {
-        transition-delay: $transition*2;
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-    }
-  }
 }

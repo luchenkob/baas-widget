@@ -1,0 +1,21 @@
+{
+  "name": "baas",
+  "version": "0.0.0",
+  "description": "The BaaS API allows the assessment of a set of \"storage-node\"s. It operates an asynchronous model - first a new assessment is POSTed to /assessment, then its progress can be monitored via a GET to /job. When the job is complete, GET /assessment will return the details of the assessment.",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "cors": "^2.8.5",
+    "js-yaml": "^3.3.0",
+    "oas3-tools": "^2.0.2"
+  }
+}

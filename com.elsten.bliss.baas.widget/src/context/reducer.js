@@ -15,6 +15,11 @@ export default function (state, action) {
         ...state,
         ...action.data
       }
+    case 'SET_NOTIFICATION':
+      return {
+        ...state,
+        ...action.data
+      }
     default:
       return state;
   }

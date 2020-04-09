@@ -1,0 +1,15 @@
+@import "../../styles/global/variables.scss";
+
+.notification {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all $transition ease;
+
+  &.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

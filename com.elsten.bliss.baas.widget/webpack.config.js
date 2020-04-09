@@ -44,6 +44,9 @@ module.exports = {
     }
   ]
 },
+node: {
+  fs: "empty"
+},
 resolve: { extensions: ["*", ".js", ".jsx"] },
 output: {
   path: path.resolve("./dist/assets"),

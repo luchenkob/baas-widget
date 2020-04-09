@@ -17,12 +17,12 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     tempFiles = [];
     result = {};
 
-    dispatch({ type: "SET_DATA", data: { isProcessing: true, len: length, cur: current, errors: errors } })
+    dispatch({ type: "SET_DATA", data: { isProcessing: true, len: length, cur: current, errors: errors,  processingMessage: `Processing ${current} of ${length}`}})
 
     if (acceptedFiles) {
       acceptedFiles.forEach(file => {
         musicMetadata.parseBlob(file).then(metadata => {
-          tempFiles.push({ ...metadata, file: file.name });
+          tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path });
           setProgress();
         },
           error => {
@@ -41,7 +41,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
   const setProgress = () => {
 
     current++;
-    dispatch({ type: "SET_DATA", data: { isProcessing: true, cur: current, len: length, errors: errors } })
+    dispatch({ type: "SET_DATA", data: { isProcessing: true, cur: current, len: length, errors: errors, processingMessage: `Processing ${current} of ${length}` } })
 
     if (current == length) {
       filterData();
@@ -75,12 +75,11 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
     sortData();
 
-    dispatch({ type: "SET_DATA", data: { isProcessing: false, files: result, errors: errors, step: 2 } })
+    dispatch({ type: "SET_DATA", data: { isProcessing: false, files: result, origFiles: tempFiles, errors: errors, step: 2 } })
   }
 
   return (
     <div className="uploader">
-      <div className={`uploader-processing ${isProcessing ? 'active' : ''}`}><span>Processing {cur} of {len}</span></div>
       <div className={`uploader-inner ${isDragActive ? "active" : ''}`} {...getRootProps()}>
         <input {...getInputProps()} />
         <p className="mb-0">Drag 'n' drop music files here, or click to select</p>
