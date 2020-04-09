@@ -55,11 +55,11 @@ const ViewResult = (state) => {
     });
 
     ApiService.post("assessment", data).then(result => {
-      dispatch({ type: "SET_STEP", data: { step: 3, isNotification: true, notificationMessage: "", notificationType: "", isBussy: false } })
+      localStorage.setItem('assessment', '542');
+      dispatch({ type: "SET_STEP", data: { step: 3 } })
     }, error => {
       dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `Error: ${error}`, notificationType: "danger", isBussy: false} })
     })
-
   }
 
   return (

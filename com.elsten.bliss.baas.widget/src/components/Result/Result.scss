@@ -17,6 +17,32 @@
     height: calc(100% - #{$bottom-nav-height});
   }
 
+  .result-inline-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .result-assesment {
+    width: 100%;
+    border: 1px solid $light;
+    padding: $spacer;
+    background-color: $white;
+  }
+
+  .result-compliances {
+    width: 100%;
+    display: flex;
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    
+    .result-compliance{
+      padding: 20px;
+      margin: 1rem;
+      border: 1px solid $border-color;
+    }
+  }
+
   .result-album {
     display: flex;
     flex-direction: column;

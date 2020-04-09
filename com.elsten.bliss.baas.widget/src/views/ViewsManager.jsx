@@ -1,7 +1,7 @@
 import React from "react";
 import ViewUploader from "./ViewUploader/ViewUploader";
 import ViewResult from "./ViewResult/ViewResult";
-import ViewAssess from "./ViewAssess/ViewAssess";
+import ViewAssessment from "./ViewAssessment/ViewAssessment";
 
 const ViewsManager = (state) => {
 
@@ -16,7 +16,7 @@ const ViewsManager = (state) => {
         return <ViewResult {...state} />;
       }
       case 3: {
-        return <ViewAssess {...state} />;
+        return <ViewAssessment {...state} />;
       }
       default:{
         return <ViewUploader {...state} />

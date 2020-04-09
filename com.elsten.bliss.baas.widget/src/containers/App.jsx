@@ -15,12 +15,14 @@ const App = () => {
     cur: 0,
     files: {},
     origFiles:[],
+    assessments: [],
     errors: [],
     step:1,
     activeAlbum: '',
+    activeAssessment: 0,
     processingMessage: 'Loading',
     notificationMessage: "",
-    notificationType: "primary" }
+    notificationType: "primary", }
     );
 
   return (
