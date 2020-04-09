@@ -1,3 +1,3 @@
 export const appSettings = {
-  api: "http://localhost:8080/"
+  api: "https://virtserver.swaggerhub.com/zorasic/baa-s/0.0.0/"
 }
