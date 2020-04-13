@@ -32,12 +32,15 @@ const Assessment = ({ activeAssessment, ...props }) => {
           if (part.state == "NONCOMPLIANT") return false;
         });
       } else {
-        return false;
+        return true;
       }
-      return true;
     } else {
-      return false;
+      return true;
     }
+  }
+
+  const getDetail = (data, i) => {
+    return data.split(",")[i] ? data.split(",")[i] : "-";
   }
 
   const renderAssessment = () => {
@@ -54,7 +57,27 @@ const Assessment = ({ activeAssessment, ...props }) => {
             {
               assessments[active].assessment.compliance.parts.map((part, i) => (
                 <div className="result-compliance" key={`com-${i}`}>
-                  <span>{part.summary}</span>
+                  <div className="result-compliance-inner">
+                    <div className="container-fluid p-0">
+                      <div className="row">
+                        <div className="col">
+                          <h5 className="text-danger mb-4">{part.summary}</h5>
+                        </div>
+                      </div>
+                      <div className="row">
+                        {part.responses.map((response, i) => (
+                          <div className="col-md-4" key={`alt-${i}`}>
+                            <div className="result-compliance-alternative">
+                              <div className="result-compliance-alternative-title">{getDetail(part.detail, i)}</div>
+                              <p className="text-center mt-3"><strong>Alternative:</strong></p>
+                              <div className="result-compliance-alternative-art" style={{ background: `url(${response.url})` }}>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))
             }
