@@ -14,7 +14,7 @@
   }
 
   .result-content {
-    height: calc(100% - #{$bottom-nav-height});
+    height: calc(100% - #{$bottom-nav-height} );
   }
 
   .result-inline-title {

@@ -2,13 +2,13 @@
 
 .preloader {
   display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   text-align: center;
-  width: 100vw;
-  height: 100vh;
-  transform: scaleY(0);
+  width: 260px;
+  height: 100px;
+  transform: scaleY(0) translateY(-50%) translateX(-50%);
   transform-origin: center bottom;
   display: flex;
   pointer-events: none;
@@ -16,7 +16,10 @@
   justify-content: center;
   background-color: $light;
   z-index: 1;
-  transition: opacity $transition ease, transform $transition*2 ease;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+  transition: opacity $transition/2 ease, transform $transition ease;
 
   span {
     opacity: 0;
@@ -26,13 +29,13 @@
 
   &.active {
     opacity: 1;
-    transform: scaleY(1);
+    transition: opacity $transition ease, transform $transition * 2 ease;
+    transform: scaleY(1) translateY(-50%) translateX(-50%);
 
     span {
-      transition-delay: $transition*2;
+      transition-delay: $transition * 2;
       opacity: 1;
       transform: translateY(0);
     }
-
   }
 }

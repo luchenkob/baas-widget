@@ -7,10 +7,12 @@
   align-items: center;
   height: 100%;
   position: relative;
+  padding: 1rem;
 
   .uploader-inner {
     width: 800px;
-    height: calc(100% - #{$spacer*2});
+    min-height: 100px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

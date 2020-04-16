@@ -41,7 +41,8 @@ $headings-font-family:          $font-family-secondary;
 $headings-color:                $dark;
 $font-weight-base:              300;
 
-$bottom-nav-height:             100px;
+$bottom-nav-height:             60px;
+$app-max-height:                100%;
 
 $transition:                    300ms;
 
@@ -50,6 +51,3 @@ $badge-padding-x:               1em;
 $badge-font-size:               75%;
 
 $yiq-contrasted-threshold:      200;
-
-$lg:                            1140px;
-$md:                            991px;
