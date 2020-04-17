@@ -7,15 +7,14 @@ import { ApiService } from "../../services/ApiService";
 
 const ViewAssessment = (state) => {
 
-  const { dispatch } = useContext(Context);
+  const { dispatch, config } = useContext(Context);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     const id = localStorage.getItem('assessment');
 
-    ApiService.get(`assessment/${id}`).then(result => {
+    ApiService.get(`assessment/${id}`, config).then(result => {
       setIsMounted(true);
-      console.log(result.data);
       dispatch({ type: "SET_ASSESSMENTS", data: { assessments: result.data, isNotification: false, isBussy: false } })
     }, error => {
       dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `Error: ${error}`, notificationType: "danger", isBussy: false} })

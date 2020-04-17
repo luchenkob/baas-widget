@@ -11,7 +11,7 @@ const sizeOf = require('image-size');
 const ViewResult = (state) => {
 
   const { isBussy } = state;
-  const { dispatch } = useContext(Context);
+  const { dispatch, config } = useContext(Context);
 
   const handleUploadAgain = () => {
     dispatch({ type: "SET_STEP", data: { step: 1 } })
@@ -54,7 +54,7 @@ const ViewResult = (state) => {
       );
     });
 
-    ApiService.post("assessment", data).then(result => {
+    ApiService.post("assessment", data, config).then(result => {
       localStorage.setItem('assessment', '542');
       dispatch({ type: "SET_STEP", data: { step: 3 } })
     }, error => {

@@ -4,9 +4,11 @@ import Preloader from "../components/Preloader/Preloader"
 import Notification from "../components/Notification/Notification"
 import { Context } from "../context/context";
 import reducer from "../context/reducer";
-import {appSettings} from "../defines/settings";
+import {appDefaultConfig} from "../defines/config";
 
-const App = ({config}) => {
+const App = ({userConfig}) => {
+
+  const config = {...appDefaultConfig, ...userConfig};
 
   const [state, dispatch] = useReducer(reducer, {
     isProcessing: false,
@@ -27,11 +29,9 @@ const App = ({config}) => {
   }
   );
 
-  console.log(config)
-
   return (
-    <div className="baas" style={{height: config.height ? config.height : appSettings.defaultConfig.height}}>
-      <Context.Provider value={{ dispatch }}>
+    <div className="baas" style={{height: config.height}}>
+      <Context.Provider value={{ dispatch, config }}>
         <Notification {...state} />
         <Preloader {...state} />
         <ViewsManager {...state} />

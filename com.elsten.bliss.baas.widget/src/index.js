@@ -5,5 +5,5 @@ import "./styles/ui.scss";
 
 export const init = (config) => {
   const target = config ? config.target ? config.target : "#baas-widget" : "#baas-widget";
-  ReactDOM.render(<App config={config} />, document.querySelector(target));
+  ReactDOM.render(<App userConfig={config} />, document.querySelector(target));
 }
