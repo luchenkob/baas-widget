@@ -15,6 +15,7 @@ const ViewAssessment = (state) => {
 
     ApiService.get(`assessment/${id}`, config).then(result => {
       setIsMounted(true);
+      console.log(result);
       dispatch({ type: "SET_ASSESSMENTS", data: { assessments: result.data, isNotification: false, isBussy: false } })
     }, error => {
       dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `Error: ${error}`, notificationType: "danger", isBussy: false} })

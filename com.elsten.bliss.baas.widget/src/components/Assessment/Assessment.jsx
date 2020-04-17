@@ -51,8 +51,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
       active ? active == activeAssessment : active = 0;
 
       return (
-        <div className="result-assesment">
-          <h2>Assessment: {assessments[active].assessment.cost}</h2>
+        <div className="result-assessment">
+          <h4>Assessment: {assessments[active].assessment.cost}</h4>
           <div className="result-compliances">
             {
               assessments[active].assessment.compliance.parts.map((part, i) => (
@@ -66,7 +66,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                       </div>
                       <div className="row">
                         {part.responses.map((response, i) => (
-                          <div className="col-md-4" key={`alt-${i}`}>
+                          <div className="col-lg-4" key={`alt-${i}`}>
                             <div className="result-compliance-alternative">
                               <div className="result-compliance-alternative-title">{getDetail(part.detail, i)}</div>
                               <p className="text-center mt-3"><strong>Alternative:</strong></p>
@@ -92,7 +92,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
     return assessments.map((assessment, i) => (
       <div className={`result-album ${activeAssessment ? i == activeAssessment ? "active" : '' : i == 0 ? "active" : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(i) }}>
         <div className="result-inline-title">
-          <h2 className="mb-1">{assessment.album.title}</h2>
+          <h5 className="mb-1">{assessment.album.title}</h5>
           {isCompliance(assessment.assessment.compliance) ? <span className="badge badge-success">Done</span> : <span className="badge badge-danger">Missed</span>}
         </div>
         <div className="result-artist">{getArtists(assessment.album.artists)}</div>
@@ -106,7 +106,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <div className="result-errors"><span>Errors (wrong files):</span><div className="result-errors-count">{errors.length}</div></div>
       )}
       <div className="result-title">
-        <h2>Assessing</h2>
+        <h4>Assessing</h4>
       </div>
       <div className="result-content">
         <Container fluid className="h-100 p-0" fluid>

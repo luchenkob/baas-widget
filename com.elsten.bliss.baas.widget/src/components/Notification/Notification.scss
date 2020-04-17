@@ -1,7 +1,7 @@
 @import "../../styles/global/variables.scss";
 
 .notification {
-  position: fixed;
+  position: absolute;
   top: 1rem;
   right: 1rem;
   transform: translateY(-100%);
