@@ -54,6 +54,8 @@ const ViewResult = (state) => {
       );
     });
 
+    if(config.rules) data.rules = config.rules
+
     ApiService.post("assessment", data, config).then(result => {
       localStorage.setItem('assessment', '542');
       dispatch({ type: "SET_STEP", data: { step: 3 } })

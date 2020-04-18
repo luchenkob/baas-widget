@@ -16,6 +16,18 @@
   <script>
     baasWidget.init({
       target: "#baas-widget",
+      rules: {
+        images: {
+          maxWidth: 300,
+          maxHeight: 300
+        },
+        tags: {
+          album_name: {
+            sync: "SYNCED",
+            required: true
+          }
+        }
+      }
     }); 
   </script>
 </body>
