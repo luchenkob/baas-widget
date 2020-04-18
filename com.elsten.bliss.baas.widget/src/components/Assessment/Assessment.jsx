@@ -92,7 +92,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
     return assessments.map((assessment, i) => (
       <div className={`result-album ${activeAssessment ? i == activeAssessment ? "active" : '' : i == 0 ? "active" : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(i) }}>
         <div className="result-inline-title">
-          <h5 className="mb-1">{assessment.album.title}</h5>
+          <h5 className="mb-2">{assessment.album.title}</h5>
           {isCompliance(assessment.assessment.compliance) ? <span className="badge badge-success">Done</span> : <span className="badge badge-danger">Missed</span>}
         </div>
         <div className="result-artist">{getArtists(assessment.album.artists)}</div>
@@ -111,10 +111,10 @@ const Assessment = ({ activeAssessment, ...props }) => {
       <div className="result-content">
         <Container fluid className="h-100 p-0" fluid>
           <Row className="h-100">
-            <Col md={6} className="h-100 h-md-auto overflow-auto">
+            <Col md={6} className="h-100 h-md-auto overflow-y-auto">
               {renderAlbums()}
             </Col>
-            <Col md={6} className="h-100 h-md-auto overflow-auto">
+            <Col md={6} className="h-100 h-md-auto overflow-y-auto">
               {renderAssessment()}
             </Col>
           </Row>

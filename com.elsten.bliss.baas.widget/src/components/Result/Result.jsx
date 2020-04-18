@@ -63,7 +63,7 @@ const Result = ({ activeAlbum, ...props }) => {
     if (files) {
       return Object.keys(files).map((file, i) => (
         <div className={`result-album ${activeAlbum ? file == activeAlbum ? "active" : '' : i == 0 ? "active" : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(file) }}>
-          <h5 className="mb-1">{file}</h5>
+          <h5 className="mb-2">{file}</h5>
           <div className="result-artist">{getUniqueArtists(files[file])}</div>
         </div>
       ));
@@ -84,10 +84,10 @@ const Result = ({ activeAlbum, ...props }) => {
       <div className="result-content">
         <Container fluid className="h-100 p-0" fluid>
           <Row className="h-100">
-            <Col md={6} className="h-100 h-md-auto overflow-auto">
+            <Col md={6} className="h-100 h-md-auto overflow-y-auto">
               {renderAlbums()}
             </Col>
-            <Col md={6} className="h-100 h-md-auto overflow-auto">
+            <Col md={6} className="h-100 h-md-auto overflow-y-auto">
               {renderList()}
             </Col>
           </Row>

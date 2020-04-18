@@ -30,22 +30,15 @@ h2 {
 	text-align: right;
 }
 
-.mb-0 {
-  margin-bottom: 0 !important;
-}
-
-.mb-1 {
-  margin-bottom: 1rem !important;
-}
-
-.mt-0 {
-  margin-top: 0 !important;
-}
-
 .m-0 {
   margin: 0 !important;
 }
 
  .text-medium {
    font-weight: 600;
+ }
+
+ .overflow-y-auto {
+   overflow-y: auto;
+   overflow-x: hidden;
  }
