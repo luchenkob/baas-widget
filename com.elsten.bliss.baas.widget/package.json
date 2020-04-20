@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --open",
+    "start": "cross-var webpack-dev-server --inline --hot --open --endpoint=$npm_config_endpoint",
     "build": "webpack --mode production"
   },
   "author": "Darfys",
@@ -26,6 +26,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "cross-var": "^1.1.0",
     "image-size": "^0.8.3",
     "music-metadata-browser": "^2.0.5",
     "node-sass": "^4.12.0",
