@@ -8,7 +8,7 @@ import { appDefaultConfig } from "../defines/config";
 
 const App = ({ userConfig }) => {
 
-  endpoint !== '$npm_config_endpoint' ? userConfig.endpoint = endpoint : null;
+  if(endpoint) endpoint !== '$npm_config_endpoint' ? userConfig.endpoint = endpoint : null;
   const config = { ...appDefaultConfig, ...userConfig, appWidth: userConfig.target.offsetWidth };
 
   const [state, dispatch] = useReducer(reducer, {
