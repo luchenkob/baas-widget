@@ -5,8 +5,9 @@ import Notification from "../components/Notification/Notification"
 import { Context } from "../context/context";
 import reducer from "../context/reducer";
 import { appDefaultConfig } from "../defines/config";
+import { useTranslation } from "react-i18next";
 
-const App = ({ userConfig }) => {
+const App = ({ userConfig, i18n }) => {
 
   if(endpoint) endpoint !== '$npm_config_endpoint' ? userConfig.endpoint = endpoint : null;
   const config = { ...appDefaultConfig, ...userConfig, appWidth: userConfig.target.offsetWidth };

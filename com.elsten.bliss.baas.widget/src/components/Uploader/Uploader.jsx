@@ -1,6 +1,8 @@
 import React, { useCallback, useContext } from "react";
 import { useDropzone } from 'react-dropzone';
 import { Context } from "../../context/context";
+import { useTranslation } from "react-i18next";
+
 const musicMetadata = require('music-metadata-browser');
 
 import "./Uploader.scss";
@@ -9,6 +11,8 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
   const { dispatch } = useContext(Context);
   let length = 0, current = 0, errors = [], tempFiles = [], result = {};
+
+  const { t } = useTranslation();
 
   const onDrop = useCallback(acceptedFiles => {
 
@@ -60,7 +64,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
   const setProgress = () => {
 
     current++;
-    dispatch({ type: "SET_DATA", data: { isProcessing: true, cur: current, len: length, errors: errors, processingMessage: `Processing ${current} of ${length}` } })
+    dispatch({ type: "SET_DATA", data: { isProcessing: true, cur: current, len: length, errors: errors, processingMessage: `${t('Processing')} ${current} ${t('of')} ${length}` } })
 
     if (current == length) {
       filterData();
@@ -81,7 +85,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
       if (tempFile.type !== "image/jpeg" && tempFile.type !== "image/png") {
 
-        let key = typeof tempFile.common.album === "undefined" ? "Unknown" : tempFile.common.album;
+        let key = typeof tempFile.common.album === "undefined" ? t('Unknown') : tempFile.common.album;
 
         if (!result[key]) result[key] = [];
 
@@ -104,7 +108,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     <div className="uploader">
       <div className={`uploader-inner ${isDragActive ? "active" : ''}`} {...getRootProps()}>
         <input {...getInputProps()} />
-        <p className="mb-0">Drag 'n' drop music files here, or click to select</p>
+        <p className="mb-0">{t('Drag and drop music files here')}</p>
       </div>
     </div>
   );

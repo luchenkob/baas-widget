@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/context";
 import { Container, Row, Col } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 import "./Result.scss";
 
@@ -14,6 +15,7 @@ const Result = ({ activeAlbum, ...props }) => {
 
   const { isProcessing, files, cur, len, errors } = props;
   const { dispatch } = useContext(Context);
+  const { t } = useTranslation();
 
   const getUniqueArtists = (traks) => {
     let temp = [];
@@ -42,9 +44,9 @@ const Result = ({ activeAlbum, ...props }) => {
       return (
         <div className="result-album-inner">
           <div className="result-tittle">
-            <div>№</div>
-            <div>Name</div>
-            <div>Filename</div>
+            <div>{t('№')}</div>
+            <div>{t('Name')}</div>
+            <div>{t('Filename')}</div>
           </div>
           {files[active].map((track, i) => (
             <div className="result-track" key={`t-${i}`}>
@@ -73,13 +75,13 @@ const Result = ({ activeAlbum, ...props }) => {
   return (
     <div className={`result`}>
       {errors.length > 0 && (
-        <div className="result-errors"><span>Errors (wrong files):</span><div className="result-errors-count">{errors.length}</div></div>
+        <div className="result-errors"><span>{t('Errors (wrong files)')}:</span><div className="result-errors-count">{errors.length}</div></div>
       )}
       {isProcessing && (
-        <div className="result-processing">Processing {cur} of {len}</div>
+        <div className="result-processing">{t('Processing')} {cur} {t('of')} {len}</div>
       )}
       <div className="result-title">
-        <h4>Albums found {Object.keys(files).length}</h4>
+        <h4>{t('Albums found')} {Object.keys(files).length}</h4>
       </div>
       <div className="result-content">
         <Container fluid className="h-100 p-0" fluid>
