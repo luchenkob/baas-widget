@@ -17,19 +17,38 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     tempFiles = [];
     result = {};
 
-    dispatch({ type: "SET_DATA", data: { isProcessing: true, len: length, cur: current, errors: errors,  processingMessage: `Processing ${current} of ${length}`}})
+    dispatch({ type: "SET_DATA", data: { isProcessing: true, len: length, cur: current, errors: errors, processingMessage: `Processing ${current} of ${length}` } })
 
     if (acceptedFiles) {
       acceptedFiles.forEach(file => {
-        musicMetadata.parseBlob(file).then(metadata => {
-          tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path });
-          setProgress();
-        },
-          error => {
-            console.log(error)
-            errors.push(error)
-            setProgress();
+
+        if (file.type === "image/jpeg" || file.type === "image/png") {
+
+          const reader = new FileReader();
+
+          reader.onload = ((entry) => {
+            const image = new Image();
+            image.src = entry.target.result;
+            image.onload = () => {
+              tempFiles.push({ file: file.name, size: file.size, path: file.path, type: file.type, width: image.width, height: image.height });
+              errors.push(`mime-type:${file.type}`)
+              setProgress();
+            };
           });
+
+          reader.readAsDataURL(file);
+
+        } else {
+          musicMetadata.parseBlob(file).then(metadata => {
+            tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path, type: file.type });
+            setProgress();
+          },
+            error => {
+              console.log(error)
+              errors.push(error)
+              setProgress();
+            });
+        }
       });
     }
 
@@ -60,17 +79,20 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
     tempFiles.forEach((tempFile) => {
 
-      let key = typeof tempFile.common.album === "undefined" ? "Unknown" : tempFile.common.album;
+      if (tempFile.type !== "image/jpeg" && tempFile.type !== "image/png") {
 
-      if (!result[key]) result[key] = [];
+        let key = typeof tempFile.common.album === "undefined" ? "Unknown" : tempFile.common.album;
 
-      result[key].push(
-        {
-          title: tempFile.common.title,
-          artist: tempFile.common.artist,
-          no: tempFile.common.track.no,
-          file: tempFile.file
-        })
+        if (!result[key]) result[key] = [];
+
+        result[key].push(
+          {
+            title: tempFile.common.title,
+            artist: tempFile.common.artist,
+            no: tempFile.common.track.no,
+            file: tempFile.file
+          })
+      }
     });
 
     sortData();

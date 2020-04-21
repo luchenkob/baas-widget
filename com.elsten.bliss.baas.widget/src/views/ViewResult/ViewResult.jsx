@@ -25,33 +25,48 @@ const ViewResult = (state) => {
     dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: "Data is being processed", notificationType: "primary", isBussy: true} })
 
     origFiles.forEach((file) => {
-      data["storage-nodes"].push(
-        {
-          "lib": "",
-          "path": file.path,
-          "fields": {
-            "ALBUM_NAME": file.common.album ? file.common.album : null,
-            "ARTIST": file.common.artist ? file.common.artist : null,
-            "YEAR": file.common.year ? file.common.year : null,
-            "GENRE": file.common.genre ? file.common.genre : null,
-            "TRACK_NAME": file.common.title ? file.common.title : null,
-            "ALBUM_ARTIST": file.common.albumartist ? file.common.albumartist : null,
-            "COVER_ART": file.common.picture ? {
-              "width": sizeOf(file.common.picture[0].data).width,
-              "height": sizeOf(file.common.picture[0].data).height,
-              "size-bytes": file.common.picture[0].data.byteLength,
-              "codec": getFilteredCodec(file.common.picture[0].format),
-            } : {},
-            "COMPILATION": true,
-            "TRACK_NUMBER": file.common.track.no ? file.common.track.no : null,
-            "DISC_NUMBER": file.common.disk.no ? file.common.disk.no : null,
-            "empty": true,
-            "additionalProp1": {},
-            "additionalProp2": {},
-            "additionalProp3": {}
+
+      if(file.type != "image/jpeg" && file.type != "image/png") {
+        data["storage-nodes"].push(
+          {
+            "lib": "",
+            "path": file.path,
+            "mime-type": file.type,
+            "fields": {
+              "ALBUM_NAME": file.common.album ? file.common.album : null,
+              "ARTIST": file.common.artist ? file.common.artist : null,
+              "YEAR": file.common.year ? file.common.year : null,
+              "GENRE": file.common.genre ? file.common.genre : null,
+              "TRACK_NAME": file.common.title ? file.common.title : null,
+              "ALBUM_ARTIST": file.common.albumartist ? file.common.albumartist : null,
+              "COVER_ART": file.common.picture ? {
+                "width": sizeOf(file.common.picture[0].data).width,
+                "height": sizeOf(file.common.picture[0].data).height,
+                "size-bytes": file.common.picture[0].data.byteLength,
+                "codec": getFilteredCodec(file.common.picture[0].format),
+              } : {},
+              "COMPILATION": true,
+              "TRACK_NUMBER": file.common.track.no ? file.common.track.no : null,
+              "DISC_NUMBER": file.common.disk.no ? file.common.disk.no : null,
+              "empty": true,
+              "additionalProp1": {},
+              "additionalProp2": {},
+              "additionalProp3": {}
+            }
           }
-        }
-      );
+        );
+      }else {
+        data["storage-nodes"].push(
+          {
+            "lib": "",
+            "path": file.path,
+            "mime-type": file.type,
+            "width": file.width,
+            "height": file.height,
+            "size-bytes": file.size
+          }
+        );
+      }
     });
 
     if(config.rules) data.rules = config.rules
