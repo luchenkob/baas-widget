@@ -21,6 +21,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .badge {
+      margin-left: 0.5rem;
+    }
   }
 
   .result-assessment {
@@ -32,22 +36,17 @@
 
   .result-compliances {
     width: 100%;
-    display: flex;
     width: calc(100% + 2rem);
     margin-left: -1rem;
     
     .result-compliance{
       margin: 1rem;
-      width: 100%;
 
       .result-compliance-inner {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-
         .result-compliance-alternative {
           padding: 1rem;
           border: 1px solid $border-color;
+          margin-bottom: 1rem;
 
           .result-compliance-alternative-title {
             height: 60px;
@@ -206,6 +205,20 @@
 
   @include media-breakpoint-down(md) { 
     padding: 0;
+
+    .result-inline-title {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .result-badges {
+      .badge {
+        &:first-child{
+          margin-left: 0;
+        }
+      }
+    }
 
     .result-compliances {
  

@@ -29,10 +29,19 @@ const Assessment = ({ activeAssessment, ...props }) => {
   }
 
   const complianceNotification = (compliance) => {
+    let badges = [];
+
     if (compliance) {
       if (compliance.parts) {
         for (let part of compliance.parts) {
-          if (part.state == "NONCOMPLIANT") return <span className="badge badge-danger">{t(capitalize(part.source.policyDescriptor))}</span>
+          if (part.state == "NONCOMPLIANT") {
+            badges.push(<span className="badge badge-danger">{t(capitalize(part.source.policyDescriptor))}</span>);
+          }
+        }
+        if (badges.length == 0) {
+          return <span className="badge badge-success">{t('Done')}</span>
+        } else {
+          return badges;
         }
       } else {
         return <span className="badge badge-success">{t('Done')}</span>;
@@ -53,7 +62,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       case "CoverArtPolicy":
         return (
           <div className="row">
-            {part.responses.map((response, i) => (
+            {part.responses && part.responses.map((response, i) => (
               <div className="col-lg-4" key={`alt-${i}`}>
                 <div className="result-compliance-alternative">
                   <div className="result-compliance-alternative-title">{getDetail(part.detail, i)}</div>
@@ -100,7 +109,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                     <div className="container-fluid p-0">
                       <div className="row">
                         <div className="col">
-                          <h5 className="text-danger mb-4">{t(part.summary)}</h5>
+                          <h5 className={`mb-4 ${part.state == "NONCOMPLIANT" ? "text-danger" : "text-success"}`}>{t(part.summary)}</h5>
                         </div>
                       </div>
                       {renderCompliance(part, i)}
@@ -121,7 +130,9 @@ const Assessment = ({ activeAssessment, ...props }) => {
       <div className={`result-album ${activeAssessment ? i == activeAssessment ? "active" : '' : i == 0 ? "active" : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(i) }}>
         <div className="result-inline-title">
           <h5 className="mb-2">{assessment.album.title}</h5>
-          {complianceNotification(assessment.assessment.compliance)}
+          <div className="result-badges">
+            {complianceNotification(assessment.assessment.compliance)}
+          </div>
         </div>
         <div className="result-artist">{getArtists(assessment.album.artists)}</div>
       </div>
