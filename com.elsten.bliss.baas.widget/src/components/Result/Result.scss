@@ -30,23 +30,22 @@
   .result-assessment {
     width: 100%;
     border: 1px solid $light;
-    padding: $spacer;
+    padding: $spacer/2;
     background-color: $white;
+    margin-bottom: 2rem;
   }
 
   .result-compliances {
     width: 100%;
-    width: calc(100% + 2rem);
-    margin-left: -1rem;
     
     .result-compliance{
-      margin: 1rem;
+      margin: 0rem 1rem 1rem 1rem;
 
       .result-compliance-inner {
         .result-compliance-alternative {
           padding: 1rem;
           border: 1px solid $border-color;
-          margin-bottom: 1rem;
+          margin-bottom: 2rem;
 
           .result-compliance-alternative-title {
             height: 60px;

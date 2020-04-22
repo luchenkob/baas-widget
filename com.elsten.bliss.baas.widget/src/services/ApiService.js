@@ -28,7 +28,6 @@ export const ApiService = {
 
   buildApiLink(action, config, post){
     if (config.endpoint === "local") {
-      //axios.create({baseURL: 'http://localhost:3000'})
       if(post) {
         return appDefaultConfig.endpoint + action;
       }else{

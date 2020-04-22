@@ -8,6 +8,11 @@
   height: 100vh !important;
 }
 
+.badge {
+  display: inline-flex;
+  align-items: center;
+}
+
 @include media-breakpoint-down(md) {
   .h-md-auto {
     height: auto !important;
