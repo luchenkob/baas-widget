@@ -31,6 +31,11 @@ const App = ({ userConfig }) => {
   }
   );
 
+  useEffect(()=>{
+    console.log(userConfig.target);
+    userConfig.target.style.height = config.height;
+  }, [])
+
   return (
     <div className={`baas ${config.appWidth < 991 ? config.appWidth < 520 ? 'baas-mobile' : 'baas-small' : '' }`} style={{ height: config.height }}>
       <Context.Provider value={{ dispatch, config }}>
