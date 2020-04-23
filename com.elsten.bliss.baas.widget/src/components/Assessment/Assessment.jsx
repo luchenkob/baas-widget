@@ -99,7 +99,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                 <div className="col">
                   <div className="container-fluid">
                     <div className="row border">
-                      <div className="col-lg-8 d-flex align-items-center pb-2 justify-content-lg-start justify-content-center">
+                      <div className="col-lg-8 d-flex align-items-center pt-2 pb-2 justify-content-lg-start justify-content-center">
                         <span>{t(response.description)}</span>
                       </div>
                       <div className="col-lg-4 d-flex align-items-center justify-content-lg-end justify-content-center">
