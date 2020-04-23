@@ -48,6 +48,7 @@ const ViewResult = (state) => {
               "COMPILATION": true,
               "TRACK_NUMBER": file.common.track.no ? file.common.track.no : null,
               "DISC_NUMBER": file.common.disk.no ? file.common.disk.no : null,
+              "TRACK_DURATION": file.format.duration ? file.format.duration : null,
               "empty": true,
               "additionalProp1": {},
               "additionalProp2": {},
