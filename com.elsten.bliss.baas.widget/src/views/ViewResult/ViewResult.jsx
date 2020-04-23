@@ -29,7 +29,7 @@ const ViewResult = (state) => {
       if(file.type != "image/jpeg" && file.type != "image/png") {
         data["storage-nodes"].push(
           {
-            "lib": "",
+            "lib": "/",
             "path": file.path,
             "mimeType": file.type,
             "duration": file.format.duration ? file.format.duration : null,
@@ -49,10 +49,6 @@ const ViewResult = (state) => {
               "COMPILATION": true,
               "TRACK_NUMBER": file.common.track.no ? file.common.track.no : null,
               "DISC_NUMBER": file.common.disk.no ? file.common.disk.no : null,
-              "empty": true,
-              "additionalProp1": {},
-              "additionalProp2": {},
-              "additionalProp3": {}
             }
           }
         );

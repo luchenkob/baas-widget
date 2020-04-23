@@ -32,7 +32,6 @@ const App = ({ userConfig }) => {
   );
 
   useEffect(()=>{
-    console.log(userConfig.target);
     userConfig.target.style.height = config.height;
   }, [])
 
