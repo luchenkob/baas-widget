@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { useDropzone } from 'react-dropzone';
 import { Context } from "../../context/context";
 import { useTranslation } from "react-i18next";
+import { getFileExtension } from "../../utils";
 
 const musicMetadata = require('music-metadata-browser');
 
@@ -34,7 +35,8 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
             const image = new Image();
             image.src = entry.target.result;
             image.onload = () => {
-              tempFiles.push({ file: file.name, size: file.size, path: file.path, type: file.type, width: image.width, height: image.height });
+
+              tempFiles.push({ file: file.name, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)), width: image.width, height: image.height });
               errors.push(`mime-type:${file.type}`)
               setProgress();
             };
@@ -44,7 +46,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
         } else {
           musicMetadata.parseBlob(file).then(metadata => {
-            tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path, type: file.type });
+            tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)) });
             setProgress();
           },
             error => {
@@ -55,8 +57,6 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
         }
       });
     }
-
-
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
@@ -102,6 +102,21 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     sortData();
 
     dispatch({ type: "SET_DATA", data: { isProcessing: false, files: result, origFiles: tempFiles, errors: errors, step: 2 } })
+  }
+
+  const renameMimeType = (type, ext) => {
+
+    switch (type) {
+
+      case "audio/mpeg":
+        if(ext == "mp3") return "audio/mp3";
+
+      case "video/ogg":
+        return "audio/ogg";
+
+      default:
+        return type
+    }
   }
 
   return (

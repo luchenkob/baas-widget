@@ -14,7 +14,7 @@ const ViewResult = (state) => {
   const { dispatch, config } = useContext(Context);
 
   const handleUploadAgain = () => {
-    dispatch({ type: "SET_STEP", data: { step: 1 } })
+    dispatch({ type: "SET_STEP", data: { step: 1, isNotification: false}})
   }
 
   const handleAssess = () => {
@@ -72,7 +72,7 @@ const ViewResult = (state) => {
       localStorage.setItem('assessment', '542');
       dispatch({ type: "SET_STEP", data: { step: 3 } })
     }, error => {
-      dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `Error: ${error}`, notificationType: "danger", isBussy: false} })
+      dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false} })
     })
   }
 

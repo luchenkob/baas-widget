@@ -15,15 +15,14 @@ const ViewAssessment = (state) => {
 
     ApiService.get(`assessment/${id}`, config).then(result => {
       setIsMounted(true);
-      console.log(result);
       dispatch({ type: "SET_ASSESSMENTS", data: { assessments: result.data, isNotification: false, isBussy: false } })
     }, error => {
-      dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `Error: ${error}`, notificationType: "danger", isBussy: false} })
+      dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false} })
     })
   }, [])
 
   const handleBack = () => {
-    dispatch({ type: "SET_STEP", data: { step: 2 } })
+    dispatch({ type: "SET_STEP", data: { step: 2, isNotification: false }})
   }
 
   const handleAssess = () => {
