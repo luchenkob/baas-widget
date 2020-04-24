@@ -22,7 +22,12 @@ const ViewResult = (state) => {
     const { origFiles } = state;
     let data = { "storage-nodes": [] }
 
-    dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: "Data is being processed", notificationType: "primary", isBussy: true} })
+    dispatch({ 
+      type: "SET_NOTIFICATION", data: {
+      isProcessing: true,
+      processingMessage: "Data is being processed",
+      isBussy: true} 
+    })
 
     origFiles.forEach((file) => {
 

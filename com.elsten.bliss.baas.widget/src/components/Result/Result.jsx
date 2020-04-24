@@ -77,9 +77,6 @@ const Result = ({ activeAlbum, ...props }) => {
       {errors.length > 0 && (
         <div className="result-errors"><span>{t('Errors (wrong files)')}:</span><div className="result-errors-count">{errors.length}</div></div>
       )}
-      {isProcessing && (
-        <div className="result-processing">{t('Processing')} {cur} {t('of')} {len}</div>
-      )}
       <div className="result-title">
         <h4>{t('Albums found')} {Object.keys(files).length}</h4>
       </div>

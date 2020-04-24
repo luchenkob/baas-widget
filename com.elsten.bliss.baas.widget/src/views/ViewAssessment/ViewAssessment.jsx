@@ -9,6 +9,7 @@ const ViewAssessment = (state) => {
 
   const { dispatch, config } = useContext(Context);
   const [isMounted, setIsMounted] = useState(false);
+  const { isBussy } = state;
   let interval = null;
   const id = localStorage.getItem('assessment');
 
@@ -17,7 +18,7 @@ const ViewAssessment = (state) => {
     checkJob(() => {
       ApiService.get(`assessment/${id}`, config).then(result => {
         setIsMounted(true);
-        dispatch({ type: "SET_ASSESSMENTS", data: { assessments: result.data, isNotification: false, isBussy: false } })
+        dispatch({ type: "SET_ASSESSMENTS", data: { isProcessing: false, assessments: result.data, isNotification: false, isBussy: false } })
       }, error => {
         dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false } })
       })
@@ -53,8 +54,8 @@ const ViewAssessment = (state) => {
   return (
     <LayoutContent slots={[
       isMounted ? <Assessment {...state} /> : null,
-      <Button variant="secondary" onClick={handleBack}>Back to list</Button>,
-      <Button variant="light" className="ml-4" onClick={handleAssess}>Complete</Button>
+      <Button variant="secondary" disabled={isBussy ? true : false} onClick={handleBack}>Back to list</Button>,
+      <Button variant="light" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Complete</Button>
     ]} />
   );
 }
