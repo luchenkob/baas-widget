@@ -43,7 +43,7 @@ const ViewResult = (state) => {
               "COVER_ART": file.common.picture ? {
                 "width": sizeOf(file.common.picture[0].data).width,
                 "height": sizeOf(file.common.picture[0].data).height,
-                "sizeBytes": file.common.picture[0].data.byteLength,
+                "size-bytes": file.common.picture[0].data.byteLength,
                 "codec": getFilteredCodec(file.common.picture[0].format),
               } : {},
               "COMPILATION": true,
@@ -60,7 +60,7 @@ const ViewResult = (state) => {
             "mimeType": file.type,
             "width": file.width,
             "height": file.height,
-            "sizeBytes": file.size
+            "size-bytes": file.size
           }
         );
       }
