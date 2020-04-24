@@ -9,20 +9,41 @@ const ViewAssessment = (state) => {
 
   const { dispatch, config } = useContext(Context);
   const [isMounted, setIsMounted] = useState(false);
+  let interval = null;
+  const id = localStorage.getItem('assessment');
 
   useEffect(() => {
-    const id = localStorage.getItem('assessment');
 
-    ApiService.get(`assessment/${id}`, config).then(result => {
-      setIsMounted(true);
-      dispatch({ type: "SET_ASSESSMENTS", data: { assessments: result.data, isNotification: false, isBussy: false } })
-    }, error => {
-      dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false} })
-    })
+    checkJob(() => {
+      ApiService.get(`assessment/${id}`, config).then(result => {
+        setIsMounted(true);
+        dispatch({ type: "SET_ASSESSMENTS", data: { assessments: result.data, isNotification: false, isBussy: false } })
+      }, error => {
+        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false } })
+      })
+    });
+
   }, [])
 
+  const checkJob = (callback) => {
+    ApiService.get(`job/${id}`, config).then(result => {
+      if (result.data.status === "Completed") {
+        clearInterval(interval);
+        callback();
+      } else {
+        if(!interval){
+          interval = setInterval(() => {
+            checkJob();
+          }, config.queryDelay);
+        }
+      }
+    }, error => {
+      dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false } })
+    })
+  }
+
   const handleBack = () => {
-    dispatch({ type: "SET_STEP", data: { step: 2, isNotification: false }})
+    dispatch({ type: "SET_STEP", data: { step: 2, isNotification: false } })
   }
 
   const handleAssess = () => {
