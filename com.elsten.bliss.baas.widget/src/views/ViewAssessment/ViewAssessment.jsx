@@ -29,7 +29,14 @@ const ViewAssessment = (state) => {
   const checkJob = (callback) => {
     ApiService.get(`job/${id}`, config).then(result => {
       if (result.data.status === "Completed") {
+        clearInterval(interval);
         callback();
+      } else {
+        if(!interval){
+          interval = setInterval(() => {
+            checkJob();
+          }, config.queryDelay);
+        }
       }
     }, error => {
       dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false } })
