@@ -74,8 +74,10 @@ const ViewResult = (state) => {
     if(config.rules) data.rules = config.rules
 
     ApiService.post("assessment", data, config).then(result => {
-      localStorage.setItem('assessment', result.data);
-      dispatch({ type: "SET_STEP", data: { step: 3 } })
+      if(result.headers.location) {
+        localStorage.setItem('assessment', result.headers.location);
+        dispatch({ type: "SET_STEP", data: { step: 3 } })
+      }
     }, error => {
       dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false} })
     })
