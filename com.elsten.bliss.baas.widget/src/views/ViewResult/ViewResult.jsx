@@ -20,7 +20,7 @@ const ViewResult = (state) => {
   const handleAssess = () => {
 
     const { origFiles } = state;
-    let data = { "storage-nodes": [] }
+    let data = { "storageNodes": [] }
 
     dispatch({ 
       type: "SET_NOTIFICATION", data: {
@@ -31,8 +31,10 @@ const ViewResult = (state) => {
 
     origFiles.forEach((file) => {
 
+      console.log(JSON.stringify(file));
+
       if(file.type != "image/jpeg" && file.type != "image/png") {
-        data["storage-nodes"].push(
+        data["storageNodes"].push(
           {
             "lib": "/",
             "path": file.path,
@@ -48,7 +50,7 @@ const ViewResult = (state) => {
               "COVER_ART": file.common.picture ? {
                 "width": sizeOf(file.common.picture[0].data).width,
                 "height": sizeOf(file.common.picture[0].data).height,
-                "size-bytes": file.common.picture[0].data.byteLength,
+                "sizeBytes": file.common.picture[0].data.byteLength,
                 "codec": getFilteredCodec(file.common.picture[0].format),
               } : {},
               "COMPILATION": true,
@@ -58,14 +60,14 @@ const ViewResult = (state) => {
           }
         );
       }else {
-        data["storage-nodes"].push(
+        data["storageNodes"].push(
           {
-            "lib": "",
+            "lib": "/",
             "path": file.path,
             "mimeType": file.type,
             "width": file.width,
             "height": file.height,
-            "size-bytes": file.size
+            "sizeBytes": file.size
           }
         );
       }
