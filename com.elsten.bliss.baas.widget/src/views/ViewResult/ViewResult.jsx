@@ -31,8 +31,6 @@ const ViewResult = (state) => {
 
     origFiles.forEach((file) => {
 
-      console.log(JSON.stringify(file));
-
       if(file.type != "image/jpeg" && file.type != "image/png") {
         data["storageNodes"].push(
           {
