@@ -46,13 +46,9 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
   }
 
-  const getDetail = (data, i) => {
-    return data.split(",")[i] ? data.split(",")[i] : "-";
-  }
-
   const renderCompliance = (part, i) => {
 
-    if (part.responses) {
+    if (part.responses && part.responses.length > 0) {
 
       switch (part.responses[0].objectType) {
 
@@ -62,7 +58,6 @@ const Assessment = ({ activeAssessment, ...props }) => {
               {part.responses && part.responses.map((response, i) => (
                 <div className="col-lg-4" key={`alt-${i}`}>
                   <div className="result-compliance-alternative">
-                    <div className="result-compliance-alternative-title">{getDetail(part.detail, i)}</div>
                     <p className="text-center mt-3"><strong>{t('Alternative')}:</strong></p>
                     <div className="result-compliance-alternative-art" style={{ background: `url(${response.url})` }}>
                     </div>
@@ -133,7 +128,16 @@ const Assessment = ({ activeAssessment, ...props }) => {
                     <div className="container-fluid p-0">
                       <div className="row">
                         <div className="col">
-                          <h5 className={`mb-4 ${part.state == "NONCOMPLIANT" ? "text-danger" : "text-success"}`}>{t(part.summary)}</h5>
+                          <h4 className="mb-4">
+                            <span className={`badge ${part.state == "NONCOMPLIANT" ? "badge-danger" : "badge-success"}`}>
+                              {part.state == "NONCOMPLIANT" ? 
+                              <><Icon variant="times" className="mr-1" />{t(capitalize(part.summary))}</>
+                              : 
+                              <><Icon variant="done" className="mr-1" />{t("Compliant")}</>
+                              }
+                            </span>
+                          </h4>
+                          <h5 className={`mb-4 ${part.state == "NONCOMPLIANT" ? "text-danger" : "text-success"}`}>{t(part.detail)}</h5>
                         </div>
                       </div>
                       {renderCompliance(part, i)}

@@ -13,6 +13,16 @@
   align-items: center;
 }
 
+h1,h2,h3,h4 {
+  .badge {
+    font-weight: 500;
+
+    svg {
+      font-size: 0.9em;
+    }
+  }
+}
+
 @include media-breakpoint-down(md) {
   .h-md-auto {
     height: auto !important;

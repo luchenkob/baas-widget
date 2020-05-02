@@ -1,0 +1,45 @@
+{
+  "id": "string",
+  "status": "Completed",
+  "completed-location": "string",
+  "query": {
+    "storage-nodes": [
+      {
+        "lib": "/C:/Users/gavin/Music",
+        "path": "/First album/1_track-one.mp3",
+        "mime-type": "image/jpeg",
+        "fields": {
+          "empty": true,
+          "additionalProp1": {},
+          "additionalProp2": {},
+          "additionalProp3": {}
+        }
+      },
+      {
+        "lib": "/C:/Users/gavin/Music",
+        "path": "/First album/1_track-one.mp3",
+        "mime-type": "image/jpeg",
+        "width": 300,
+        "height": 300,
+        "size-bytes": 23000
+      }
+    ],
+    "rules": {
+      "images": {
+        "storage": {
+          "embedded": "embed",
+          "imageFileNamesRelative": "folder"
+        },
+        "maxWidth": 500,
+        "maxHeight": 500,
+        "minWidth": 300,
+        "minHeight": 300,
+        "maxDataSizeBytes": 0,
+        "singularEmbeddedArt": true,
+        "permittedFormats": [
+          "jpeg"
+        ]
+      }
+    }
+  }
+}
