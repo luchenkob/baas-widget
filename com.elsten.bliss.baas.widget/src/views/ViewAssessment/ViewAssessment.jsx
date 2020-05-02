@@ -14,17 +14,17 @@ const ViewAssessment = (state) => {
   const id = localStorage.getItem('assessment').split("/")[2];
 
   useEffect(() => {
-
-    checkJob(() => {
-      ApiService.get(`assessment/${id}`, config).then(result => {
-        setIsMounted(true);
-        dispatch({ type: "SET_ASSESSMENTS", data: { isProcessing: false, assessments: result.data, isNotification: false, isBussy: false } })
-      }, error => {
-        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false } })
-      })
-    });
-
+    checkJob(getData);
   }, [])
+
+  const getData = () => {
+    ApiService.get(`assessment/${id}`, config).then(result => {
+      setIsMounted(true);
+      dispatch({ type: "SET_ASSESSMENTS", data: { isProcessing: false, assessments: result.data, isNotification: false, isBussy: false } })
+    }, error => {
+      dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false } })
+    })
+  }
 
   const checkJob = (callback) => {
     ApiService.get(`job/${id}`, config).then(result => {
@@ -34,7 +34,7 @@ const ViewAssessment = (state) => {
       } else {
         if(!interval){
           interval = setInterval(() => {
-            checkJob();
+            checkJob(getData);
           }, config.queryDelay);
         }
       }

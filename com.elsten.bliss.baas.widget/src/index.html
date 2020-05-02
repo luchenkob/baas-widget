@@ -16,16 +16,22 @@
   <script>
     baasWidget.init({
       target: "#baas-widget",
-      rules: {
-        images: {
-          maxWidth: 300,
-          maxHeight: 300
-        },
-        tags: {
-          album_name: {
-            sync: "SYNCED",
-            required: true
-          }
+      "rules": {
+        "images": {
+          "storage": {
+            "embedded": "embed",
+            "imageFileNamesRelative": ["folder"]
+          },
+          "maxWidth": 500,
+          "maxHeight": 500,
+          "minWidth": 300,
+          "minHeight": 300,
+          "maxDataSizeBytes": 127000,
+          "singularEmbeddedArt": false,
+          "permittedFormats": [
+            "jpeg",
+            "png"
+          ]
         }
       }
     }); 
