@@ -80,7 +80,7 @@ const ViewResult = (state) => {
           dispatch({ type: "SET_STEP", data: { step: 3 } })
         }
       }, error => {
-        dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isBussy: false} })
+        dispatch({ type: "SET_NOTIFICATION", data: {isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isProcessing: false, isBussy: false} })
       })
     }else{
       dispatch({ type: "SET_STEP", data: { step: 3 } })
