@@ -108,9 +108,6 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
     switch (type) {
 
-      case "audio/mpeg":
-        if(ext == "mp3") return "audio/mp3";
-
       case "video/ogg":
         return "audio/ogg";
 
