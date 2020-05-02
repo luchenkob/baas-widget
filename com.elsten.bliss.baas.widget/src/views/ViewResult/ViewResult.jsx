@@ -37,7 +37,7 @@ const ViewResult = (state) => {
             "lib": "/",
             "path": file.path,
             "mimeType": file.type,
-            "duration": file.format.duration ? file.format.duration : null,
+            "duration": file.format.duration ? file.format.duration * 1000 : null,
             "fields": {
               "ALBUM_NAME": file.common.album ? file.common.album : null,
               "ARTIST": file.common.artist ? file.common.artist : null,
