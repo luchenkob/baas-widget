@@ -44,7 +44,7 @@ const ViewAssessment = (state) => {
   }
 
   const handleBack = () => {
-    dispatch({ type: "SET_STEP", data: { step: 2, isNotification: false } })
+    dispatch({ type: "SET_STEP", data: { step: 2, isNotification: false, isProcessing: false, isBussy: false } })
   }
 
   const handleAssess = () => {

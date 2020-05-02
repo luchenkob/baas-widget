@@ -14,7 +14,7 @@ const ViewResult = (state) => {
   const { dispatch, config } = useContext(Context);
 
   const handleUploadAgain = () => {
-    dispatch({ type: "SET_STEP", data: { step: 1, isNotification: false}})
+    dispatch({ type: "SET_STEP", data: { step: 1, isNotification: false, isProcessing: false, isBussy: false}})
   }
 
   const handleAssess = () => {
