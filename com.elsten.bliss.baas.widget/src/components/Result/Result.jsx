@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../../context/context";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { isEmpty } from "../../utils";
 
 import "./Result.scss";
 
@@ -37,7 +38,7 @@ const Result = ({ activeAlbum, ...props }) => {
 
     let active = activeAlbum;
 
-    if (files) {
+    if (!isEmpty(files)) {
 
       active ? active == activeAlbum : active = Object.keys(files)[0];
 

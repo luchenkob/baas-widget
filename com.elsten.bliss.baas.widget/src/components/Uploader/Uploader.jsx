@@ -37,7 +37,6 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
             image.onload = () => {
 
               tempFiles.push({ file: file.name, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)), width: image.width, height: image.height });
-              errors.push(`mime-type:${file.type}`)
               setProgress();
             };
           });

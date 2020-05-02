@@ -39,3 +39,7 @@ export const capitalize = (s) => {
 export const getFileExtension = (name) => {
   return name.split('.').pop();
 } 
+
+export const isEmpty = (obj) => {
+  return Object.keys(obj).length === 0;
+}
