@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-var webpack-dev-server --inline --hot --open --endpoint=$npm_config_endpoint",
+    "start": "cross-var webpack-dev-server --inline --hot --open --endpoint=$npm_config_endpoint --rules=$npm_config_rules",
     "build": "webpack --mode production"
   },
   "author": "Darfys",

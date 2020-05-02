@@ -10,6 +10,8 @@ import { useTranslation } from "react-i18next";
 const App = ({ userConfig }) => {
 
   if(endpoint) endpoint !== '$npm_config_endpoint' ? userConfig.endpoint = endpoint : null;
+  if(rules) rules !== '$npm_config_rules' ? userConfig.rules = rules : null;
+
   const config = { ...appDefaultConfig, ...userConfig, appWidth: userConfig.target.offsetWidth };
 
   const [state, dispatch] = useReducer(reducer, {

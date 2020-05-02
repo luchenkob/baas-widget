@@ -82,7 +82,8 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        endpoint: JSON.stringify(argv.endpoint)
+        endpoint: JSON.stringify(argv.endpoint),
+        rules: JSON.stringify(argv.rules)
       })
     ],
   }
