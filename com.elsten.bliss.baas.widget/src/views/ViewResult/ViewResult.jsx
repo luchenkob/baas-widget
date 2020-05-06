@@ -76,8 +76,6 @@ const ViewResult = (state) => {
       }
     });
 
-    console.log(data)
-
     if (config.rules) data.rules = config.rules
 
     if (config.endpoint !== "local") {
