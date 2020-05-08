@@ -37,6 +37,8 @@ const App = ({ userConfig }) => {
 
   useEffect(()=>{
     userConfig.target.style.height = config.height;
+    
+    if (!config.rules)  dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `400 Invalid JSON: rules are mandatory`, notificationType: "danger", isBussy: true } })
   }, [])
 
   return (
