@@ -8,8 +8,6 @@ import { filterIt, ToBase64 } from "../../utils";
 
 import "../Result/Result.scss";
 
-const sizeOf = require('image-size');
-
 const Artist = ({ ...props }) => {
   return (
     <div className="artist-name">{props.name}</div>

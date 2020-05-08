@@ -25,6 +25,7 @@ const LayoutIntro = ({ slots }) => {
           </Row>
         </Container>
       </div>
+      <div className="layout-copyright">Powered by <a href="https://www.blisshq.com" style={{fontWeight:"bold",fontFamily:'Raleway',color:"#3697d9"}}>bliss</a></div>
     </div>
   );
 }

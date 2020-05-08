@@ -25,6 +25,17 @@
     padding: 0 $spacer;
   }
 
+  .layout-copyright {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      margin-left: 0.2rem;
+    }
+  }
+
   @include media-breakpoint-down(md) { 
     .layout-content-nav {
       padding: 0 $spacer/2;

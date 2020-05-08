@@ -17,7 +17,18 @@
 
   .layout-intro-bottom {
     width: 100%;
-    height: 50%;
+    height: calc(50% - 2rem);
     background-color: $primary;
+  }
+
+  .layout-copyright {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      margin-left: 0.2rem;
+    }
   }
 }
