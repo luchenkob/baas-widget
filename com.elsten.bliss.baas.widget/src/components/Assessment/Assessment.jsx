@@ -8,6 +8,8 @@ import { filterIt, ToBase64 } from "../../utils";
 
 import "../Result/Result.scss";
 
+const sizeOf = require('image-size');
+
 const Artist = ({ ...props }) => {
   return (
     <div className="artist-name">{props.name}</div>
@@ -57,7 +59,6 @@ const Assessment = ({ activeAssessment, ...props }) => {
       case "http:":
       case "https:":
         image = response.url;
-        title = t('Alternative');
         break;
       case "baas:":
         const fileName = response.url.split("#")[0].split("/")[1];
@@ -71,8 +72,10 @@ const Assessment = ({ activeAssessment, ...props }) => {
 
     }
 
-    return <><p className="text-center mt-3"><strong>{title}:</strong></p>
-      <div className="result-compliance-alternative-art" style={{ background: `url(${image})` }}></div></>
+    return <>{title && <p className="text-center mt-3 pl-2 pr-2"><strong>{title}:</strong></p>}
+      <div className="result-compliance-alternative-art" style={{ background: `url(${image})` }}></div>
+      <p className="text-center mt-3 pl-2 pr-2"><strong>{response.width} x {response.height}</strong></p>
+      </>
   }
 
   const renderCompliance = (part, i) => {
