@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useRef } from "react";
 import ViewsManager from "../views/ViewsManager";
 import Preloader from "../components/Preloader/Preloader"
 import Notification from "../components/Notification/Notification"
@@ -11,6 +11,8 @@ const App = ({ userConfig }) => {
 
   if(endpoint) endpoint !== '$npm_config_endpoint' ? userConfig.endpoint = endpoint : null;
   if(rules) rules !== '$npm_config_rules' ? userConfig.rules = rules : null;
+
+  const container = useRef();
 
   const config = { ...appDefaultConfig, ...userConfig, appWidth: userConfig.target.offsetWidth };
 
@@ -38,8 +40,8 @@ const App = ({ userConfig }) => {
   }, [])
 
   return (
-    <div className={`baas ${config.appWidth < 991 ? config.appWidth < 520 ? 'baas-mobile' : 'baas-small' : '' }`} style={{ height: config.height }}>
-      <Context.Provider value={{ dispatch, config }}>
+    <div ref={container} className={`baas ${config.appWidth < 991 ? config.appWidth < 520 ? 'baas-mobile' : 'baas-small' : '' }`} style={{ height: config.height }}>
+      <Context.Provider value={{ dispatch, config, container }}>
         <Notification {...state} />
         <Preloader {...state} />
         <ViewsManager {...state} />

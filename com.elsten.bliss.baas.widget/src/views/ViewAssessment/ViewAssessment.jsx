@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Assessment from "../../components/Assessment/Assessment";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import LayoutContent from "../../layouts/LayoutContent/LayoutContent";
 import { Context } from "../../context/context";
 import { ApiService } from "../../services/ApiService";
@@ -8,13 +8,17 @@ import { useTranslation } from "react-i18next";
 
 const ViewAssessment = (state) => {
 
-  const { dispatch, config } = useContext(Context);
+  const { dispatch, config, container } = useContext(Context);
   const [isMounted, setIsMounted] = useState(false);
   const [failed, setFailed] = useState("");
   const { isBussy } = state;
   let interval = null;
   const id = localStorage.getItem('assessment').split("/")[2];
   const { t } = useTranslation();
+  const [show, setShow] = useState(false);
+
+  const handleCloseCompleteModal = () => setShow(false);
+  const handleShowCompleteModal = () => setShow(true);
 
   useEffect(() => {
     checkJob(getData);
@@ -36,7 +40,7 @@ const ViewAssessment = (state) => {
       case "Failed":
         setIsMounted(true);
         setFailed(msg);
-        dispatch({ type: "SET_ASSESSMENTS", data: { isProcessing: false,  isNotification: false, isBussy: false } });
+        dispatch({ type: "SET_ASSESSMENTS", data: { isProcessing: false, isNotification: false, isBussy: false } });
         break;
 
       default:
@@ -80,15 +84,32 @@ const ViewAssessment = (state) => {
   }
 
   const handleAssess = () => {
-    dispatch({ type: "SET_STEP", data: { step: 3 } })
+    handleShowCompleteModal(true);
+  }
+
+  const handleLinktoBliss = () => {
+    handleCloseCompleteModal(false);
+    window.location = config.completeLink;
   }
 
   return (
-    <LayoutContent slots={[
-      isMounted ? failed ? <div className="msg-box failed">{failed}</div> : <Assessment {...state} /> : null,
-      <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>Choose files</Button>,
-      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Fix missing artwork</Button>
-    ]} />
+    <>
+      <LayoutContent slots={[
+        isMounted ? failed ? <div className="msg-box failed">{failed}</div> : <Assessment {...state} /> : null,
+        <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>{t("Choose files")}</Button>,
+        <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>{t("Fix missing artwork")}</Button>
+      ]} />
+
+      <Modal show={show} centered={true} container={container} onHide={handleCloseCompleteModal}>
+        <Modal.Header closeButton>
+        <Modal.Title className="text-center w-100">{t("Fix missing artwork")}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center" dangerouslySetInnerHTML={{ __html: t(config.completeHtml) }}></Modal.Body>
+        <Modal.Footer className="d-flex justify-content-center">
+          <Button variant="primary" onClick={handleLinktoBliss}>{t(config.completeLabel)}</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 

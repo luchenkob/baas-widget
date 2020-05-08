@@ -5,6 +5,7 @@ import LayoutContent from "../../layouts/LayoutContent/LayoutContent";
 import { Context } from "../../context/context";
 import { ApiService } from "../../services/ApiService";
 import { getFilteredCodec } from "../../utils"
+import { useTranslation } from "react-i18next";
 
 const sizeOf = require('image-size');
 
@@ -12,6 +13,7 @@ const ViewResult = (state) => {
 
   const { isBussy } = state;
   const { dispatch, config } = useContext(Context);
+  const { t } = useTranslation();
 
   const handleUploadAgain = () => {
     dispatch({ type: "SET_STEP", data: { step: 1, isNotification: false, isProcessing: false, isBussy: false } })
@@ -97,8 +99,8 @@ const ViewResult = (state) => {
   return (
     <LayoutContent slots={[
       <Result {...state} />,
-      <Button variant="light" disabled={isBussy ? true : false} onClick={handleUploadAgain}>Choose files</Button>,
-      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Find missing artwork</Button>
+      <Button variant="light" disabled={isBussy ? true : false} onClick={handleUploadAgain}>{t("Choose files")}</Button>,
+      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>{t("Find missing artwork")}</Button>
     ]} />
   );
 }

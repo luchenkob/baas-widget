@@ -3,4 +3,7 @@ export const appDefaultConfig = {
   localapi: "/localapi/",
   height:"100%",
   queryDelay: 5000,
+  completeHtml: "To find the missing artwork for your albums,<br/> <a href='/download.html'>download and install bliss</a>",
+  completeLabel: "Download and install bliss",
+  completeLink: "./download.html"
 }
