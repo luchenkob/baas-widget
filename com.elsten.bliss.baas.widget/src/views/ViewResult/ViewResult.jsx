@@ -25,7 +25,7 @@ const ViewResult = (state) => {
     dispatch({
       type: "SET_NOTIFICATION", data: {
         isProcessing: true,
-        processingMessage: "Data is being processed",
+        processingMessage: "Submitting music for assessment",
         isBussy: true
       }
     })
@@ -82,7 +82,7 @@ const ViewResult = (state) => {
       ApiService.post("assessment", data, config).then(result => {
         if (result.headers.location) {
           localStorage.setItem('assessment', result.headers.location);
-          dispatch({ type: "SET_STEP", data: { step: 3 } })
+          dispatch({ type: "SET_STEP", data: { step: 3, processingMessage: "Checking for missing artwork", } })
         }
       }, error => {
         dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isProcessing: false, isBussy: false } })

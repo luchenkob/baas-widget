@@ -48,6 +48,8 @@ const ViewAssessment = (state) => {
   const checkJob = (callback) => {
     ApiService.get(`job/${id}`, config).then(result => {
 
+      dispatch({ type: "SET_STEP", data: { processingMessage: "Retrieving results", } })
+
       switch (result.data.status) {
 
         case "Completed":
