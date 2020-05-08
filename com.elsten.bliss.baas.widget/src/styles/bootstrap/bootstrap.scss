@@ -8,12 +8,24 @@
   height: 100vh !important;
 }
 
+.btn {
+  text-decoration: none !important;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .badge {
   display: inline-flex;
   align-items: center;
+  top: 0 !important;
 }
 
-h1,h2,h3,h4 {
+h1,
+h2,
+h3,
+h4 {
   .badge {
     font-weight: 500;
 
@@ -38,6 +50,13 @@ h1,h2,h3,h4 {
 }
 
 .modal {
+  position: absolute;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop {
   position: absolute;
 }
 

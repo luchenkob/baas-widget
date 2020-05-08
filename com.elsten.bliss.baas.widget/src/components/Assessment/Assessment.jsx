@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/context";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Accordion, Button, Card } from "react-bootstrap";
 import { capitalize } from "../../utils";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon";
@@ -73,7 +73,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
     return <>{title && <p className="text-center mt-3 pl-2 pr-2"><strong>{title}:</strong></p>}
       <div className="result-compliance-alternative-art" style={{ background: `url(${image})` }}></div>
       <p className="text-center mt-3 pl-2 pr-2"><strong>{response.width} x {response.height}</strong></p>
-      </>
+    </>
   }
 
   const renderCompliance = (part, i) => {
@@ -118,20 +118,20 @@ const Assessment = ({ activeAssessment, ...props }) => {
         default:
           return (
             part.responses.map((response, i) => (
-              <div className="row" key={`resp-${i}`}>
-                <div className="col">
-                  <div className="container-fluid">
-                    <div className="row border">
-                      <div className="col-lg-8 d-flex align-items-center pt-2 pb-2 justify-content-lg-start justify-content-center">
+              <Row key={`resp-${i}`}>
+                <Col>
+                  <Container fluid>
+                    <Row className="border">
+                      <Col lg={8} className="d-flex align-items-center pt-2 pb-2 justify-content-lg-start justify-content-center">
                         <span>{t(response.description)}</span>
-                      </div>
-                      <div className="col-lg-4 d-flex align-items-center justify-content-lg-end justify-content-center">
-                        <button className="btn btn-primary m-2">{t('Fix')}</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                      </Col>
+                      <Col lg={4} className="d-flex align-items-center justify-content-lg-end justify-content-center">
+                        <Button variant="primary" className="m-2">{t('Fix')}</Button>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Col>
+              </Row>
             ))
           );
       }
@@ -150,29 +150,43 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <div className="result-assessment">
           <div className="result-compliances">
             {
-              assessments[active].assessment.compliance.parts.map((part, i) => (
-                <div className="result-compliance" key={`com-${i}`}>
-                  <div className="result-compliance-inner">
-                    <div className="container-fluid p-0">
-                      <div className="row">
-                        <div className="col">
-                          <h4 className="mb-4">
-                            <span className={`badge ${part.state == "NONCOMPLIANT" ? "badge-danger" : "badge-success"}`}>
-                              {part.state == "NONCOMPLIANT" ?
-                                <><Icon variant="times" className="mr-1" />{t(capitalize(part.summary))}</>
-                                :
-                                <><Icon variant="done" className="mr-1" />{t("Compliant")}</>
-                              }
-                            </span>
-                          </h4>
-                          <h5 className={`mb-4 ${part.state == "NONCOMPLIANT" ? "text-danger" : "text-success"}`}>{t(part.detail)}</h5>
+              <Accordion defaultActiveKey="0">
+                {assessments[active].assessment.compliance.parts.map((part, i) => (
+                  <Card key={`ac-${i}`}>
+
+                    <Accordion.Toggle as={Button} variant="link" eventKey={i}>
+                      <Card.Header className="text-left">
+                        <span className={`badge ${part.state == "NONCOMPLIANT" ? "badge-danger" : "badge-success"}`}>
+                          {part.state == "NONCOMPLIANT" ?
+                            <><Icon variant="times" className="mr-1" />{t(capitalize(part.summary))}</>
+                            :
+                            <><Icon variant="done" className="mr-1" />{t("Compliant")}</>
+                          }
+                        </span>
+                      </Card.Header>
+                    </Accordion.Toggle>
+
+                    <Accordion.Collapse eventKey={i}>
+                      <Card.Body>
+                        <div className="result-compliance">
+                          <div className="result-compliance-inner">
+                            <Container fluid className="p-0">
+                              <Row>
+                                <Col>
+                                  <p className={`mb-4 ${part.state == "NONCOMPLIANT" ? "text-danger" : "text-success"}`}>{t(part.detail)}</p>
+                                </Col>
+                              </Row>
+                              {renderCompliance(part, i)}
+                            </Container>
+                          </div>
                         </div>
-                      </div>
-                      {renderCompliance(part, i)}
-                    </div>
-                  </div>
-                </div>
-              ))
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+
+
+                ))}
+              </Accordion>
             }
           </div>
         </div>

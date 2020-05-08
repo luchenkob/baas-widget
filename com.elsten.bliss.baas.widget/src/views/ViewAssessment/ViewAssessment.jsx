@@ -100,7 +100,7 @@ const ViewAssessment = (state) => {
         <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>{t("Fix missing artwork")}</Button>
       ]} />
 
-      <Modal show={show} centered={true} container={container} onHide={handleCloseCompleteModal}>
+      <Modal show={show} container={container} onHide={handleCloseCompleteModal}>
         <Modal.Header closeButton>
         <Modal.Title className="text-center w-100">{t("Fix missing artwork")}</Modal.Title>
         </Modal.Header>
