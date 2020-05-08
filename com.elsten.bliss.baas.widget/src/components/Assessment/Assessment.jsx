@@ -201,7 +201,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <div className="result-errors"><span>{t('Errors (wrong files)')}:</span><div className="result-errors-count">{errors.length}</div></div>
       )}
       <div className="result-title">
-        <h4>{t('Assessing')}</h4>
+        <h4>{t('Assessment')}</h4>
       </div>
       <div className="result-content">
         <Container fluid className="h-100 p-0" fluid>

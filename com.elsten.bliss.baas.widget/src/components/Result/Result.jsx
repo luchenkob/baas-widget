@@ -3,6 +3,7 @@ import { Context } from "../../context/context";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { isEmpty } from "../../utils";
+import converter from 'number-to-words';
 
 import "./Result.scss";
 
@@ -79,7 +80,7 @@ const Result = ({ activeAlbum, ...props }) => {
         <div className="result-errors"><span>{t('Errors (wrong files)')}:</span><div className="result-errors-count">{errors.length}</div></div>
       )}
       <div className="result-title">
-        <h4>{t('Albums found')} {Object.keys(files).length}</h4>
+      <h4>{t('Found')} {converter.toWords(Object.keys(files).length)} {Object.keys(files).length > 1 ? t('albums') : t('album')}</h4>
       </div>
       <div className="result-content">
         <Container fluid className="h-100 p-0" fluid>
