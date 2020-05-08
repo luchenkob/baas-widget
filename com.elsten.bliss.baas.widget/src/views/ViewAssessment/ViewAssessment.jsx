@@ -74,7 +74,7 @@ const ViewAssessment = (state) => {
   }
 
   const handleBack = () => {
-    dispatch({ type: "SET_STEP", data: { step: 2, isNotification: false, isProcessing: false, isBussy: false } })
+    dispatch({ type: "SET_STEP", data: { step: 1, isNotification: false, isProcessing: false, isBussy: false } })
   }
 
   const handleAssess = () => {
@@ -84,8 +84,8 @@ const ViewAssessment = (state) => {
   return (
     <LayoutContent slots={[
       isMounted ? failed ? <div className="msg-box failed">{failed}</div> : <Assessment {...state} /> : null,
-      <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>Back to list</Button>,
-      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Complete</Button>
+      <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>Choose files</Button>,
+      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Fix missing artwork</Button>
     ]} />
   );
 }

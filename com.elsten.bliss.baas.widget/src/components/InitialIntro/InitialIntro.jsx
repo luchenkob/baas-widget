@@ -8,7 +8,7 @@ const InitialIntro = () => {
   const { config } = useContext(Context);
 
   return (
-    <div>
+    <div className="p-2">
       <h2 className="text-center text-primary">{t(config.title)}</h2>
       <p className="mw-800 mx-auto text-center" dangerouslySetInnerHTML={{ __html: t(config.introHtml) }}></p>
     </div>

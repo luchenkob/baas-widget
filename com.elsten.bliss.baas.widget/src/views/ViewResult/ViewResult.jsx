@@ -97,8 +97,8 @@ const ViewResult = (state) => {
   return (
     <LayoutContent slots={[
       <Result {...state} />,
-      <Button variant="light" disabled={isBussy ? true : false} onClick={handleUploadAgain}>Upload again</Button>,
-      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Assess</Button>
+      <Button variant="light" disabled={isBussy ? true : false} onClick={handleUploadAgain}>Choose files</Button>,
+      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Find missing artwork</Button>
     ]} />
   );
 }
