@@ -61,7 +61,10 @@ const Assessment = ({ activeAssessment, ...props }) => {
         break;
       case "baas:":
         const fileName = response.url.split("#")[0].split("/")[1];
-        if (fileName) image = filterIt(origFiles, fileName, "file")[0].common.picture[0].data;
+        if (fileName) {
+          const file = filterIt(origFiles, fileName, "file")[0];
+          image = file ? file.common.picture[0].data : null;
+        }
         if (image) image = ToBase64(image);
         title = t('Use existing art');
         break;

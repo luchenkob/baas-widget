@@ -84,8 +84,8 @@ const ViewAssessment = (state) => {
   return (
     <LayoutContent slots={[
       isMounted ? failed ? <div className="msg-box failed">{failed}</div> : <Assessment {...state} /> : null,
-      <Button variant="secondary" disabled={isBussy ? true : false} onClick={handleBack}>Back to list</Button>,
-      <Button variant="light" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Complete</Button>
+      <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>Back to list</Button>,
+      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>Complete</Button>
     ]} />
   );
 }
