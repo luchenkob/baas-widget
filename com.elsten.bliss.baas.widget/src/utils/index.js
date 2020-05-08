@@ -43,3 +43,10 @@ export const getFileExtension = (name) => {
 export const isEmpty = (obj) => {
   return Object.keys(obj).length === 0;
 }
+
+export const filterIt = (array, value, key) => {
+  return array.filter(key
+      ? a => a[key] === value
+      : a => Object.keys(a).some(k => a[k] === value)
+  );
+}

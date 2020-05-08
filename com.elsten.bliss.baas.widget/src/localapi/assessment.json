@@ -61,7 +61,7 @@
               },
               {
                 "objectType": "InstallImageFromUrlResponse",
-                "url": "https://upload.wikimedia.org/wikipedia/en/6/6b/Pixies-Doolittle.jpg",
+                "url": "baas:/24-salve_regina.flac#coverart",
                 "width": 500,
                 "height": 500
               }

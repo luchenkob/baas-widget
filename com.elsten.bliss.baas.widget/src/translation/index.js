@@ -26,7 +26,8 @@ i18n
           "Assessment": "Assessment",
           "Missing embedded artwork": "Missing embedded artwork",
           "Missing": "Missing",
-          "Failed to start assessment": "Failed to start assessment"
+          "Failed to start assessment": "Failed to start assessment",
+          "Use existing art": "Use existing art",
         }
       }
     },

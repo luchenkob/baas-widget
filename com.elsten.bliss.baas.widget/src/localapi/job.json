@@ -1,7 +1,6 @@
 {
   "id": "string",
-  "status": "Failed",
-  "failureMsg": "Failed to start assessment",
+  "status": "Completed",
   "completed-location": "string",
   "query": {
     "storage-nodes": [

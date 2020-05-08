@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { capitalize } from "../../utils";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon";
+import { filterIt, ToBase64 } from "../../utils";
 
 import "../Result/Result.scss";
 
@@ -15,7 +16,7 @@ const Artist = ({ ...props }) => {
 
 const Assessment = ({ activeAssessment, ...props }) => {
 
-  const { isProcessing, assessments, errors } = props;
+  const { isProcessing, assessments, errors, origFiles } = props;
   const { dispatch } = useContext(Context);
   const { t } = useTranslation();
 
@@ -46,6 +47,31 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
   }
 
+  const renderArt = (response) => {
+
+    const type = response.url.split("/")[0];
+    let image = null;
+    let title = "";
+
+    switch (type) {
+      case "http:":
+      case "https:":
+        image = response.url;
+        title = t('Alternative');
+        break;
+      case "baas:":
+        const fileName = response.url.split("#")[0].split("/")[1];
+        if (fileName) image = filterIt(origFiles, fileName, "file")[0].common.picture[0].data;
+        if (image) image = ToBase64(image);
+        title = t('Use existing art');
+        break;
+
+    }
+
+    return <><p className="text-center mt-3"><strong>{title}:</strong></p>
+      <div className="result-compliance-alternative-art" style={{ background: `url(${image})` }}></div></>
+  }
+
   const renderCompliance = (part, i) => {
 
     if (part.responses && part.responses.length > 0) {
@@ -58,9 +84,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
               {part.responses && part.responses.map((response, i) => (
                 <div className="col-lg-4" key={`alt-${i}`}>
                   <div className="result-compliance-alternative">
-                    <p className="text-center mt-3"><strong>{t('Alternative')}:</strong></p>
-                    <div className="result-compliance-alternative-art" style={{ background: `url(${response.url})` }}>
-                    </div>
+                    {renderArt(response)}
                   </div>
                 </div>
               ))}
@@ -130,10 +154,10 @@ const Assessment = ({ activeAssessment, ...props }) => {
                         <div className="col">
                           <h4 className="mb-4">
                             <span className={`badge ${part.state == "NONCOMPLIANT" ? "badge-danger" : "badge-success"}`}>
-                              {part.state == "NONCOMPLIANT" ? 
-                              <><Icon variant="times" className="mr-1" />{t(capitalize(part.summary))}</>
-                              : 
-                              <><Icon variant="done" className="mr-1" />{t("Compliant")}</>
+                              {part.state == "NONCOMPLIANT" ?
+                                <><Icon variant="times" className="mr-1" />{t(capitalize(part.summary))}</>
+                                :
+                                <><Icon variant="done" className="mr-1" />{t("Compliant")}</>
                               }
                             </span>
                           </h4>
