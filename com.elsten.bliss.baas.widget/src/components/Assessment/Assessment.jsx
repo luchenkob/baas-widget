@@ -39,7 +39,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       if (compliance.parts) {
         for (const [i, part] of Object.entries(compliance.parts)) {
           if (part.state == "NONCOMPLIANT") {
-            badges.push(<span key={`b-${i}`} className="badge badge-danger"><Icon variant="times" className="mr-1" />{t(capitalize(part.source.policyDescriptor))}</span>);
+            badges.push(<span key={`b-${i}`} className="badge badge-danger"><Icon variant="times" className="mr-1" />{t(capitalize(part.summary))}</span>);
           }
         }
         if (badges.length > 0) {
