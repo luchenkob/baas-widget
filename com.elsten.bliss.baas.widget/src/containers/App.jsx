@@ -20,6 +20,7 @@ const App = ({ userConfig }) => {
     isProcessing: false,
     isNotification: false,
     isBussy: false,
+    isSkipAssesment: false,
     len: 0,
     cur: 0,
     files: {},
@@ -43,7 +44,7 @@ const App = ({ userConfig }) => {
 
   return (
     <div ref={container} className={`baas ${config.appWidth < 991 ? config.appWidth < 520 ? 'baas-mobile' : 'baas-small' : '' }`} style={{ height: config.height }}>
-      <Context.Provider value={{ dispatch, config, container }}>
+      <Context.Provider value={{ dispatch, config, container, state }}>
         <Notification {...state} />
         <Preloader {...state} />
         <ViewsManager {...state} />

@@ -169,7 +169,7 @@
     border-bottom: 1px solid $light;
 
     > * {
-      width: 40%;
+      width: 60%;
       padding: 0 10px;
 
       &:first-child {
@@ -177,7 +177,17 @@
         padding: 0;
       }
       &:last-child {
-        padding: 0;
+        width: 20%;
+        text-align: right;
+
+        > * {
+          cursor: pointer;
+          transition: opacity $transition ease;
+
+          &:hover {
+            opacity: 0.5;
+          }
+        }
       }
     }
   }

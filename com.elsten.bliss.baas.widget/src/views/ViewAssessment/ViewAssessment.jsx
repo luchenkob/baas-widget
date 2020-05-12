@@ -21,7 +21,7 @@ const ViewAssessment = (state) => {
   const handleShowCompleteModal = () => setShow(true);
 
   useEffect(() => {
-    checkJob(getData);
+    state.isSkipAssesment ? setIsMounted(true) : checkJob(getData);
   }, [])
 
   const getData = (status, msg) => {

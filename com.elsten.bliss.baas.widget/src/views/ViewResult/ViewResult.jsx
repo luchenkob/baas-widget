@@ -24,76 +24,78 @@ const ViewResult = (state) => {
     const { origFiles } = state;
     let data = { "storageNodes": [] }
 
-    dispatch({
-      type: "SET_NOTIFICATION", data: {
-        isProcessing: true,
-        processingMessage: "Submitting music for assessment",
-        isBussy: true
-      }
-    })
-
-    origFiles.forEach((file) => {
-
-      if (file.type != "image/jpeg" && file.type != "image/png") {
-
-        let json =
-        {
-          "lib": "/",
-          "path": file.path,
-          "mimeType": file.type,
-          "duration": file.format.duration ? file.format.duration * 1000 : null,
-          "fields": {
-            "ALBUM_NAME": file.common.album ? file.common.album : null,
-            "ARTIST": file.common.artist ? file.common.artist : null,
-            "YEAR": file.common.year ? file.common.year : null,
-            "GENRE": file.common.genre ? file.common.genre : null,
-            "TRACK_NAME": file.common.title ? file.common.title : null,
-            "ALBUM_ARTIST": file.common.albumartist ? file.common.albumartist : null,
-            "COMPILATION": true,
-            "TRACK_NUMBER": file.common.track.no ? file.common.track.no : null,
-            "DISC_NUMBER": file.common.disk.no ? file.common.disk.no : null,
-          }
+    if (state.isSkipAssesment) {
+      dispatch({ type: "SET_STEP", data: { step: 3, isNotification: false, isProcessing: false, isBussy: false } })
+    } else {
+      dispatch({
+        type: "SET_NOTIFICATION", data: {
+          isProcessing: true,
+          processingMessage: "Submitting music for assessment",
+          isBussy: true
         }
+      })
 
-        if (file.common.picture) json.fields.COVER_ART = {
-          "width": sizeOf(file.common.picture[0].data).width,
-          "height": sizeOf(file.common.picture[0].data).height,
-          "sizeBytes": file.common.picture[0].data.byteLength,
-          "codec": getFilteredCodec(file.common.picture[0].format)
-        }
+      origFiles.forEach((file) => {
 
-        data["storageNodes"].push(json);
+        if (file.type != "image/jpeg" && file.type != "image/png") {
 
-      } else {
-        data["storageNodes"].push(
+          let json =
           {
             "lib": "/",
             "path": file.path,
             "mimeType": file.type,
-            "width": file.width,
-            "height": file.height,
-            "sizeBytes": file.size
+            "duration": file.format.duration ? file.format.duration * 1000 : null,
+            "fields": {
+              "ALBUM_NAME": file.common.album ? file.common.album : null,
+              "ARTIST": file.common.artist ? file.common.artist : null,
+              "YEAR": file.common.year ? file.common.year : null,
+              "GENRE": file.common.genre ? file.common.genre : null,
+              "TRACK_NAME": file.common.title ? file.common.title : null,
+              "ALBUM_ARTIST": file.common.albumartist ? file.common.albumartist : null,
+              "COMPILATION": true,
+              "TRACK_NUMBER": file.common.track.no ? file.common.track.no : null,
+              "DISC_NUMBER": file.common.disk.no ? file.common.disk.no : null,
+            }
           }
-        );
-      }
-    });
 
-    if (config.rules) data.rules = config.rules
+          if (file.common.picture) json.fields.COVER_ART = {
+            "width": sizeOf(file.common.picture[0].data).width,
+            "height": sizeOf(file.common.picture[0].data).height,
+            "sizeBytes": file.common.picture[0].data.byteLength,
+            "codec": getFilteredCodec(file.common.picture[0].format)
+          }
 
-    if (config.endpoint !== "local") {
-      ApiService.post("assessment", data, config).then(result => {
-        if (result.headers.location) {
-          localStorage.setItem('assessment', result.headers.location);
-          dispatch({ type: "SET_STEP", data: { step: 3, processingMessage: "Checking for missing artwork", } })
+          data["storageNodes"].push(json);
+
+        } else {
+          data["storageNodes"].push(
+            {
+              "lib": "/",
+              "path": file.path,
+              "mimeType": file.type,
+              "width": file.width,
+              "height": file.height,
+              "sizeBytes": file.size
+            }
+          );
         }
-      }, error => {
-        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isProcessing: false, isBussy: false } })
-      })
-    } else {
-      dispatch({ type: "SET_STEP", data: { step: 3 } })
+      });
+
+      if (config.rules) data.rules = config.rules
+
+      if (config.endpoint !== "local") {
+        ApiService.post("assessment", data, config).then(result => {
+          if (result.headers.location) {
+            localStorage.setItem('assessment', result.headers.location);
+            dispatch({ type: "SET_STEP", data: { step: 3, processingMessage: "Checking for missing artwork", } })
+          }
+        }, error => {
+          dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isProcessing: false, isBussy: false } })
+        })
+      } else {
+        dispatch({ type: "SET_STEP", data: { step: 3 } })
+      }
     }
-
-
   }
 
   return (

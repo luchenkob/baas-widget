@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { useDropzone } from 'react-dropzone';
 import { Context } from "../../context/context";
 import { useTranslation } from "react-i18next";
-import { getFileExtension } from "../../utils";
+import { getFileExtension, isArrayEqual } from "../../utils";
 
 const musicMetadata = require('music-metadata-browser');
 
@@ -10,7 +10,7 @@ import "./Uploader.scss";
 
 const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
-  const { dispatch } = useContext(Context);
+  const { dispatch, state } = useContext(Context);
   let length = 0, current = 0, errors = [], tempFiles = [], result = {};
 
   const { t } = useTranslation();
@@ -100,7 +100,11 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
     sortData();
 
-    dispatch({ type: "SET_DATA", data: { isProcessing: false, files: result, origFiles: tempFiles, errors: errors, step: 2 } })
+    if (state.origFiles.length > 0 && isArrayEqual(state.origFiles.sort(), tempFiles.sort())) {
+      dispatch({ type: "SET_STEP", data: { step: 2, isSkipAssesment: true, isNotification: false, isProcessing: false, isBussy: false } })
+    } else {
+      dispatch({ type: "SET_DATA", data: { isProcessing: false, isSkipAssesment: false, files: result, origFiles: tempFiles, errors: errors, step: 2 } })
+    }
   }
 
   const renameMimeType = (type, ext) => {

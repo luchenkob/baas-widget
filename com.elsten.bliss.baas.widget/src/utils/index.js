@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const ToBase64 = (u8) => {
   const Uint8ToString = (u8a) => {
     var CHUNK_SZ = 0x8000;
@@ -11,7 +13,6 @@ export const ToBase64 = (u8) => {
 }
 
 export const getU8Dimensions = (u8) => {
-  console.log(u8.buffer)
   const dataView = new DataView(u8.buffer)
 
   return {
@@ -50,3 +51,7 @@ export const filterIt = (array, value, key) => {
       : a => Object.keys(a).some(k => a[k] === value)
   );
 }
+
+export const isArrayEqual = (x, y) => {
+  return _(x).differenceWith(y, _.isEqual).isEmpty();
+};

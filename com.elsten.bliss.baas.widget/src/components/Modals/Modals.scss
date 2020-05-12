@@ -1,0 +1,57 @@
+@import "../../styles/global/variables.scss";
+
+.modal-details {
+  max-height: 80%;
+  top: 50% !important;
+  transform: translateY(-50%);
+
+  .modal-dialog {
+    width: 500px !important;
+    max-width: 100% !important;
+    height: 100%;
+
+    .modal-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+
+      .modal-header {
+        height: 60px;
+      }
+
+      .modal-body {
+        height: calc(100% - 69px);
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) { 
+    top: 0 !important;
+    transform: translateY(0);
+  }
+}
+
+.track-details {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .track-detail {
+    padding: 0.5rem;
+    border-bottom: 1px solid $border-color;
+
+    >*{
+      &:first-child{
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: $black;
+    }
+  }
+}

@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../../context/context";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { isEmpty } from "../../utils";
 import converter from 'number-to-words';
+import Icon from "../Icon";
+import ModalDetails from "../Modals/ModalDetails";
+import { filterIt } from "../../utils";
 
 import "./Result.scss";
 
@@ -15,9 +18,10 @@ const Artist = ({ ...props }) => {
 
 const Result = ({ activeAlbum, ...props }) => {
 
-  const { isProcessing, files, cur, len, errors } = props;
+  const { files, origFiles, errors } = props;
   const { dispatch } = useContext(Context);
   const { t } = useTranslation();
+  const [ details, setDetails] = useState({isActive: false, track: {}});
 
   const getUniqueArtists = (traks) => {
     let temp = [];
@@ -35,6 +39,11 @@ const Result = ({ activeAlbum, ...props }) => {
     dispatch({ type: "SET_ACTIVE_ALBUM", data: { activeAlbum: i } })
   }
 
+  const onShowDetails = (track) => {
+    const file = filterIt(origFiles, track.file, "file")[0];
+    setDetails({isActive: true, track: file});
+  }
+
   const renderList = () => {
 
     let active = activeAlbum;
@@ -48,13 +57,13 @@ const Result = ({ activeAlbum, ...props }) => {
           <div className="result-tittle">
             <div>{t('№')}</div>
             <div>{t('Name')}</div>
-            <div>{t('Filename')}</div>
+            <div></div>
           </div>
           {files[active].map((track, i) => (
             <div className="result-track" key={`t-${i}`}>
               <div>{`${track.no ? track.no : "-"}`}</div>
               <div>{`${track.title ? track.title : "-"}`}</div>
-              <div>{`${track.file ? track.file : "-"}`}</div>
+              <div><div onClick={()=>onShowDetails(track)}><Icon className="icon-primary" variant="info"/></div></div>
             </div>
           ))}
         </div>
@@ -94,6 +103,7 @@ const Result = ({ activeAlbum, ...props }) => {
           </Row>
         </Container>
       </div>
+      <ModalDetails show={details.isActive} track={details.track} onClose={()=>setDetails(previuos => ({...previuos, isActive: false}))} />
     </div>
   );
 }
