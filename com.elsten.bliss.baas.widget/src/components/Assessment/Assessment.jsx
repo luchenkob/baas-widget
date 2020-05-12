@@ -150,7 +150,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <div className="result-assessment">
           <div className="result-compliances">
             {
-              <Accordion defaultActiveKey="0">
+              <Accordion defaultActiveKey={0}>
                 {assessments[active].assessment.compliance.parts.map((part, i) => (
                   <Card key={`ac-${i}`}>
 
