@@ -31,15 +31,24 @@ module.exports = (env, argv) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: true
+                sourceMap: true,
               }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: [
+                  require('postcss-prefixer')({ prefix: 'baasZcx-' })
+                ]
+              },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: true
+                sourceMap: true,
               }
-            }
+            },
           ]
         },
         {
@@ -84,7 +93,7 @@ module.exports = (env, argv) => {
       new webpack.DefinePlugin({
         endpoint: JSON.stringify(argv.endpoint),
         rules: JSON.stringify(argv.rules)
-      })
+      }),
     ],
   }
 };

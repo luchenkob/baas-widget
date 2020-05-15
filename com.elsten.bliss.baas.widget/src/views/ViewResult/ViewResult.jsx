@@ -6,6 +6,7 @@ import { Context } from "../../context/context";
 import { ApiService } from "../../services/ApiService";
 import { getFilteredCodec } from "../../utils"
 import { useTranslation } from "react-i18next";
+import { _p } from "../../defines/config";
 
 const sizeOf = require('image-size');
 
@@ -102,7 +103,7 @@ const ViewResult = (state) => {
     <LayoutContent slots={[
       <Result {...state} />,
       <Button variant="light" disabled={isBussy ? true : false} onClick={handleUploadAgain}>{t("Choose files")}</Button>,
-      <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>{t("Find missing artwork")}</Button>
+      <Button variant="secondary" disabled={isBussy ? true : false} className={`${_p}ml-4`} onClick={handleAssess}>{t("Find missing artwork")}</Button>
     ]} />
   );
 }

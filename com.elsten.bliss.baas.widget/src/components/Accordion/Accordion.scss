@@ -1,0 +1,37 @@
+@import "../../styles/global/variables.scss";
+
+/*** ACCORDION ***/
+
+/* Header */
+.caccordion > div > div:first-of-type {
+  padding: 1em;
+  background-color: $light;
+  user-select: none;
+  cursor: pointer;
+  border-bottom: 1px solid rgba($gray, 0.2);
+}
+
+/* Content */
+.caccordion > div > div:last-of-type {
+
+}
+
+/* Inner */
+.caccordion .caccordion-item {
+  padding: 1em;
+  opacity: 1;
+  transition: opacity 300ms ease;
+  overflow: auto;
+}
+.caccordion > div:first-child .caccordion-item {
+  max-height: 400px;
+}
+.caccordion > div.open .caccordion-item {
+  opacity: 1;
+  transition: opacity 700ms ease;
+}
+.caccordion img.caccordion-item {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}

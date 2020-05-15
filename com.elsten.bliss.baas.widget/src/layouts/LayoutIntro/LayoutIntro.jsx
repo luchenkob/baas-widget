@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { _p } from "../../defines/config";
 
 import "./LayoutIntro.scss"
 
 const LayoutIntro = ({ slots, isDisabledIntro }) => {
 
   return (
-    <div className={`layout-intro ${isDisabledIntro ? "disabled-intro" : ""}`}>
-      <div className="layout-intro-top">
+    <div className={`${_p}layout-intro ${isDisabledIntro ? `${_p}disabled-intro` : ""}`}>
+      <div className={`${_p}layout-intro-top`}>
         <Container fluid>
           <Row>
             <Col>
@@ -16,16 +17,16 @@ const LayoutIntro = ({ slots, isDisabledIntro }) => {
           </Row>
         </Container>
       </div>
-      <div className="layout-intro-bottom">
-        <Container className="h-100" fluid>
-          <Row className="h-100">
-            <Col className="h-100">
+      <div className={`${_p}layout-intro-bottom`}>
+        <Container className={`${_p}h-100`} fluid>
+          <Row className={`${_p}h-100`}>
+            <Col className={`${_p}h-100`}>
               {slots[1]}
             </Col>
           </Row>
         </Container>
       </div>
-      <div className="layout-copyright">Powered by <a href="https://www.blisshq.com" style={{fontWeight:"bold",fontFamily:'Raleway',color:"#3697d9"}}>bliss</a></div>
+      <div className={`${_p}layout-copyright`}>Powered by <a href="https://www.blisshq.com" style={{fontWeight:"bold",fontFamily:'Raleway',color:"#3697d9"}}>bliss</a></div>
     </div>
   );
 }

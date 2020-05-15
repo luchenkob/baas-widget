@@ -1,16 +1,19 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/context";
-import { Container, Row, Col, Accordion, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { capitalize } from "../../utils";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon";
 import { filterIt, ToBase64 } from "../../utils";
+import { _p } from "../../defines/config";
+import Accordion from "../Accordion/Accordion";
 
 import "../Result/Result.scss";
+import { useState } from "react";
 
 const Artist = ({ ...props }) => {
   return (
-    <div className="artist-name">{props.name}</div>
+    <div className={`${_p}artist-name`}>{props.name}</div>
   );
 }
 
@@ -19,6 +22,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
   const { isProcessing, assessments, errors, origFiles } = props;
   const { dispatch } = useContext(Context);
   const { t } = useTranslation();
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const getArtists = (artists) => {
     return artists.map(((artist, i) => (
@@ -37,7 +41,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       if (compliance.parts) {
         for (const [i, part] of Object.entries(compliance.parts)) {
           if (part.state == "NONCOMPLIANT") {
-            badges.push(<span key={`b-${i}`} className="badge badge-danger"><Icon variant="times" className="mr-1" />{t(capitalize(part.summary))}</span>);
+            badges.push(<span key={`b-${i}`} className={`${_p}badge ${_p}badge-danger`}><Icon variant="times" className={`${_p}mr-1`} />{t(capitalize(part.summary))}</span>);
           }
         }
         if (badges.length > 0) {
@@ -70,13 +74,13 @@ const Assessment = ({ activeAssessment, ...props }) => {
 
     }
 
-    return <>{title && <p className="text-center mt-3 pl-2 pr-2"><strong>{title}:</strong></p>}
-      <div className="result-compliance-alternative-art" style={{ background: `url(${image})` }}></div>
-      <p className="text-center mt-3 pl-2 pr-2"><strong>{response.width} x {response.height}</strong></p>
+    return <>{title && <p className={`${_p}text-center ${_p}mt-3 ${_p}pl-2 ${_p}pr-2`}><strong>{title}:</strong></p>}
+      <div className={`${_p}result-compliance-alternative-art`} style={{ background: `url(${image})` }}></div>
+      <p className={`${_p}text-center ${_p}mt-3 ${_p}pl-2 ${_p}pr-2`}><strong>{response.width} x {response.height}</strong></p>
     </>
   }
 
-  const renderCompliance = (part, i) => {
+  const renderCompliance = (part) => {
 
     if (part.responses && part.responses.length > 0) {
 
@@ -84,34 +88,34 @@ const Assessment = ({ activeAssessment, ...props }) => {
 
         case "InstallImageFromUrlResponse":
           return (
-            <div className="row">
+            <Row>
               {part.responses && part.responses.map((response, i) => (
-                <div className="col-lg-4" key={`alt-${i}`}>
-                  <div className="result-compliance-alternative">
+                <Col lg={4} key={`alt-${i}`}>
+                  <div className={`${_p}result-compliance-alternative`}>
                     {renderArt(response)}
                   </div>
-                </div>
+                </Col>
               ))}
-            </div>
+            </Row>
           );
 
         case "Response":
           return (
             part.responses.map((response, i) => (
-              <div className="row" key={`resp-${i}`}>
-                <div className="col">
-                  <div className="container-fluid">
-                    <div className="row border">
-                      <div className="col-lg-8 d-flex align-items-center pt-2 pb-2 justify-content-lg-start justify-content-center">
+              <Row key={`resp-${i}`}>
+                <Col>
+                  <Container fluid>
+                    <Row className={`${_p}border`}>
+                      <Col lg={8} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-start ${_p}justify-content-center`}>
                         <span>{t(response.description)}</span>
-                      </div>
-                      <div className="col-lg-4 d-flex align-items-center justify-content-lg-end justify-content-center">
-                        <button className="btn btn-primary m-2">{t('Fix')}</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                      </Col>
+                      <Col lg={4} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-end ${_p}justify-content-center`}>
+                        <Button variant="primary" className={`${_p}m-2`}>{t('Fix')}</Button>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Col>
+              </Row>
             ))
           );
 
@@ -121,12 +125,12 @@ const Assessment = ({ activeAssessment, ...props }) => {
               <Row key={`resp-${i}`}>
                 <Col>
                   <Container fluid>
-                    <Row className="border">
-                      <Col lg={8} className="d-flex align-items-center pt-2 pb-2 justify-content-lg-start justify-content-center">
+                    <Row className={`${_p}border`}>
+                      <Col lg={8} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-start ${_p}justify-content-center`}>
                         <span>{t(response.description)}</span>
                       </Col>
-                      <Col lg={4} className="d-flex align-items-center justify-content-lg-end justify-content-center">
-                        <Button variant="primary" className="m-2">{t('Fix')}</Button>
+                      <Col lg={4} className={`${_p}d-flex ${_p}align-items-center ${_p}justify-content-lg-end ${_p}justify-content-center`}>
+                        <Button variant="primary" className={`${_p}m-2`}>{t('Fix')}</Button>
                       </Col>
                     </Row>
                   </Container>
@@ -136,6 +140,81 @@ const Assessment = ({ activeAssessment, ...props }) => {
           );
       }
     }
+  }
+
+  const checkCompliance = (part) => {
+
+    const alt = [];
+    const other = [];
+
+    if (part.responses) {
+
+      for (let response of part.responses) {
+        if (response.objectType == "InstallImageFromUrlResponse") {
+          alt.push(response);
+        }
+      }
+    }
+
+    return alt.length > 0 ?
+      <div header="Alternative art" className={`${_p}caccordion-item`}>
+        <div className={`${_p}result-compliance`}>
+          <div className={`${_p}result-compliance-inner`}>
+            <Container fluid className={`${_p}p-0`}>
+              <Row>
+                {alt.map((response, i) => (
+                  <Col lg={4} key={`alt-${i}`}>
+                    <div className={`${_p}result-compliance-alternative`}>
+                      {renderArt(response)}
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </Container>
+          </div>
+        </div>
+      </div> : <></>
+  }
+
+  const checkComplianceOther = (part) => {
+
+    const other = [];
+
+    if (part.responses) {
+
+      for (let response of part.responses) {
+        if (response.objectType != "InstallImageFromUrlResponse") {
+          other.push(response);
+        }
+      }
+    }
+
+    return other.length > 0 ?
+      <div header="Other fixes" className={`${_p}caccordion-item ${_p}pl-0 ${_p}pr-0`}>
+        <div className={`${_p}result-compliance`}>
+          <div className={`${_p}result-compliance-inner`}>
+            <Container fluid className={`${_p}p-0`}>
+              {other.map((response, i) => (
+                <Row key={`resp-${i}`}>
+                  <Col>
+                    <Container fluid>
+                      <Row className={`${_p}border`}>
+                        <Col lg={8} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-start ${_p}justify-content-center`}>
+                          <span>{t(response.description)}</span>
+                        </Col>
+                        <Col lg={4} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-end ${_p}justify-content-center`}>
+                          <Button variant="primary" className={`${_p}m-2`}>{t('Fix')}</Button>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </Col>
+                </Row>
+              ))}
+            </Container>
+          </div>
+        </div>
+      </div>
+      : <></>
 
   }
 
@@ -145,49 +224,37 @@ const Assessment = ({ activeAssessment, ...props }) => {
 
     if (assessments.length > 0) {
       active ? active == activeAssessment : active = 0;
-
       return (
-        <div className="result-assessment">
-          <div className="result-compliances">
-            {
-              <Accordion defaultActiveKey={0}>
-                {assessments[active].assessment.compliance.parts.map((part, i) => (
-                  <Card key={`ac-${i}`}>
+        <div className={`${_p}result-assessment`}>
+          <div className={`${_p}result-compliances`}>
+            {assessments[active].assessment.compliance.parts.map((part, i) => (
+              <Accordion key={`ac-${i}`} className={`${_p}caccordion ${_p}mb-4`} selectedIndex={selectedIndex} onChange={() => { }}>
 
-                    <Accordion.Toggle as={Button} variant="link" eventKey={i}>
-                      <Card.Header className="text-left">
-                        <span className={`badge ${part.state == "NONCOMPLIANT" ? "badge-danger" : "badge-success"}`}>
-                          {part.state == "NONCOMPLIANT" ?
-                            <><Icon variant="times" className="mr-1" />{t(capitalize(part.summary))}</>
-                            :
-                            <><Icon variant="done" className="mr-1" />{t("Compliant")}</>
-                          }
-                        </span>
-                      </Card.Header>
-                    </Accordion.Toggle>
+                <div header={
+                  <span className={`${_p}badge ${part.state == "NONCOMPLIANT" ? `${_p}badge-danger` : `${_p}badge-success`}`}>
+                    {part.state == "NONCOMPLIANT" ?
+                      <><Icon variant="times" className={`${_p}mr-1`} />{t(capitalize(part.summary))}</>
+                      :
+                      <><Icon variant="done" className={`${_p}mr-1`} />{t("Compliant")}</>
+                    }
+                  </span>} className={`${_p}caccordion-item`}>
+                  <div className={`${_p}result-compliance`}>
+                    <div className={`${_p}result-compliance-inner`}>
+                      <Container fluid className={`${_p}p-0`}>
+                        <Row>
+                          <Col>
+                            <p className={`${_p}mb-4 ${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}`}>{t(part.detail)}</p>
+                          </Col>
+                        </Row>
+                      </Container>
+                    </div>
+                  </div>
+                </div>
 
-                    <Accordion.Collapse eventKey={i}>
-                      <Card.Body>
-                        <div className="result-compliance">
-                          <div className="result-compliance-inner">
-                            <Container fluid className="p-0">
-                              <Row>
-                                <Col>
-                                  <p className={`mb-4 ${part.state == "NONCOMPLIANT" ? "text-danger" : "text-success"}`}>{t(part.detail)}</p>
-                                </Col>
-                              </Row>
-                              {renderCompliance(part, i)}
-                            </Container>
-                          </div>
-                        </div>
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
-
-
-                ))}
+                {checkCompliance(part)}
+                {checkComplianceOther(part)}
               </Accordion>
-            }
+            ))}
           </div>
         </div>
       )
@@ -197,33 +264,33 @@ const Assessment = ({ activeAssessment, ...props }) => {
   const renderAlbums = () => {
 
     return assessments.map((assessment, i) => (
-      <div className={`result-album ${activeAssessment ? i == activeAssessment ? "active" : '' : i == 0 ? "active" : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(i) }}>
-        <div className="result-inline-title">
-          <h5 className="mb-2">{assessment.album.title}</h5>
-          <div className="result-badges">
+      <div className={`${_p}result-album ${activeAssessment ? i == activeAssessment ? `${_p}active` : '' : i == 0 ? `${_p}active` : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(i) }}>
+        <div className={`${_p}result-inline-title`}>
+          <h5 className={`${_p}mb-2`}>{assessment.album.title}</h5>
+          <div className={`${_p}result-badges`}>
             {complianceNotification(assessment.assessment.compliance)}
           </div>
         </div>
-        <div className="result-artist">{getArtists(assessment.album.artists)}</div>
+        <div className={`${_p}result-artist`}>{getArtists(assessment.album.artists)}</div>
       </div>
     ));
   }
 
   return (
-    <div className={`result ${isProcessing ? "processing" : ''}`}>
+    <div className={`${_p}result ${isProcessing ? `${_p}processing` : ''}`}>
       {errors.length > 0 && (
-        <div className="result-errors"><span>{t('Errors (wrong files)')}:</span><div className="result-errors-count">{errors.length}</div></div>
+        <div className={`${_p}result-errors`}><span>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
       )}
-      <div className="result-title">
+      <div className={`${_p}result-title`}>
         <h4>{t('Assessment')}</h4>
       </div>
-      <div className="result-content">
-        <Container fluid className="h-100 p-0" fluid>
-          <Row className="h-100">
-            <Col md={6} className="h-100 h-md-auto overflow-y-auto">
+      <div className={`${_p}result-content`}>
+        <Container fluid className={`${_p}h-100 ${_p}p-0`} fluid>
+          <Row className={`${_p}h-100`}>
+            <Col md={6} className={`${_p}h-100 ${_p}h-md-auto ${_p}overflow-y-auto`}>
               {renderAlbums()}
             </Col>
-            <Col md={6} className="h-100 h-md-auto overflow-y-auto">
+            <Col md={6} className={`${_p}h-100 ${_p}bg-white ${_p}h-md-auto ${_p}overflow-y-auto`}>
               {renderAssessment()}
             </Col>
           </Row>

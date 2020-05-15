@@ -3,6 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Context } from "../../context/context";
 import { useTranslation } from "react-i18next";
 import { getFileExtension, isArrayEqualByFileName } from "../../utils";
+import { _p } from "../../defines/config";
 
 const musicMetadata = require('music-metadata-browser');
 
@@ -120,10 +121,10 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
   }
 
   return (
-    <div className="uploader">
-      <div className={`uploader-inner ${isDragActive ? "active" : ''}`} {...getRootProps()}>
+    <div className={`${_p}uploader`}>
+      <div className={`${_p}uploader-inner ${isDragActive ? `${_p}active` : ''}`} {...getRootProps()}>
         <input {...getInputProps()} />
-        <p className="mb-0">{t('Drag and drop music files here')}</p>
+        <p className={`${_p}mb-0`}>{t('Drag and drop music files here')}</p>
       </div>
     </div>
   );

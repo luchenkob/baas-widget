@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import Assessment from "../../components/Assessment/Assessment";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import LayoutContent from "../../layouts/LayoutContent/LayoutContent";
 import { Context } from "../../context/context";
 import { ApiService } from "../../services/ApiService";
 import { useTranslation } from "react-i18next";
+import { _p } from "../../defines/config";
+import Modal from "../../components/Modals/Modal";
 
 const ViewAssessment = (state) => {
 
@@ -95,19 +97,15 @@ const ViewAssessment = (state) => {
   return (
     <>
       <LayoutContent slots={[
-        isMounted ? failed ? <div className="msg-box failed">{failed}</div> : <Assessment {...state} /> : null,
+        isMounted ? failed ? <div className={`${_p}msg-box ${_p}failed`}>{failed}</div> : <Assessment {...state} /> : null,
         <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>{t("Choose files")}</Button>,
-        <Button variant="secondary" disabled={isBussy ? true : false} className="ml-4" onClick={handleAssess}>{t("Fix missing artwork")}</Button>
+        <Button variant="secondary" disabled={isBussy ? true : false} className={`${_p}ml-4`} onClick={handleAssess}>{t("Fix missing artwork")}</Button>
       ]} />
 
-      <Modal show={show} container={container} onHide={handleCloseCompleteModal}>
-        <Modal.Header closeButton>
-        <Modal.Title className="text-center w-100">{t("Fix missing artwork")}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="text-center" dangerouslySetInnerHTML={{ __html: t(config.completeHtml) }}></Modal.Body>
-        <Modal.Footer className="d-flex justify-content-center">
-          <Button variant="primary" onClick={handleLinktoBliss}>{t(config.completeLabel)}</Button>
-        </Modal.Footer>
+      <Modal show={show} className={`${_p}small`} onClose={() => setShow(false)}>
+        <h3 className={`${_p}text-center ${_p}w-100`}>{t("Fix missing artwork")}</h3>
+        <div className={`${_p}text-center ${_p}text-regular ${_p}mb-4`} dangerouslySetInnerHTML={{ __html: t(config.completeHtml) }}></div>
+        <div className={`${_p}text-center`}><Button variant="primary" onClick={handleLinktoBliss}>{t(config.completeLabel)}</Button></div>
       </Modal>
     </>
   );

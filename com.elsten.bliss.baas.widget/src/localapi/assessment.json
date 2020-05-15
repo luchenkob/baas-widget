@@ -60,6 +60,16 @@
                 "height": 500
               },
               {
+                "objectType": "Response",
+                "title": "Shrink art",
+                "description": "Shrink the art to 500x500"
+              },
+              {
+                "objectType": "Response",
+                "title": "Shrink art",
+                "description": "Shrink the art to 500x500"
+              },
+              {
                 "objectType": "InstallImageFromUrlResponse",
                 "url": "baas:/24-salve_regina.flac#coverart",
                 "width": 500,
