@@ -55,3 +55,13 @@ export const filterIt = (array, value, key) => {
 export const isArrayEqual = (x, y) => {
   return _(x).differenceWith(y, _.isEqual).isEmpty();
 };
+
+export const isArrayEqualByFileName = (x, y) => {
+  if(x.length != y.length) return false;
+
+  x.map((item, i)=>{
+    if(item.file !==  y[i].file) return false;
+  })
+
+  return true;
+};
