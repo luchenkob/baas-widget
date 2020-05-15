@@ -3,10 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import "./LayoutIntro.scss"
 
-const LayoutIntro = ({ slots }) => {
+const LayoutIntro = ({ slots, isDisabledIntro }) => {
 
   return (
-    <div className="layout-intro">
+    <div className={`layout-intro ${isDisabledIntro ? "disabled-intro" : ""}`}>
       <div className="layout-intro-top">
         <Container fluid>
           <Row>

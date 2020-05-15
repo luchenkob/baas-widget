@@ -7,6 +7,17 @@
   flex-direction: column;
   align-items: stretch;
 
+  &.disabled-intro {
+    .layout-intro-top {
+      display: none;
+    }
+    .layout-intro-bottom {
+      width: 100%;
+      height: 100%;
+      background-color: $primary;
+    }
+  }
+
   .layout-intro-top {
     width: 100%;
     height: 50%;

@@ -9,12 +9,8 @@ const ViewUploader = (state) => {
   const { config } = useContext(Context);
 
   return (
-    !config.title && !config.introHtml ?
-      <LayoutIntro slots={[<></>,
-        <Uploader {...state} />
-      ]} /> :
-      <LayoutIntro slots={[
-        <InitialIntro />,
+      <LayoutIntro isDisabledIntro={!config.title && !config.introHtml ? true : false} slots={[
+        !config.title && !config.introHtml ? <></>: <InitialIntro />,
         <Uploader {...state} />
       ]} />
   );
