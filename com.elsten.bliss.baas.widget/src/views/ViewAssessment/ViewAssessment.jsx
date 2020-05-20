@@ -99,7 +99,7 @@ const ViewAssessment = (state) => {
       <LayoutContent slots={[
         isMounted ? failed ? <div className={`${_p}msg-box ${_p}failed`}>{failed}</div> : <Assessment {...state} /> : null,
         <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>{t("Choose files")}</Button>,
-        <Button variant="secondary" disabled={isBussy ? true : false} className={`${_p}ml-4`} onClick={handleAssess}>{t("Fix missing artwork")}</Button>
+        <Button variant="secondary" disabled={isBussy ? true : false} className={`${_p}ml-4 ${_p}btn-lg`} onClick={handleAssess}>{t("Fix missing artwork")}</Button>
       ]} />
 
       <Modal show={show} className={`${_p}small`} onClose={() => setShow(false)}>
