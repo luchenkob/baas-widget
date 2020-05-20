@@ -7,6 +7,7 @@ import Icon from "../Icon";
 import { filterIt, ToBase64 } from "../../utils";
 import { _p } from "../../defines/config";
 import Accordion from "../Accordion/Accordion";
+import sizeOf from "image-size";
 
 import "../Result/Result.scss";
 import { useState } from "react";
@@ -56,6 +57,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
     const type = response.url.split("/")[0];
     let image = null;
     let title = "";
+    let width = 0;
+    let height = 0;
 
     switch (type) {
       case "http:":
@@ -68,15 +71,20 @@ const Assessment = ({ activeAssessment, ...props }) => {
           const file = filterIt(origFiles, fileName, "file")[0];
           image = file ? file.common.picture[0].data : null;
         }
-        if (image) image = ToBase64(image);
-        title = t('Use existing art');
+        if (image) {
+          image = ToBase64(image);
+          width = sizeOf(image).width;
+          height = sizeOf(image).height;
+        } 
+
+        title = fileName;
         break;
 
     }
 
-    return <>{title && <p className={`${_p}text-center ${_p}mt-3 ${_p}pl-2 ${_p}pr-2`}><strong>{title}:</strong></p>}
+    return <>{title && <p className={`${_p}text-center ${_p}mt-3 ${_p}pl-2 ${_p}pr-2`}><strong>{title}</strong></p>}
       <div className={`${_p}result-compliance-alternative-art`} style={{ background: `url(${image})` }}></div>
-      <p className={`${_p}text-center ${_p}mt-3 ${_p}pl-2 ${_p}pr-2`}><strong>{response.width} x {response.height}</strong></p>
+      <p className={`${_p}text-center ${_p}mt-3 ${_p}pl-2 ${_p}pr-2`}><strong>{width} x {height}</strong></p>
     </>
   }
 
