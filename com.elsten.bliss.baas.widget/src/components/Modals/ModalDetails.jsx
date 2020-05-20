@@ -14,9 +14,10 @@ const ModalDetails = ({ show, track, onClose }) => {
     switch (key) {
       case "picture":
       case "comment":
+      case "artist":
         break;
       default:
-        return <div key={`${key}`} className={`${_p}track-detail`}><div><strong>{t(key)}</strong></div><div><p>{content}</p></div></div>;
+        return content.length > 0 && <div key={`${key}`} className={`${_p}track-detail`}><div><strong>{t(key)}</strong></div><div>{typeof content == "string" ? <p>{content}</p> : content.map((item) => (<p>{item}</p>))}</div></div>;
     }
   }
 
@@ -25,11 +26,11 @@ const ModalDetails = ({ show, track, onClose }) => {
       <div className={`${_p}track-detail`}><div><h4 className={`${_p}text-primary ${_p}mb-0`}>{t("Common")}</h4></div></div>
       <div className={`${_p}track-detail`}><div><strong>{t("File name")}</strong></div><div><p>{track.file}</p></div></div>
       {track.common ? Object.keys(track.common).map((key) => (
-        filter(key, JSON.stringify(track.common[key]))
+        filter(key, track.common[key])
       )) : null}
       <div className={`${_p}track-detail`}><div><h4 className={`${_p}text-primary ${_p}mb-0`}>{t("Format")}</h4></div></div>
       {track.format ? Object.keys(track.format).map((key) => (
-        filter(key, JSON.stringify(track.format[key]))
+        filter(key, track.format[key])
       )) : null}
     </div>
   }
