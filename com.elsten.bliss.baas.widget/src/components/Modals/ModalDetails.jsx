@@ -15,9 +15,34 @@ const ModalDetails = ({ show, track, onClose }) => {
       case "picture":
       case "comment":
       case "artist":
+      case "disk":
         break;
+      case "track":
+        let result = "";
+
+        content.no ? content.of ? result = `${content.no}/${content.of}` : result = content.no : null;
+
+        return result && <div key={`${key}`} className={`${_p}track-detail`}>
+          <div><strong>{t(key)}</strong></div>
+          <div>
+            <p>{result}</p>
+          </div>
+        </div>
       default:
-        return content.length > 0 && <div key={`${key}`} className={`${_p}track-detail`}><div><strong>{t(key)}</strong></div><div>{typeof content == "string" ? <p>{content}</p> : content.map((item) => (<p>{item}</p>))}</div></div>;
+
+        return JSON.stringify(content).length > 2 &&
+          <div key={`${key}`} className={`${_p}track-detail`}>
+            <div><strong>{t(key)}</strong></div>
+            <div>
+              {
+                typeof content == "string" || typeof content == "number" || typeof content == "boolean" ?
+                  typeof content == "boolean" ? <p>{content ? t("yes") : t("no")}</p> : <p>{content}</p>
+                  : typeof content == "object"
+                    ? Object.keys(content).map((item, i) => (<p key={`it-${i}`}>{content[item]}</p>))
+                    : null
+              }
+            </div>
+          </div>;
     }
   }
 
