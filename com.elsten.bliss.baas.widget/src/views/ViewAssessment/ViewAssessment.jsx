@@ -105,7 +105,7 @@ const ViewAssessment = (state) => {
       <Modal show={show} className={`${_p}small`} onClose={() => setShow(false)}>
         <h3 className={`${_p}text-center ${_p}w-100`}>{t("Fix missing artwork")}</h3>
         <div className={`${_p}text-center ${_p}text-regular ${_p}mb-4`} dangerouslySetInnerHTML={{ __html: t(config.completeHtml) }}></div>
-        <div className={`${_p}text-center`}><Button variant="primary" onClick={handleLinktoBliss}>{t(config.completeLabel)}</Button></div>
+        <div className={`${_p}text-center`}><Button variant="primary" onClick={handleLinktoBliss} dangerouslySetInnerHTML={{ __html: t(config.completeLabel) }}></Button></div>
       </Modal>
     </>
   );
