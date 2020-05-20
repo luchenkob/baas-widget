@@ -35,9 +35,9 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
           reader.onload = ((entry) => {
             const image = new Image();
             image.src = entry.target.result;
-            image.onload = () => {
+             image.onload = () => {
 
-              tempFiles.push({ file: file.name, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)), width: image.width, height: image.height });
+              tempFiles.push({ file: file.name, data:entry.target.result, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)), width: image.width, height: image.height });
               setProgress();
             };
           });

@@ -71,7 +71,7 @@
               },
               {
                 "objectType": "InstallImageFromUrlResponse",
-                "url": "baas:/24-salve_regina.flac#coverart",
+                "url": "baas:/folder.jpg#coverart",
                 "width": 500,
                 "height": 500
               }

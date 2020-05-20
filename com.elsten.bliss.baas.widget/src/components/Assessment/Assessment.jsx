@@ -57,6 +57,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
     const type = response.url.split("/")[0];
     let image = null;
     let title = "";
+    let file = 0;
     let width = 0;
     let height = 0;
 
@@ -64,18 +65,17 @@ const Assessment = ({ activeAssessment, ...props }) => {
       case "http:":
       case "https:":
         image = response.url;
+        width = response.width;
+        height = response.height;
         break;
       case "baas:":
         const fileName = response.url.split("#")[0].split("/")[1];
         if (fileName) {
-          const file = filterIt(origFiles, fileName, "file")[0];
-          image = file ? file.common.picture[0].data : null;
+          file = filterIt(origFiles, fileName, "file")[0];
+          image = file ? file.data : null;
+          width = file ? file.width : 0;
+          height = file ? file.height : 0;
         }
-        if (image) {
-          image = ToBase64(image);
-          width = sizeOf(image).width;
-          height = sizeOf(image).height;
-        } 
 
         title = fileName;
         break;
