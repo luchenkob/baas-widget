@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Context } from "../../context/context";
 import { _p } from "../../defines/config";
 
 import "./LayoutContent.scss"
 
 const LayoutContent = ({ slots }) => {
+
+  const { config } = useContext(Context);
 
   return (
     <div className={`${_p}layout-content`}>
@@ -27,7 +30,7 @@ const LayoutContent = ({ slots }) => {
           </Row>
         </Container>
       </div>
-      <div className={`${_p}layout-copyright`}>Powered by <a href="https://www.blisshq.com" style={{ fontWeight: "bold", fontFamily: 'Raleway', color: "#3697d9" }}>bliss</a></div>
+      {config.showPoweredBy && <div className={`${_p}layout-copyright`}>Powered by <a href="https://www.blisshq.com" style={{ fontWeight: "bold", fontFamily: 'Raleway', color: "#3697d9" }}>bliss</a></div>}
     </div>
   );
 }
