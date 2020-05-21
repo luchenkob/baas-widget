@@ -8,6 +8,7 @@ import { filterIt, ToBase64 } from "../../utils";
 import { _p } from "../../defines/config";
 import Accordion from "../Accordion/Accordion";
 import sizeOf from "image-size";
+import Modal from "../Modals/Modal";
 
 import "../Result/Result.scss";
 import { useState } from "react";
@@ -21,9 +22,10 @@ const Artist = ({ ...props }) => {
 const Assessment = ({ activeAssessment, ...props }) => {
 
   const { isProcessing, assessments, errors, origFiles } = props;
-  const { dispatch } = useContext(Context);
+  const { dispatch, config } = useContext(Context);
   const { t } = useTranslation();
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isHelpModal, setIsHelpModal] = useState(false);
 
   const getArtists = (artists) => {
     return artists.map(((artist, i) => (
@@ -300,6 +302,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       )}
       <div className={`${_p}result-title`}>
         <h4>{t('Assessment')}</h4>
+        <div className={`${_p}result-title-icon`} onClick={()=>setIsHelpModal(true)}><Icon variant="help" /></div>
       </div>
       <div className={`${_p}result-content`}>
         <Container fluid className={`${_p}h-100 ${_p}p-0`} fluid>
@@ -312,6 +315,10 @@ const Assessment = ({ activeAssessment, ...props }) => {
             </Col>
           </Row>
         </Container>
+
+        <Modal title={t(config.assessmentStepHelpTitleHtml)} className={`${_p}small`} show={isHelpModal} onClose={() => setIsHelpModal(false)}>
+          <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.assessmentStepHelpContentHtml) }}></p>
+        </Modal>
       </div>
     </div>
   );

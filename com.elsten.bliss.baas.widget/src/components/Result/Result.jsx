@@ -21,9 +21,10 @@ const Artist = ({ ...props }) => {
 const Result = ({ activeAlbum, ...props }) => {
 
   const { files, origFiles, errors } = props;
-  const { dispatch } = useContext(Context);
+  const { dispatch, config } = useContext(Context);
   const { t } = useTranslation();
   const [details, setDetails] = useState({ isActive: false, track: {} });
+  const [isHelpModal, setIsHelpModal] = useState(false);
 
   const getUniqueArtists = (traks) => {
     let temp = [];
@@ -94,6 +95,7 @@ const Result = ({ activeAlbum, ...props }) => {
       )}
       <div className={`${_p}result-title`}>
         <h4>{t('Found')} {converter.toWords(Object.keys(files).length)} {Object.keys(files).length > 1 ? t('albums') : t('album')}</h4>
+        <div className={`${_p}result-title-icon`} onClick={()=>setIsHelpModal(true)}><Icon variant="help"/></div>
       </div>
       <div className={`${_p}result-content`}>
         <Container fluid className={`${_p}h-100 ${_p}p-0`} fluid>
@@ -109,6 +111,10 @@ const Result = ({ activeAlbum, ...props }) => {
       </div>
       <Modal title={t('Track details')} show={details.isActive} onClose={() => setDetails(previuos => ({ ...previuos, isActive: false }))}>
         <ModalDetails track={details.track} />
+      </Modal>
+
+      <Modal title={t(config.previewStepHelpTitleHtml)} className={`${_p}small`} show={isHelpModal} onClose={() => setIsHelpModal(false)}>
+        <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.previewStepHelpContentHtml)}}></p>
       </Modal>
     </div>
   );

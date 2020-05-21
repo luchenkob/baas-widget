@@ -10,7 +10,17 @@
   .result-title {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: $bottom-nav-height;
+  }
+
+  .result-title-icon {
+    cursor: pointer;
+    transition: color $transition ease;
+
+    &:hover {
+      color:$primary;
+    }
   }
 
   .result-content {
