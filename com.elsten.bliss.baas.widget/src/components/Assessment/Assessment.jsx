@@ -6,9 +6,8 @@ import { useTranslation } from "react-i18next";
 import Icon from "../Icon";
 import { filterIt, ToBase64 } from "../../utils";
 import { _p } from "../../defines/config";
-import Accordion from "../Accordion/Accordion";
-import sizeOf from "image-size";
 import Modal from "../Modals/Modal";
+import Collapsible from 'react-collapsible';
 
 import "../Result/Result.scss";
 import { useState } from "react";
@@ -26,6 +25,9 @@ const Assessment = ({ activeAssessment, ...props }) => {
   const { t } = useTranslation();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isHelpModal, setIsHelpModal] = useState(false);
+  const [complianceDetail, setComplianceDetail] = useState("");
+  const [isComplDetail, setIsComplDetail] = useState(false);
+  
 
   const getArtists = (artists) => {
     return artists.map(((artist, i) => (
@@ -90,72 +92,9 @@ const Assessment = ({ activeAssessment, ...props }) => {
     </>
   }
 
-  const renderCompliance = (part) => {
-
-    if (part.responses && part.responses.length > 0) {
-
-      switch (part.responses[0].objectType) {
-
-        case "InstallImageFromUrlResponse":
-          return (
-            <Row>
-              {part.responses && part.responses.map((response, i) => (
-                <Col lg={4} key={`alt-${i}`}>
-                  <div className={`${_p}result-compliance-alternative`}>
-                    {renderArt(response)}
-                  </div>
-                </Col>
-              ))}
-            </Row>
-          );
-
-        case "Response":
-          return (
-            part.responses.map((response, i) => (
-              <Row key={`resp-${i}`}>
-                <Col>
-                  <Container fluid>
-                    <Row className={`${_p}border`}>
-                      <Col lg={8} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-start ${_p}justify-content-center`}>
-                        <span>{t(response.description)}</span>
-                      </Col>
-                      <Col lg={4} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-end ${_p}justify-content-center`}>
-                        <Button variant="primary" className={`${_p}m-2`}>{t('Fix')}</Button>
-                      </Col>
-                    </Row>
-                  </Container>
-                </Col>
-              </Row>
-            ))
-          );
-
-        default:
-          return (
-            part.responses.map((response, i) => (
-              <Row key={`resp-${i}`}>
-                <Col>
-                  <Container fluid>
-                    <Row className={`${_p}border`}>
-                      <Col lg={8} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-start ${_p}justify-content-center`}>
-                        <span>{t(response.description)}</span>
-                      </Col>
-                      <Col lg={4} className={`${_p}d-flex ${_p}align-items-center ${_p}justify-content-lg-end ${_p}justify-content-center`}>
-                        <Button variant="primary" className={`${_p}m-2`}>{t('Fix')}</Button>
-                      </Col>
-                    </Row>
-                  </Container>
-                </Col>
-              </Row>
-            ))
-          );
-      }
-    }
-  }
-
-  const checkCompliance = (part) => {
+  const checkCompliance = (part, isTitle) => {
 
     const alt = [];
-    const other = [];
 
     if (part.responses) {
 
@@ -167,10 +106,11 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
 
     return alt.length > 0 ?
-      <div header="Alternative art" className={`${_p}caccordion-item`}>
+      <div className={`${_p}caccordion-item`}>
         <div className={`${_p}result-compliance`}>
           <div className={`${_p}result-compliance-inner`}>
             <Container fluid className={`${_p}p-0`}>
+              {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('Alternative art')}</h5></Col></Row>}
               <Row>
                 {alt.map((response, i) => (
                   <Col lg={4} key={`alt-${i}`}>
@@ -186,7 +126,19 @@ const Assessment = ({ activeAssessment, ...props }) => {
       </div> : <></>
   }
 
-  const checkComplianceOther = (part) => {
+  const isHasAlternativeArt = (part) => {
+
+    if (part.responses) {
+
+      for (let response of part.responses) {
+        if (response.objectType == "InstallImageFromUrlResponse") {
+          return true;
+        }
+      }
+    }
+  }
+
+  const checkComplianceOther = (part, isTitle) => {
 
     const other = [];
 
@@ -200,12 +152,13 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
 
     return other.length > 0 ?
-      <div header="Other fixes" className={`${_p}caccordion-item ${_p}pl-0 ${_p}pr-0`}>
+      <div className={`${_p}caccordion-item ${_p}pl-0 ${_p}pr-0`}>
         <div className={`${_p}result-compliance`}>
           <div className={`${_p}result-compliance-inner`}>
             <Container fluid className={`${_p}p-0`}>
+              {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('Other fixes')}</h5></Col></Row>}
               {other.map((response, i) => (
-                <Row key={`resp-${i}`}>
+                <Row className={`${_p}mb-2`} key={`resp-${i}`}>
                   <Col>
                     <Container fluid>
                       <Row className={`${_p}border`}>
@@ -238,32 +191,37 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <div className={`${_p}result-assessment`}>
           <div className={`${_p}result-compliances`}>
             {assessments[active].assessment.compliance.parts.map((part, i) => (
-              <Accordion key={`ac-${i}`} className={`${_p}caccordion ${_p}mb-4`} selectedIndex={selectedIndex} onChange={() => { }}>
-
-                <div header={
-                  <span className={`${_p}badge ${part.state == "NONCOMPLIANT" ? `${_p}badge-danger` : `${_p}badge-success`}`}>
-                    {part.state == "NONCOMPLIANT" ?
-                      <><Icon variant="times" className={`${_p}mr-1`} />{t(capitalize(part.summary))}</>
-                      :
-                      <><Icon variant="done" className={`${_p}mr-1`} />{t("Compliant")}</>
-                    }
-                  </span>} className={`${_p}caccordion-item`}>
-                  <div className={`${_p}result-compliance`}>
-                    <div className={`${_p}result-compliance-inner`}>
-                      <Container fluid className={`${_p}p-0`}>
-                        <Row>
-                          <Col>
-                            <p className={`${_p}mb-4 ${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}`}>{t(part.detail)}</p>
-                          </Col>
-                        </Row>
-                      </Container>
-                    </div>
+              <Collapsible
+                className={`${_p}collapsible`}
+                openedClassName={`${_p}collapsible`}
+                triggerClassName={`${_p}collapsible__trigger`}
+                triggerOpenedClassName={`${_p}collapsible__trigger`}
+                contentOuterClassName={`${_p}collapsible__contentOuter`}
+                contentInnerClassName={`${_p}collapsible__contentInner`}
+                triggerDisabled={true}
+                key={`ac-${i}`} open={selectedIndex == i}
+                onTriggerClosing={(e) => setSelectedIndex(-1)}
+                onTriggerOpening={(e) => setSelectedIndex(i)}
+                easing="ease" trigger={
+                  <>
+                    <div className={`${_p}collapsible-trigger-bg`} onClick={()=>setSelectedIndex(selectedIndex == i ? -1 : i)}></div>
+                    <span className={`${_p}badge ${part.state == "NONCOMPLIANT" ? `${_p}badge-danger` : `${_p}badge-success`}`}>
+                      {part.state == "NONCOMPLIANT" ?
+                        <><Icon variant="times" className={`${_p}mr-1`} />{t(capitalize(part.summary))}</>
+                        :
+                        <><Icon variant="done" className={`${_p}mr-1`} />{t("Compliant")}</>
+                      }
+                    </span>
+                    <Button variant="outline-primary" onClick={()=>{setComplianceDetail(`<span class=${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}>${part.detail}</span>`);setIsComplDetail(true)}}><Icon className={`${_p}mr-1`} variant="info"/>{t("More")}</Button>
+                  </>
+                }>
+                <div className={`${_p}result-compliance`}>
+                  <div className={`${_p}result-compliance-inner`}>
+                    {checkCompliance(part, true)}
+                    {checkComplianceOther(part, isHasAlternativeArt(part))}
                   </div>
                 </div>
-
-                {checkCompliance(part)}
-                {checkComplianceOther(part)}
-              </Accordion>
+              </Collapsible>
             ))}
           </div>
         </div>
@@ -272,13 +230,13 @@ const Assessment = ({ activeAssessment, ...props }) => {
   }
 
   const renderCover = (assessment) => {
-    return <Icon variant="empty"/>
+    return <Icon variant="empty" />
   }
 
   const renderAlbums = () => {
 
     return assessments.map((assessment, i) => (
-      <div className={`${_p}result-album ${activeAssessment ? i == activeAssessment ? `${_p}active` : '' : i == 0 ? `${_p}active` : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(i) }}>
+      <div className={`${_p}result-album ${activeAssessment ? i == activeAssessment ? `${_p}active` : '' : i == 0 ? `${_p}active` : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(i); setSelectedIndex(0) }}>
         <div className={`${_p}result-album-cover`}>
           {renderCover(assessment)}
         </div>
@@ -302,7 +260,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       )}
       <div className={`${_p}result-title`}>
         <h4>{t('Assessment')}</h4>
-        <div className={`${_p}result-title-icon`} onClick={()=>setIsHelpModal(true)}><Icon variant="help" /></div>
+        <div className={`${_p}result-title-icon`} onClick={() => setIsHelpModal(true)}><Icon variant="help" /></div>
       </div>
       <div className={`${_p}result-content`}>
         <Container fluid className={`${_p}h-100 ${_p}p-0`} fluid>
@@ -310,7 +268,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
             <Col md={6} className={`${_p}h-100 ${_p}h-md-auto ${_p}overflow-y-auto`}>
               {renderAlbums()}
             </Col>
-            <Col md={6} className={`${_p}h-100 ${_p}bg-white ${_p}h-md-auto ${_p}overflow-y-auto`}>
+            <Col md={6} className={`${_p}h-100 ${_p}assesment-column ${_p}bg-white ${_p}h-md-auto ${_p}overflow-y-auto`}>
               {renderAssessment()}
             </Col>
           </Row>
@@ -318,6 +276,10 @@ const Assessment = ({ activeAssessment, ...props }) => {
 
         <Modal title={t(config.assessmentStepHelpTitleHtml)} className={`${_p}small`} show={isHelpModal} onClose={() => setIsHelpModal(false)}>
           <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.assessmentStepHelpContentHtml) }}></p>
+        </Modal>
+
+        <Modal title={t("The compliance details")} className={`${_p}small`} show={isComplDetail} onClose={() => setIsComplDetail(false)}>
+          <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: complianceDetail }}></p>
         </Modal>
       </div>
     </div>
