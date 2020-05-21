@@ -12,10 +12,12 @@ const Icon = ({ variant, className }) => {
       case "loader":
         return (<svg className={`${_p}circular`} viewBox="25 25 50 50"><circle className={`${_p}path`} cx="50" cy="50" r="20" fill="none" strokeWidth="4" strokeMiterlimit="10" /></svg>)
       case "done":
-        return (<svg className={`${_p}app-icon ${className}`} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35.2px" height="26.8px" viewBox="0 0 35.2 26.8"><path d="M11.2,21.2l-8.3-8.3L0,15.7l11.2,11.2l24-24L32.3,0L11.2,21.2z"/></svg>)
+        return (<svg className={`${_p}app-icon ${className}`} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35.2px" height="26.8px" viewBox="0 0 35.2 26.8"><path d="M11.2,21.2l-8.3-8.3L0,15.7l11.2,11.2l24-24L32.3,0L11.2,21.2z" /></svg>);
       case "info":
-        return (<svg className={`${_p}app-icon ${className}`} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="417px" height="417px" viewBox="0 0 417 417"><g><path d="M356,61.2C274.6-20.3,142.6-20.4,61.2,61c-81.5,81.4-81.6,213.4-0.2,294.9c81.4,81.5,213.4,81.6,294.8,0.2C437.3,274.6,437.4,142.6,356,61.2z M237.6,340.8c0,3.2-2.6,5.8-5.8,5.8h-46.6c-3.2,0-5.8-2.6-5.8-5.8V167.9c0-3.2,2.6-5.8,5.8-5.8h46.6c3.2,0,5.8,2.6,5.8,5.8V340.8z M208.5,137.9c-18.6,0-33.8-15.1-33.8-33.8c0-18.6,15.1-33.8,33.8-33.8s33.8,15.1,33.8,33.8C242.3,122.8,227.1,137.9,208.5,137.9z"/></g></svg>)
-      }
+        return (<svg className={`${_p}app-icon ${className}`} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="417px" height="417px" viewBox="0 0 417 417"><g><path d="M356,61.2C274.6-20.3,142.6-20.4,61.2,61c-81.5,81.4-81.6,213.4-0.2,294.9c81.4,81.5,213.4,81.6,294.8,0.2C437.3,274.6,437.4,142.6,356,61.2z M237.6,340.8c0,3.2-2.6,5.8-5.8,5.8h-46.6c-3.2,0-5.8-2.6-5.8-5.8V167.9c0-3.2,2.6-5.8,5.8-5.8h46.6c3.2,0,5.8,2.6,5.8,5.8V340.8z M208.5,137.9c-18.6,0-33.8-15.1-33.8-33.8c0-18.6,15.1-33.8,33.8-33.8s33.8,15.1,33.8,33.8C242.3,122.8,227.1,137.9,208.5,137.9z" /></g></svg>);
+      case "empty":
+        return (<svg className={`${_p}app-icon ${className}`} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="512px" height="384px" viewBox="0 0 512 384"><path d="M464,384H48c-26.5,0-48-21.5-48-48V48C0,21.5,21.5,0,48,0h416c26.5,0,48,21.5,48,48v288C512,362.5,490.5,384,464,384zM112,56c-30.9,0-56,25.1-56,56s25.1,56,56,56s56-25.1,56-56S142.9,56,112,56z M64,320h384V208l-87.5-87.5c-4.7-4.7-12.3-4.7-17,0L208,256l-55.5-55.5c-4.7-4.7-12.3-4.7-17,0L64,272V320z" /></svg>);
+    }
   }
 
   return (

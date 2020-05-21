@@ -78,8 +78,10 @@ const Result = ({ activeAlbum, ...props }) => {
     if (files) {
       return Object.keys(files).map((file, i) => (
         <div className={`${_p}result-album ${activeAlbum ? file == activeAlbum ? `${_p}active` : '' : i == 0 ? `${_p}active` : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(file) }}>
-          <h5 className={`${_p}mb-2`}>{file}</h5>
-          <div className={`${_p}result-artist`}>{getUniqueArtists(files[file])}</div>
+          <div className={`${_p}w-100`}>
+            <h5 className={`${_p}mb-2`}>{file}</h5>
+            <div className={`${_p}result-artist`}>{getUniqueArtists(files[file])}</div>
+          </div>
         </div>
       ));
     }

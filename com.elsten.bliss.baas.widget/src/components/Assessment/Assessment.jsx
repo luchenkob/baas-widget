@@ -269,17 +269,26 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
   }
 
+  const renderCover = (assessment) => {
+    return <Icon variant="empty"/>
+  }
+
   const renderAlbums = () => {
 
     return assessments.map((assessment, i) => (
       <div className={`${_p}result-album ${activeAssessment ? i == activeAssessment ? `${_p}active` : '' : i == 0 ? `${_p}active` : ''}`} key={`a-${i}`} onClick={() => { handleAlbumClick(i) }}>
-        <div className={`${_p}result-inline-title`}>
-          <h5 className={`${_p}mb-2`}>{assessment.album.title}</h5>
-          <div className={`${_p}result-badges`}>
-            {complianceNotification(assessment.assessment.compliance)}
-          </div>
+        <div className={`${_p}result-album-cover`}>
+          {renderCover(assessment)}
         </div>
-        <div className={`${_p}result-artist`}>{getArtists(assessment.album.artists)}</div>
+        <div className={`${_p}w-100`}>
+          <div className={`${_p}result-inline-title`}>
+            <h5 className={`${_p}mb-2`}>{assessment.album.title}</h5>
+            <div className={`${_p}result-badges`}>
+              {complianceNotification(assessment.assessment.compliance)}
+            </div>
+          </div>
+          <div className={`${_p}result-artist`}>{getArtists(assessment.album.artists)}</div>
+        </div>
       </div>
     ));
   }
