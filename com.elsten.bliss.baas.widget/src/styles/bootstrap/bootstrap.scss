@@ -14,6 +14,12 @@
   &:hover {
     text-decoration: none;
   }
+
+  &[disabled]{
+    background-color: $white;
+    border-color: $white;
+    color: $body-color;
+  }
 }
 
 .badge {
