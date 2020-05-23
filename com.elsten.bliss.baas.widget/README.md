@@ -12,6 +12,18 @@ npm install
 npm start
 ```
 
+Using the additional api link
+
+```bash
+npm start --endpoint=link
+```
+
+Using the additional rules
+
+```bash
+npm start --rules=rules
+```
+
 ## Production
 
 ```bash
@@ -43,17 +55,18 @@ baasWidget.init({
 Required:
 
 *   `localapi`: url to the api
-*   `rules`: the app rules
+*   `rules`: The app rules
 
 Additional:
 
-*   `title`: title
-*   `introHtml`: intro
-*   `completeHtml`: Message in the completion popup
-*   `completeLabel`: Button text in the completion popup
-*   `completeLink`: Link in the completion popup
-*   `previewStepHelpTitleHtml`: the app intro
-*   `previewStepHelpContentHtml`: the app intro
-*   `assessmentStepHelpTitleHtml`: the app intro
-*   `assessmentStepHelpContentHtml`: the app intro
-*   `showPoweredBy`: copyright. [`true, false`] default `true`
+*   `title`: The app title [`string`]
+*   `introHtml`: The app intro [`html`]
+*   `completeHtml`: Message in the completion popup [`html`]
+*   `completeLabel`: Button text in the completion popup [`string`]
+*   `completeLink`: Link in the completion popup [`string`]
+*   `previewStepHelpTitleHtml`: The help title for the preview help popup [`html`]
+*   `previewStepHelpContentHtml`: The help message for the preview help popup [`html`]
+*   `assessmentStepHelpTitleHtml`: The help title for the assesment help popup [`html`]
+*   `assessmentStepHelpContentHtml`: The help message for the assesment help popup [`html`]
+*   `showPoweredBy`: Copyright. [`true, false`] default `true`
+*   `height`: The height of the app. [`%, px`] default `100%`
