@@ -78,6 +78,26 @@
             ]
           },
           {
+            "images": [
+              {
+                "info": {
+                  "width": 0,
+                  "height": 0
+                },
+                "location": "baas:/folder.jpg"
+              }
+            ],
+            "objectType": "ExtantArtCompliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "missing"
+            },
+            "state": "COMPLIANT",
+            "summary": "Art is installed in th...",
+            "detail": "Art is installed in this album",
+            "responses": []
+          },
+          {
             "source": {
               "category": "CoverArtPolicy",
               "policyDescriptor": "max-size"

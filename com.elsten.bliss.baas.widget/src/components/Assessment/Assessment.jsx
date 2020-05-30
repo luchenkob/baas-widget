@@ -56,6 +56,29 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
   }
 
+  const getArt = (response) => {
+    const type = response.split("/")[0];
+    let file = 0;
+    let image = null;
+
+    switch (type) {
+      case "http:":
+      case "https:":
+        image = response;
+        break;
+      case "baas:":
+        const fileName = response.split("#")[0].split("/")[1];
+        if (fileName) {
+          file = filterIt(origFiles, fileName, "file")[0];
+          image = file ? file.data : null;
+        }
+        break;
+    }
+
+    return image;
+
+  }
+
   const renderArt = (response) => {
 
     const type = response.url.split("/")[0];
@@ -230,7 +253,15 @@ const Assessment = ({ activeAssessment, ...props }) => {
   }
 
   const renderCover = (assessment) => {
-    return <Icon variant="empty" />
+    let cover = null;
+
+    assessment.assessment.compliance.parts.forEach((part)=>{
+      if(part.objectType == "ExtantArtCompliance") {
+        cover = getArt(part.images[0].location);
+      }
+    })
+
+    return cover ? <div style={{background: `url(${cover})`}}></div> : <Icon variant="empty" />;
   }
 
   const renderAlbums = () => {
