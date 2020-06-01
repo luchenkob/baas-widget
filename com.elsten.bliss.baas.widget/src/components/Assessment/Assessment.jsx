@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../../context/context";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { capitalize } from "../../utils";
@@ -10,7 +10,6 @@ import Modal from "../Modals/Modal";
 import Collapsible from 'react-collapsible';
 
 import "../Result/Result.scss";
-import { useState } from "react";
 
 const Artist = ({ ...props }) => {
   return (
@@ -27,7 +26,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
   const [isHelpModal, setIsHelpModal] = useState(false);
   const [complianceDetail, setComplianceDetail] = useState("");
   const [isComplDetail, setIsComplDetail] = useState(false);
-  
+
 
   const getArtists = (artists) => {
     return artists.map(((artist, i) => (
@@ -68,9 +67,21 @@ const Assessment = ({ activeAssessment, ...props }) => {
         break;
       case "baas:":
         const fileName = response.split("#")[0].split("/")[1];
+
         if (fileName) {
+          const ext = fileName.split(".")[1];
           file = filterIt(origFiles, fileName, "file")[0];
-          image = file ? file.data : null;
+
+          switch (ext) {
+            case "jpg":
+            case "png":
+            case "bpm":
+              image = file ? file.data : null;
+              break;
+            default:
+              image = file ? ToBase64(file.common.picture[0].data) : null;
+              break;
+          }
         }
         break;
     }
@@ -98,10 +109,25 @@ const Assessment = ({ activeAssessment, ...props }) => {
       case "baas:":
         const fileName = response.url.split("#")[0].split("/")[1];
         if (fileName) {
+          const ext = fileName.split(".")[1];
           file = filterIt(origFiles, fileName, "file")[0];
-          image = file ? file.data : null;
-          width = file ? file.width : 0;
-          height = file ? file.height : 0;
+
+          switch (ext) {
+            case "jpg":
+            case "png":
+            case "bpm":
+              image = file ? file.data : null;
+              width = file ? file.width : 0;
+              height = file ? file.height : 0;
+              break;
+            default:
+              image = file ? ToBase64(file.common.picture[0].data) : null;
+              width = file ? file.common.picture[0].width : 0;
+              height = file ? file.common.picture[0].height : 0;
+              break;
+          }
+
+
         }
 
         title = fileName;
@@ -227,7 +253,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                 onTriggerOpening={(e) => setSelectedIndex(i)}
                 easing="ease" trigger={
                   <>
-                    <div className={`${_p}collapsible-trigger-bg`} onClick={()=>setSelectedIndex(selectedIndex == i ? -1 : i)}></div>
+                    <div className={`${_p}collapsible-trigger-bg`} onClick={() => setSelectedIndex(selectedIndex == i ? -1 : i)}></div>
                     <span className={`${_p}badge ${part.state == "NONCOMPLIANT" ? `${_p}badge-danger` : `${_p}badge-success`}`}>
                       {part.state == "NONCOMPLIANT" ?
                         <><Icon variant="times" className={`${_p}mr-1`} />{t(capitalize(part.summary))}</>
@@ -235,7 +261,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                         <><Icon variant="done" className={`${_p}mr-1`} />{t("Compliant")}</>
                       }
                     </span>
-                    <Button variant="outline-primary" onClick={()=>{setComplianceDetail(`<span class=${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}>${part.detail}</span>`);setIsComplDetail(true)}}><Icon className={`${_p}mr-1`} variant="info"/>{t("More")}</Button>
+                    <Button variant="outline-primary" onClick={() => { setComplianceDetail(`<span class=${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}>${part.detail}</span>`); setIsComplDetail(true) }}><Icon className={`${_p}mr-1`} variant="info" />{t("More")}</Button>
                   </>
                 }>
                 <div className={`${_p}result-compliance`}>
@@ -255,13 +281,13 @@ const Assessment = ({ activeAssessment, ...props }) => {
   const renderCover = (assessment) => {
     let cover = null;
 
-    assessment.assessment.compliance.parts.forEach((part)=>{
-      if(part.objectType == "ExtantArtCompliance") {
+    assessment.assessment.compliance.parts.forEach((part) => {
+      if (part.objectType == "ExtantArtCompliance") {
         cover = getArt(part.images[0].location);
       }
     })
 
-    return cover ? <div style={{background: `url(${cover})`}}></div> : <Icon variant="empty" />;
+    return cover ? <div style={{ background: `url(${cover})` }}></div> : <Icon variant="empty" />;
   }
 
   const renderAlbums = () => {

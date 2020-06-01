@@ -1,30 +1,100 @@
 [
   {
     "album": {
-      "title": "Missing artwork album",
+      "title": "WHATEVER PEOPLE SAY I AM, THAT’S WHAT I’M NOT",
       "artists": [
-        "Artist 1"
+        "Arctic Monkeys"
       ],
       "tracks": [
         {
-          "title": "track1",
+          "title": "from the ritz to the rubble",
           "path": {
             "lib": "/",
-            "path": "album1/track1.flac"
+            "path": "12-from_the_ritz_to_the_rubble.ogg"
           }
         },
         {
-          "title": "track2",
+          "title": "fake tales of san francisco",
           "path": {
             "lib": "/",
-            "path": "album1/track2.flac"
+            "path": "03-fake_tales_of_san_francisco.ogg"
           }
         },
         {
-          "title": "track3",
+          "title": "red light indicates doors are secured",
           "path": {
             "lib": "/",
-            "path": "album1/track3.flac"
+            "path": "08-red_light_indicates_doors_are_secured.ogg"
+          }
+        },
+        {
+          "title": "mardy bum",
+          "path": {
+            "lib": "/",
+            "path": "09-mardy_bum.ogg"
+          }
+        },
+        {
+          "title": "Dancing Shoes",
+          "path": {
+            "lib": "/",
+            "path": "04-Dancing_Shoes.ogg"
+          }
+        },
+        {
+          "title": "Riot Van",
+          "path": {
+            "lib": "/",
+            "path": "07-Riot_Van.ogg"
+          }
+        },
+        {
+          "title": "the view from the afternoon",
+          "path": {
+            "lib": "/",
+            "path": "01-the_view_from_the_afternoon.ogg"
+          }
+        },
+        {
+          "title": "a certain romance",
+          "path": {
+            "lib": "/",
+            "path": "13-a_certain_romance.ogg"
+          }
+        },
+        {
+          "title": "when the sun goes down",
+          "path": {
+            "lib": "/",
+            "path": "11-when_the_sun_goes_down.ogg"
+          }
+        },
+        {
+          "title": "still take you home",
+          "path": {
+            "lib": "/",
+            "path": "06-still_take_you_home.ogg"
+          }
+        },
+        {
+          "title": "perhaps vampires is a bit strong but…",
+          "path": {
+            "lib": "/",
+            "path": "10-perhaps_vampires_is_a_bit_strong_but….ogg"
+          }
+        },
+        {
+          "title": "i bet you look good on the dancefloor",
+          "path": {
+            "lib": "/",
+            "path": "02-i_bet_you_look_good_on_the_dancefloor.ogg"
+          }
+        },
+        {
+          "title": " you probably couldn’t see for the lights but you were staring straight at me",
+          "path": {
+            "lib": "/",
+            "path": "05-you_probably_couldn’t_see_for_the_lights_but_you_were_staring_straight_at_me.ogg"
           }
         }
       ]
@@ -33,47 +103,21 @@
       "compliance": {
         "parts": [
           {
+            "objectType": "Compliance",
             "source": {
               "category": "CoverArtPolicy",
               "policyDescriptor": "missing"
             },
             "state": "NONCOMPLIANT",
             "summary": "Missing art",
-            "detail": "Missing embedded art",
+            "detail": "Missing /folder.jpg",
             "responses": [
               {
-                "objectType": "InstallImageFromUrlResponse",
-                "url": "https://upload.wikimedia.org/wikipedia/en/6/6b/Pixies-Doolittle.jpg",
-                "width": 500,
-                "height": 500
-              },
-              {
-                "objectType": "InstallImageFromUrlResponse",
-                "url": "https://upload.wikimedia.org/wikipedia/en/6/6b/Pixies-Doolittle.jpg",
-                "width": 500,
-                "height": 500
-              },
-              {
-                "objectType": "InstallImageFromUrlResponse",
-                "url": "https://upload.wikimedia.org/wikipedia/en/6/6b/Pixies-Doolittle.jpg",
-                "width": 500,
-                "height": 500
-              },
-              {
-                "objectType": "Response",
-                "title": "Shrink art",
-                "description": "Shrink the art to 500x500"
-              },
-              {
-                "objectType": "Response",
-                "title": "Shrink art",
-                "description": "Shrink the art to 500x500"
-              },
-              {
-                "objectType": "InstallImageFromUrlResponse",
-                "url": "baas:/folder.jpg#coverart",
-                "width": 500,
-                "height": 500
+                "url": "baas:/09-mardy_bum.ogg#coverart",
+                "width": 0,
+                "height": 0,
+                "realPath": "/09-mardy_bum.ogg",
+                "objectType": "InstallImageFromUrlResponse"
               }
             ]
           },
@@ -84,7 +128,7 @@
                   "width": 0,
                   "height": 0
                 },
-                "location": "baas:/folder.jpg"
+                "location": "baas:/09-mardy_bum.ogg#coverart"
               }
             ],
             "objectType": "ExtantArtCompliance",
@@ -96,123 +140,6 @@
             "summary": "Art is installed in th...",
             "detail": "Art is installed in this album",
             "responses": []
-          },
-          {
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "max-size"
-            },
-            "state": "NONCOMPLIANT",
-            "summary": "Art is too large",
-            "detail": "Art is 1024x1024 but should be no larger than 500x500",
-            "responses": [
-              {
-                "objectType": "Response",
-                "title": "Shrink art",
-                "description": "Shrink the art to 500x500"
-              }
-            ]
-          }
-        ]
-      },
-      "cost": 0
-    }
-  },
-  {
-    "album": {
-      "title": "Compliant album",
-      "artists": [
-        "Artist 2"
-      ],
-      "tracks": [
-        {
-          "title": "track1",
-          "path": {
-            "lib": "/",
-            "path": "album2/track1.flac"
-          }
-        },
-        {
-          "title": "track2",
-          "path": {
-            "lib": "/",
-            "path": "album2/track2.flac"
-          }
-        },
-        {
-          "title": "track3",
-          "path": {
-            "lib": "/",
-            "path": "album2/track3.flac"
-          }
-        }
-      ]
-    },
-    "assessment": {
-      "compliance": {
-        "parts": [
-          {
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "missing"
-            },
-            "state": "COMPLIANT",
-            "summary": "Art is installed",
-            "detail": "Art is embedded"
-          }
-        ]
-      },
-      "cost": 0
-    }
-  },
-  {
-    "album": {
-      "title": "Too large album cover",
-      "artists": [
-        "Artist 3"
-      ],
-      "tracks": [
-        {
-          "title": "track1",
-          "path": {
-            "lib": "/",
-            "path": "album3/track1.flac"
-          }
-        },
-        {
-          "title": "track2",
-          "path": {
-            "lib": "/",
-            "path": "album3/track2.flac"
-          }
-        },
-        {
-          "title": "track3",
-          "path": {
-            "lib": "/",
-            "path": "album3/track3.flac"
-          }
-        }
-      ]
-    },
-    "assessment": {
-      "compliance": {
-        "parts": [
-          {
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "max-size"
-            },
-            "state": "NONCOMPLIANT",
-            "summary": "Art is too large",
-            "detail": "Art is 1024x1024 but should be no larger than 500x500",
-            "responses": [
-              {
-                "objectType": "Response",
-                "title": "Shrink art",
-                "description": "Shrink the art to 500x500"
-              }
-            ]
           }
         ]
       },
