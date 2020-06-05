@@ -11,7 +11,7 @@ import "./Uploader.scss";
 
 const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
-  const { dispatch, state } = useContext(Context);
+  const { dispatch, state, config } = useContext(Context);
   let length = 0, current = 0, errors = [], tempFiles = [], result = {};
 
   const { t } = useTranslation();
@@ -124,7 +124,10 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     <div className={`${_p}uploader`}>
       <div className={`${_p}uploader-inner ${isDragActive ? `${_p}active` : ''}`} {...getRootProps()}>
         <input {...getInputProps()} />
-        <p className={`${_p}mb-0`}>{t('Drag and drop music files here')}</p>
+        {config.uploaderCtaHtml ?
+          <div dangerouslySetInnerHTML={{ __html: t(config.uploaderCtaHtml) }}></div>
+          :<div><p className={`${_p}mb-0`}>Drag 'n' drop music files here, or click to select</p></div>
+        }
       </div>
     </div>
   );
