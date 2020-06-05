@@ -10,8 +10,8 @@ const InitialIntro = () => {
 
   return (
     <div className={`${_p}p-2`}>
-      <h2 className={`${_p}text-center ${_p}text-primary`}>{t(config.title)}</h2>
-      <div className={`${_p}mw-800 ${_p}mx-auto ${_p}text-center`} dangerouslySetInnerHTML={{ __html: t(config.introHtml) }}></div>
+      {config.title && <h2 className={`${_p}text-center ${_p}text-primary`}>{t(config.title)}</h2>}
+      {config.introHtml && <div className={`${_p}mw-800 ${_p}mx-auto ${_p}text-center`} dangerouslySetInnerHTML={{ __html: t(config.introHtml) }}></div>}
     </div>
   );
 }
