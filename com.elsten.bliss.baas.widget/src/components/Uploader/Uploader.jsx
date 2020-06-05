@@ -126,7 +126,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
         <input {...getInputProps()} />
         {config.uploaderCtaHtml ?
           <div dangerouslySetInnerHTML={{ __html: t(config.uploaderCtaHtml) }}></div>
-          :<div><p className={`${_p}mb-0`}>Drag 'n' drop music files here, or click to select</p></div>
+        :<div><p className={`${_p}mb-0`}>{t("Drag 'n' drop music files here, or click to select")}</p></div>
         }
       </div>
     </div>

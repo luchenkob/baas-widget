@@ -28,6 +28,7 @@ i18n
           "Missing": "Missing",
           "Failed to start assessment": "Failed to start assessment",
           "Use existing art": "Use existing art",
+          "Drag 'n' drop music files here, or click to select": "Drag 'n' drop music files here, or click to select",
         }
       }
     },
