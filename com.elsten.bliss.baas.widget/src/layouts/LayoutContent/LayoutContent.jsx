@@ -23,9 +23,9 @@ const LayoutContent = ({ slots }) => {
       <div className={`${_p}layout-content-nav`}>
         <Container fluid>
           <Row>
-            <Col className={`${_p}text-md-right ${_p}text-center`}>
-              {slots[1]}
-              {slots[2]}
+            <Col className={`${_p}d-flex ${_p}justify-content-md-end ${_p}justify-content-center`}>
+              <div className={`${_p}d-flex ${_p}align-items-center`}>{slots[1]}</div>
+              <div>{slots[2]}</div>
             </Col>
           </Row>
         </Container>

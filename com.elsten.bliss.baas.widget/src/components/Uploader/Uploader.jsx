@@ -35,9 +35,9 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
           reader.onload = ((entry) => {
             const image = new Image();
             image.src = entry.target.result;
-             image.onload = () => {
+            image.onload = () => {
 
-              tempFiles.push({ file: file.name, data:entry.target.result, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)), width: image.width, height: image.height });
+              tempFiles.push({ file: file.name, data: entry.target.result, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)), width: image.width, height: image.height });
               setProgress();
             };
           });
@@ -126,7 +126,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
         <input {...getInputProps()} />
         {config.uploaderCtaHtml ?
           <div dangerouslySetInnerHTML={{ __html: t(config.uploaderCtaHtml) }}></div>
-        :<div><p className={`${_p}mb-0`}>{t("Drag 'n' drop music files here, or click to select")}</p></div>
+          : <div><p className={`${_p}mb-0`}>{t("Drag 'n' drop music files here, or click to select")}</p></div>
         }
       </div>
     </div>

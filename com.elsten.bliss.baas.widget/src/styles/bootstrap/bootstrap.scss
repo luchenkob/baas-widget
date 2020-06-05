@@ -8,6 +8,10 @@
   height: 100vh !important;
 }
 
+.h-100-m {
+  height: calc(100% - 20px) !important;
+}
+
 .btn {
   text-decoration: none !important;
 

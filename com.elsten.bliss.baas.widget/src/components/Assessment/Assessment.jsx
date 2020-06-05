@@ -258,7 +258,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                       {part.state == "NONCOMPLIANT" ?
                         <><Icon variant="times" className={`${_p}mr-1`} />{t(capitalize(part.summary))}</>
                         :
-                        <><Icon variant="done" className={`${_p}mr-1`} />{t("Compliant")}</>
+                        <><Icon variant="done" className={`${_p}mr-1`} />{t(capitalize(part.summary))}</>
                       }
                     </span>
                     <Button variant="outline-primary" onClick={() => { setComplianceDetail(`<span class=${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}>${part.detail}</span>`); setIsComplDetail(true) }}><Icon className={`${_p}mr-1`} variant="info" />{t("More")}</Button>
@@ -325,7 +325,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
             <Col md={6} className={`${_p}h-100 ${_p}h-md-auto ${_p}overflow-y-auto`}>
               {renderAlbums()}
             </Col>
-            <Col md={6} className={`${_p}h-100 ${_p}assesment-column ${_p}bg-white ${_p}h-md-auto ${_p}overflow-y-auto`}>
+            <Col md={6} className={`${_p}h-100-m ${_p}assesment-column ${_p}bg-white ${_p}h-md-auto ${_p}overflow-y-auto`}>
               {renderAssessment()}
             </Col>
           </Row>

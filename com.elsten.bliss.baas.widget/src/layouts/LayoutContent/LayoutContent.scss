@@ -20,6 +20,7 @@
     height: $bottom-nav-height;
     background-color: $primary;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: flex-end;
     padding: 0 $spacer;
