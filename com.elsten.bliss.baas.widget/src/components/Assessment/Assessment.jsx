@@ -8,7 +8,7 @@ import { filterIt, ToBase64 } from "../../utils";
 import { _p } from "../../defines/config";
 import Modal from "../Modals/Modal";
 import Collapsible from 'react-collapsible';
-
+import sizeOf from "image-size";
 import "../Result/Result.scss";
 
 const Artist = ({ ...props }) => {
@@ -75,7 +75,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
           switch (ext) {
             case "jpg":
             case "png":
-            case "bpm":
+            case "bmp":
               image = file ? file.data : null;
               break;
             default:
@@ -115,15 +115,15 @@ const Assessment = ({ activeAssessment, ...props }) => {
           switch (ext) {
             case "jpg":
             case "png":
-            case "bpm":
+            case "bmp":
               image = file ? file.data : null;
               width = file ? file.width : 0;
               height = file ? file.height : 0;
               break;
             default:
               image = file ? ToBase64(file.common.picture[0].data) : null;
-              width = file ? file.common.picture[0].width : 0;
-              height = file ? file.common.picture[0].height : 0;
+              width = file ? sizeOf(file.common.picture[0].data).width : 0;
+              height = file ? sizeOf(file.common.picture[0].data).height : 0;
               break;
           }
 
