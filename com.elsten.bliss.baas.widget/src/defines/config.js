@@ -11,7 +11,7 @@ export const appDefaultConfig = {
   assessmentStepHelpContentHtml: "Displays the assessment files.",
   completeHtml: "To find the missing artwork for your albums,<br/> <a href='/download.html'>download and install bliss</a>",
   completeLabel: "Download and install bliss",
-  completeLink: "./download.html"
+  completeLink: "./download.html",
 }
 
 export const _p = appDefaultConfig.prefix;

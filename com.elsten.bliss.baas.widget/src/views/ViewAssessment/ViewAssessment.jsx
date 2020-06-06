@@ -76,6 +76,9 @@ const ViewAssessment = (state) => {
           }
           break;
       }
+
+      if(config.onAssessment) config.onAssessment(result.data);
+
     }, error => {
       dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isProcessing: false, isBussy: false } })
     })
@@ -87,6 +90,7 @@ const ViewAssessment = (state) => {
 
   const handleAssess = () => {
     handleShowCompleteModal(true);
+    if(config.onFinish) config.onFinish();
   }
 
   const handleLinktoBliss = () => {
