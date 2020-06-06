@@ -316,8 +316,10 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <div className={`${_p}result-errors`}><span>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
       )}
       <div className={`${_p}result-title`}>
-        <h4>{t('Assessment')}</h4>
-        <div className={`${_p}result-title-icon`} onClick={() => setIsHelpModal(true)}><Icon variant="help" /></div>
+        <div className={`${_p}d-flex ${_p}align-items-center`}>
+          <h4 className={`${_p}mb-0`}>{t('Assessment')}</h4>
+          <div className={`${_p}result-title-icon ${_p}ml-2`} onClick={() => setIsHelpModal(true)}><Icon variant="help" /></div>
+        </div>
       </div>
       <div className={`${_p}result-content`}>
         <Container fluid className={`${_p}h-100 ${_p}p-0`} fluid>

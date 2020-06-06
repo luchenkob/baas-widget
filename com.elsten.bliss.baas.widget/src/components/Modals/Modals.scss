@@ -32,8 +32,8 @@
 
   .cmodal-close {
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right: 0.5rem;
+    top: 0.5rem;
     transition: opacity $transition ease;
     font-size: 1rem;
     cursor: pointer;
@@ -51,7 +51,7 @@
     max-height: 90%;
     z-index: 2;
     opacity: 0;
-    padding: 1rem;
+    padding: 1.4rem;
     background-color: $white;
     border-radius: 10px;
     transition: opacity $transition ease;

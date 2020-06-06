@@ -52,7 +52,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
           },
             error => {
               console.log(error)
-              errors.push(error)
+              errors.push(file.path)
               setProgress();
             });
         }
@@ -113,7 +113,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
       dispatch({ type: "SET_DATA", data: { isProcessing: false, isSkipAssesment: false, files: result, origFiles: tempFiles, errors: errors, step: 2 } })
     }
 
-    if(config.onFilesUploaded) config.onFilesUploaded(tempFiles);
+    if(config.onFilesUploaded) config.onFilesUploaded(result);
   }
 
   const renameMimeType = (type, ext) => {

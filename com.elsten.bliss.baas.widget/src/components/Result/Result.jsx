@@ -25,6 +25,7 @@ const Result = ({ activeAlbum, ...props }) => {
   const { t } = useTranslation();
   const [details, setDetails] = useState({ isActive: false, track: {} });
   const [isHelpModal, setIsHelpModal] = useState(false);
+  const [isErrorsModal, setIsErrorsModal] = useState(false);
 
   const getUniqueArtists = (traks) => {
     let temp = [];
@@ -62,7 +63,7 @@ const Result = ({ activeAlbum, ...props }) => {
             <div>{t('Name')}</div>
             <div></div>
           </div>
-          {files[active].map((track, i) => (
+          {files[active] && files[active].map((track, i) => (
             <div className={`${_p}result-track`} key={`t-${i}`}>
               <div>{`${track.no ? track.no : "-"}`}</div>
               <div>{`${track.title ? track.title : "-"}`}</div>
@@ -91,11 +92,13 @@ const Result = ({ activeAlbum, ...props }) => {
   return (
     <div className={`${_p}result`}>
       {errors.length > 0 && (
-        <div className={`${_p}result-errors`}><span>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
+        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={()=>setIsErrorsModal(true)}><span>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
       )}
       <div className={`${_p}result-title`}>
-        <h4>{t('Found')} {converter.toWords(Object.keys(files).length)} {Object.keys(files).length > 1 ? t('albums') : t('album')}</h4>
-        <div className={`${_p}result-title-icon`} onClick={()=>setIsHelpModal(true)}><Icon variant="help"/></div>
+        <div className={`${_p}d-flex ${_p}align-items-center`}>
+          <h4 className={`${_p}mb-0`}>{t('Found')} {converter.toWords(Object.keys(files).length)} {Object.keys(files).length > 1 ? t('albums') : t('album')}</h4>
+          <div className={`${_p}result-title-icon ${_p}ml-2`} onClick={() => setIsHelpModal(true)}><Icon variant="help" /></div>
+        </div>
       </div>
       <div className={`${_p}result-content`}>
         <Container fluid className={`${_p}h-100 ${_p}p-0`} fluid>
@@ -114,7 +117,13 @@ const Result = ({ activeAlbum, ...props }) => {
       </Modal>
 
       <Modal title={t(config.previewStepHelpTitleHtml)} className={`${_p}small`} show={isHelpModal} onClose={() => setIsHelpModal(false)}>
-        <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.previewStepHelpContentHtml)}}></p>
+        <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.previewStepHelpContentHtml) }}></p>
+      </Modal>
+
+      <Modal title={t("The following files will be ignored when assessing your music")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
+        {errors.length > 0 && errors.map((error, i)=>(
+          <div key={`e-${i}`} className={`${_p}border-bottom ${_p}text-danger ${_p}p-2`}>{error}</div>
+        ))}
       </Modal>
     </div>
   );

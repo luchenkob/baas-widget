@@ -29,6 +29,7 @@ i18n
           "Failed to start assessment": "Failed to start assessment",
           "Use existing art": "Use existing art",
           "Drag 'n' drop music files here, or click to select": "Drag 'n' drop music files here, or click to select",
+          "The following files will be ignored when assessing your music:": "The following files will be ignored when assessing your music:",
         }
       }
     },
