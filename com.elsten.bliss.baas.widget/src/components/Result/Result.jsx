@@ -92,7 +92,7 @@ const Result = ({ activeAlbum, ...props }) => {
   return (
     <div className={`${_p}result`}>
       {errors.length > 0 && (
-        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={()=>setIsErrorsModal(true)}><span>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
+        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={()=>setIsErrorsModal(true)}><span className={`${_p}d-none ${_p}d-md-block`}>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
       )}
       <div className={`${_p}result-title`}>
         <div className={`${_p}d-flex ${_p}align-items-center`}>
