@@ -51,27 +51,59 @@ const Result = ({ activeAlbum, ...props }) => {
   const renderList = () => {
 
     let active = activeAlbum;
+    let res = [];
 
     if (!isEmpty(files)) {
 
       active ? active == activeAlbum : active = Object.keys(files)[0];
 
-      return (
-        <div className={`${_p}result-album-inner`}>
-          <div className={`${_p}result-tittle`}>
-            <div>{t('№')}</div>
-            <div>{t('Name')}</div>
-            <div></div>
-          </div>
-          {files[active] && files[active].map((track, i) => (
-            <div className={`${_p}result-track`} key={`t-${i}`}>
-              <div>{`${track.no ? track.no : "-"}`}</div>
-              <div>{`${track.title ? track.title : "-"}`}</div>
-              <div><div onClick={() => onShowDetails(track)}><Icon className={`${_p}icon-primary`} variant="info" /></div></div>
+      if (files[active] && files[active][0].disk.no && files[active][0].disk.of) {
+
+        for (let i = 1; i < files[active][0].disk.of; i++) {
+          res.push(
+            <>
+              <h3>{`${t("Disk")} ${i}`}</h3>
+              <div className={`${_p}result-album-inner`}>
+                <div className={`${_p}result-tittle`}>
+                  <div>{t('№')}</div>
+                  <div>{t('Name')}</div>
+                  <div></div>
+                </div>
+                {files[active] && files[active].map((track, z) => (
+                  track.disk.no == i &&
+                  <div className={`${_p}result-track`} key={`t-${z}`}>
+                    <div>{`${track.no ? track.no : "-"}`}</div>
+                    <div>{`${track.title ? track.title : "-"}`}</div>
+                    <div><div onClick={() => onShowDetails(track)}><Icon className={`${_p}icon-primary`} variant="info" /></div></div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )
+        }
+
+        return res;
+
+      } else {
+        if (files[active]) {
+          return (
+            <div className={`${_p}result-album-inner`}>
+              <div className={`${_p}result-tittle`}>
+                <div>{t('№')}</div>
+                <div>{t('Name')}</div>
+                <div></div>
+              </div>
+              {files[active] && files[active].map((track, i) => (
+                <div className={`${_p}result-track`} key={`t-${i}`}>
+                  <div>{`${track.no ? track.no : "-"}`}</div>
+                  <div>{`${track.title ? track.title : "-"}`}</div>
+                  <div><div onClick={() => onShowDetails(track)}><Icon className={`${_p}icon-primary`} variant="info" /></div></div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      )
+          )
+        }
+      }
     }
   }
 
@@ -92,7 +124,7 @@ const Result = ({ activeAlbum, ...props }) => {
   return (
     <div className={`${_p}result`}>
       {errors.length > 0 && (
-        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={()=>setIsErrorsModal(true)}><span className={`${_p}d-none ${_p}d-md-block`}>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
+        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={() => setIsErrorsModal(true)}><span className={`${_p}d-none ${_p}d-md-block`}>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
       )}
       <div className={`${_p}result-title`}>
         <div className={`${_p}d-flex ${_p}align-items-center`}>
@@ -121,7 +153,7 @@ const Result = ({ activeAlbum, ...props }) => {
       </Modal>
 
       <Modal title={t("The following files will be ignored when assessing your music")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
-        {errors.length > 0 && errors.map((error, i)=>(
+        {errors.length > 0 && errors.map((error, i) => (
           <div key={`e-${i}`} className={`${_p}border-bottom ${_p}text-danger ${_p}p-2`}>{error}</div>
         ))}
       </Modal>

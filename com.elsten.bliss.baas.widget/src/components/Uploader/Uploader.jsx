@@ -100,7 +100,8 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
             title: tempFile.common.title,
             artist: tempFile.common.artist,
             no: tempFile.common.track.no,
-            file: tempFile.file
+            file: tempFile.file,
+            disk: tempFile.common.disk
           })
       }
     });

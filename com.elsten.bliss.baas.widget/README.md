@@ -73,6 +73,6 @@ Additional:
 
 ## Callbacks
 
-`onFilesUploaded`: Triggers when the files uploaded. [`Returns array of uploaded files`]
-`onAssessment`: Triggers when received the Assesment result. [`Returns result`]
-`onFinish`: Triggers when clicked the `Fix missing artwork`.
+*   `onFilesUploaded`: Triggers when the files uploaded. [`Returns array of uploaded files`]
+*   `onAssessment`: Triggers when received the Assesment result. [`Returns result`]
+*   `onFinish`: Triggers when clicked the `Fix missing artwork`.
