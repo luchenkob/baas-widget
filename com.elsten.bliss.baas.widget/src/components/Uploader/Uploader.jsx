@@ -23,9 +23,10 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     tempFiles = [];
     result = {};
 
-    dispatch({ type: "SET_DATA", data: { isProcessing: true, len: length, cur: current, errors: errors, processingMessage: `Processing ${current} of ${length}` } })
+    if (length > 0) {
 
-    if (acceptedFiles) {
+      dispatch({ type: "SET_DATA", data: { isProcessing: true, len: length, cur: current, errors: errors, processingMessage: `Processing ${current} of ${length}` } })
+
       acceptedFiles.forEach(file => {
 
         if (file.type === "image/jpeg" || file.type === "image/png") {
@@ -56,6 +57,11 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
             });
         }
       });
+    }else{
+      dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t("Please choose files"), notificationType: "danger", isProcessing: false, isBussy: false } })
+      setTimeout(()=>{
+        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: false, }})
+      },4000)
     }
   }, [])
 
