@@ -48,6 +48,16 @@ const Result = ({ activeAlbum, ...props }) => {
     setDetails({ isActive: true, track: file });
   }
 
+  const getDiscCount = (files) => {
+    let c = 1;
+
+    files.forEach((file)=>{
+      file.disk.no > c ? c = file.disk.no : null;
+    });
+
+    return c;
+  }
+
   const renderList = () => {
 
     let active = activeAlbum;
@@ -57,12 +67,12 @@ const Result = ({ activeAlbum, ...props }) => {
 
       active ? active == activeAlbum : active = Object.keys(files)[0];
 
-      if (files[active] && files[active][0].disk.no && files[active][0].disk.of) {
+      if (files[active] && files[active][0].disk.no) {
 
-        for (let i = 1; i < files[active][0].disk.of; i++) {
+        for (let i = 1; i < getDiscCount(files[active])+1; i++) {
           res.push(
-            <>
-              <h3>{`${t("Disk")} ${i}`}</h3>
+            <div key={`d-${i}`}>
+              <h4 className={`${i > 1 ? `${_p}mt-2` : ""}`}>{`${t("Disk")} ${i}`}</h4>
               <div className={`${_p}result-album-inner`}>
                 <div className={`${_p}result-tittle`}>
                   <div>{t('№')}</div>
@@ -78,7 +88,7 @@ const Result = ({ activeAlbum, ...props }) => {
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           )
         }
 
