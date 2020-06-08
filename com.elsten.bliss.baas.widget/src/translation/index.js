@@ -30,6 +30,8 @@ i18n
           "Use existing art": "Use existing art",
           "Drag 'n' drop music files here, or click to select": "Drag 'n' drop music files here, or click to select",
           "The following files will be ignored when assessing your music:": "The following files will be ignored when assessing your music:",
+          "Retrieving results": "Retrieving results",
+          "Error: Unable to get Assessment": "Error: Unable to get Assessment" 
         }
       }
     },

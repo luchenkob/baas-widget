@@ -15,6 +15,7 @@ const ViewAssessment = (state) => {
   const [failed, setFailed] = useState("");
   const { isBussy } = state;
   let interval = null;
+  let endTimeout = null;
   const id = localStorage.getItem('assessment').split("/")[2];
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
@@ -24,6 +25,12 @@ const ViewAssessment = (state) => {
 
   useEffect(() => {
     state.isSkipAssesment ? setIsMounted(true) : checkJob(getData);
+
+    endTimeout = setTimeout(() => {
+      clearInterval(interval);
+      clearTimeout(endTimeout);
+      dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t('Error: Unable to get Assessment'), notificationType: "danger", isProcessing: false, isBussy: false } })
+    }, config.endTimeout);
   }, [])
 
   const getData = (status, msg) => {
@@ -54,17 +61,19 @@ const ViewAssessment = (state) => {
   const checkJob = (callback) => {
     ApiService.get(`job/${id}`, config).then(result => {
 
-      dispatch({ type: "SET_STEP", data: { processingMessage: "Retrieving results", } })
+      dispatch({ type: "SET_STEP", data: { processingMessage: t('Retrieving results'), } })
 
       switch (result.data.status) {
 
         case "Completed":
           clearInterval(interval);
+          clearTimeout(endTimeout);
           callback(result.data.status);
           break;
 
         case "Failed":
           clearInterval(interval);
+          clearTimeout(endTimeout);
           callback(result.data.status, result.data.failureMsg ? t(result.data.failureMsg) : t('Failed to start assessment'));
           break;
 

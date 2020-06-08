@@ -3,6 +3,7 @@ export const appDefaultConfig = {
   localapi: "/localapi/",
   height:"100%",
   queryDelay: 5000,
+  endTimeout: 60000,
   prefix: "baasZcx-",
   showPoweredBy: true,
   previewStepHelpTitleHtml: "Scanned files",
