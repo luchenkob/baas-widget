@@ -65,6 +65,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       case "https:":
         image = response;
         break;
+      case "file:":
       case "baas:":
         const fileName = response.split("#")[0].split("/")[1];
 

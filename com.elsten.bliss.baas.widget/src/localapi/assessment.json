@@ -1,100 +1,121 @@
 [
   {
     "album": {
-      "title": "WHATEVER PEOPLE SAY I AM, THAT’S WHAT I’M NOT",
+      "title": "THE MISEDUCATION OF LAURYN HILL",
       "artists": [
-        "Arctic Monkeys"
+        "lauryn hill"
       ],
       "tracks": [
         {
-          "title": "from the ritz to the rubble",
+          "title": "nothing even matters",
           "path": {
             "lib": "/",
-            "path": "12-from_the_ritz_to_the_rubble.ogg"
+            "path": "12-nothing_even_matters.mp3"
           }
         },
         {
-          "title": "fake tales of san francisco",
+          "title": "tell him",
           "path": {
             "lib": "/",
-            "path": "03-fake_tales_of_san_francisco.ogg"
+            "path": "16-tell_him.mp3"
           }
         },
         {
-          "title": "red light indicates doors are secured",
+          "title": "ex-factor",
           "path": {
             "lib": "/",
-            "path": "08-red_light_indicates_doors_are_secured.ogg"
+            "path": "03-ex-factor.mp3"
           }
         },
         {
-          "title": "mardy bum",
+          "title": "doo wop (that thing)",
           "path": {
             "lib": "/",
-            "path": "09-mardy_bum.ogg"
+            "path": "05-doo_wop_(that_thing).mp3"
           }
         },
         {
-          "title": "Dancing Shoes",
+          "title": "to zion",
           "path": {
             "lib": "/",
-            "path": "04-Dancing_Shoes.ogg"
+            "path": "04-to_zion.mp3"
           }
         },
         {
-          "title": "Riot Van",
+          "title": "final hour",
           "path": {
             "lib": "/",
-            "path": "07-Riot_Van.ogg"
+            "path": "07-final_hour.mp3"
           }
         },
         {
-          "title": "the view from the afternoon",
+          "title": "lost ones",
           "path": {
             "lib": "/",
-            "path": "01-the_view_from_the_afternoon.ogg"
+            "path": "02-lost_ones.mp3"
           }
         },
         {
-          "title": "a certain romance",
+          "title": "intro",
           "path": {
             "lib": "/",
-            "path": "13-a_certain_romance.ogg"
+            "path": "01-intro.mp3"
           }
         },
         {
-          "title": "when the sun goes down",
+          "title": "can’t take my eyes off of you",
           "path": {
             "lib": "/",
-            "path": "11-when_the_sun_goes_down.ogg"
+            "path": "15-can’t_take_my_eyes_off_of_you.mp3"
           }
         },
         {
-          "title": "still take you home",
+          "title": "the miseducation of lauryn hill",
           "path": {
             "lib": "/",
-            "path": "06-still_take_you_home.ogg"
+            "path": "14-the_miseducation_of_lauryn_hill.mp3"
           }
         },
         {
-          "title": "perhaps vampires is a bit strong but…",
+          "title": "every ghetto, every city",
           "path": {
             "lib": "/",
-            "path": "10-perhaps_vampires_is_a_bit_strong_but….ogg"
+            "path": "11-every_ghetto,_every_city.mp3"
           }
         },
         {
-          "title": "i bet you look good on the dancefloor",
+          "title": "superstar",
           "path": {
             "lib": "/",
-            "path": "02-i_bet_you_look_good_on_the_dancefloor.ogg"
+            "path": "06-superstar.mp3"
           }
         },
         {
-          "title": " you probably couldn’t see for the lights but you were staring straight at me",
+          "title": "when it hurts so bad",
           "path": {
             "lib": "/",
-            "path": "05-you_probably_couldn’t_see_for_the_lights_but_you_were_staring_straight_at_me.ogg"
+            "path": "08-when_it_hurts_so_bad.mp3"
+          }
+        },
+        {
+          "title": "everything is everything",
+          "path": {
+            "lib": "/",
+            "path": "13-everything_is_everything.mp3"
+          }
+        },
+        {
+          "title": "i used to love him",
+          "path": {
+            "lib": "/",
+            "path": "09-i_used_to_love_him.mp3"
+          }
+        },
+        {
+          "title": "forgive them father",
+          "path": {
+            "lib": "/",
+            "path": "10-forgive_them_father.mp3"
           }
         }
       ]
@@ -103,32 +124,13 @@
       "compliance": {
         "parts": [
           {
-            "objectType": "Compliance",
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "missing"
-            },
-            "state": "NONCOMPLIANT",
-            "summary": "Missing art",
-            "detail": "Missing /folder.jpg",
-            "responses": [
-              {
-                "url": "baas:/09-mardy_bum.ogg#coverart",
-                "width": 0,
-                "height": 0,
-                "realPath": "/09-mardy_bum.ogg",
-                "objectType": "InstallImageFromUrlResponse"
-              }
-            ]
-          },
-          {
             "images": [
               {
                 "info": {
                   "width": 0,
                   "height": 0
                 },
-                "location": "baas:/09-mardy_bum.ogg#coverart"
+                "location": "file:/folder.jpg"
               }
             ],
             "objectType": "ExtantArtCompliance",

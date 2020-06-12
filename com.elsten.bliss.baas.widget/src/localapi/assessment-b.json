@@ -1,0 +1,149 @@
+[
+  {
+    "album": {
+      "title": "WHATEVER PEOPLE SAY I AM, THAT’S WHAT I’M NOT",
+      "artists": [
+        "Arctic Monkeys"
+      ],
+      "tracks": [
+        {
+          "title": "from the ritz to the rubble",
+          "path": {
+            "lib": "/",
+            "path": "12-from_the_ritz_to_the_rubble.ogg"
+          }
+        },
+        {
+          "title": "fake tales of san francisco",
+          "path": {
+            "lib": "/",
+            "path": "03-fake_tales_of_san_francisco.ogg"
+          }
+        },
+        {
+          "title": "red light indicates doors are secured",
+          "path": {
+            "lib": "/",
+            "path": "08-red_light_indicates_doors_are_secured.ogg"
+          }
+        },
+        {
+          "title": "mardy bum",
+          "path": {
+            "lib": "/",
+            "path": "09-mardy_bum.ogg"
+          }
+        },
+        {
+          "title": "Dancing Shoes",
+          "path": {
+            "lib": "/",
+            "path": "04-Dancing_Shoes.ogg"
+          }
+        },
+        {
+          "title": "Riot Van",
+          "path": {
+            "lib": "/",
+            "path": "07-Riot_Van.ogg"
+          }
+        },
+        {
+          "title": "the view from the afternoon",
+          "path": {
+            "lib": "/",
+            "path": "01-the_view_from_the_afternoon.ogg"
+          }
+        },
+        {
+          "title": "a certain romance",
+          "path": {
+            "lib": "/",
+            "path": "13-a_certain_romance.ogg"
+          }
+        },
+        {
+          "title": "when the sun goes down",
+          "path": {
+            "lib": "/",
+            "path": "11-when_the_sun_goes_down.ogg"
+          }
+        },
+        {
+          "title": "still take you home",
+          "path": {
+            "lib": "/",
+            "path": "06-still_take_you_home.ogg"
+          }
+        },
+        {
+          "title": "perhaps vampires is a bit strong but…",
+          "path": {
+            "lib": "/",
+            "path": "10-perhaps_vampires_is_a_bit_strong_but….ogg"
+          }
+        },
+        {
+          "title": "i bet you look good on the dancefloor",
+          "path": {
+            "lib": "/",
+            "path": "02-i_bet_you_look_good_on_the_dancefloor.ogg"
+          }
+        },
+        {
+          "title": " you probably couldn’t see for the lights but you were staring straight at me",
+          "path": {
+            "lib": "/",
+            "path": "05-you_probably_couldn’t_see_for_the_lights_but_you_were_staring_straight_at_me.ogg"
+          }
+        }
+      ]
+    },
+    "assessment": {
+      "compliance": {
+        "parts": [
+          {
+            "objectType": "Compliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "missing"
+            },
+            "state": "NONCOMPLIANT",
+            "summary": "Missing art",
+            "detail": "Missing /folder.jpg",
+            "responses": [
+              {
+                "url": "baas:/09-mardy_bum.ogg#coverart",
+                "width": 0,
+                "height": 0,
+                "realPath": "/09-mardy_bum.ogg",
+                "objectType": "InstallImageFromUrlResponse"
+              }
+            ]
+          },
+          {
+            "images": [
+              {
+                "info": {
+                  "width": 0,
+                  "height": 0
+                },
+                "location": "baas:/09-mardy_bum.ogg#coverart"
+              }
+            ],
+            "objectType": "ExtantArtCompliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "missing"
+            },
+            "state": "COMPLIANT",
+            "summary": "Art is installed in th...",
+            "detail": "Art is installed in this album",
+            "responses": []
+          }
+        ]
+      },
+      "cost": 0
+    }
+  }
+]
