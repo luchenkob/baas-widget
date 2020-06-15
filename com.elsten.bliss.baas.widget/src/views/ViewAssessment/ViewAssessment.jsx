@@ -16,7 +16,8 @@ const ViewAssessment = (state) => {
   const { isBussy } = state;
   let interval = null;
   let endTimeout = null;
-  const id = localStorage.getItem('assessment').split("/")[2];
+  const localAssesment = localStorage.getItem('assessment');
+  const id = localAssesment ? localAssesment.split("/")[2] : null;
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
 

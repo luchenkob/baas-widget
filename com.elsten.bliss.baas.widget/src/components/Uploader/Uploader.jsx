@@ -3,6 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Context } from "../../context/context";
 import { useTranslation } from "react-i18next";
 import { getFileExtension, isArrayEqualByFileName } from "../../utils";
+import converter from 'number-to-words';
 import { _p } from "../../defines/config";
 
 const musicMetadata = require('music-metadata-browser');
@@ -107,6 +108,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     });
 
     sortData();
+    trim();
 
     if (isArrayEqualByFileName(state.origFiles.sort(), tempFiles.sort())) {
       dispatch({ type: "SET_STEP", data: { step: 2, isSkipAssesment: true, isNotification: false, isProcessing: false, isBussy: false } })
@@ -115,6 +117,31 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     }
 
     if(config.onFilesUploaded) config.onFilesUploaded(tempFiles);
+  }
+
+  const trim = () => {
+    let count = 0;
+    let output = {};
+
+    for(const i in result) {
+      if(count < config.limitFiles) {
+        result[i].forEach((track)=>{
+          if(!output[i]) output[i] = [];
+          output[i].push(track);
+          count++;
+        })
+      }else{
+        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t(`${length} audio files have been chosen. We limit this demo to the assessment of ${converter.toWords(config.limitFiles)} audio files, so we'll just send up to that number, whole albums only.`), notificationType: "danger" } })
+        
+        setTimeout(()=>{
+          dispatch({ type: "SET_NOTIFICATION", data: { isNotification: false } })
+        }, 10000);
+        
+        break;
+      }
+    }
+
+    result = output;
   }
 
   const renameMimeType = (type, ext) => {
