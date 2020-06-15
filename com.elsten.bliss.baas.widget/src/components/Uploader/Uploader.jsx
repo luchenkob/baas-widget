@@ -110,8 +110,6 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     sortData();
     trim();
 
-    console.log(result)
-
     if (isArrayEqualByFileName(state.origFiles.sort(), tempFiles.sort())) {
       dispatch({ type: "SET_STEP", data: { step: 2, isSkipAssesment: true, isNotification: false, isProcessing: false, isBussy: false } })
     } else {
