@@ -110,6 +110,8 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     sortData();
     trim();
 
+    console.log(result)
+
     if (isArrayEqualByFileName(state.origFiles.sort(), tempFiles.sort())) {
       dispatch({ type: "SET_STEP", data: { step: 2, isSkipAssesment: true, isNotification: false, isProcessing: false, isBussy: false } })
     } else {
@@ -120,17 +122,21 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
   }
 
   const trim = () => {
+    let albumCount = 1;
     let count = 0;
     let output = {};
 
     for(const i in result) {
-      if(count < config.limitFiles) {
+      if(count < config.limitFiles && (result[i].length < (config.limitFiles - count + 1))) {
         result[i].forEach((track)=>{
           if(!output[i]) output[i] = [];
           output[i].push(track);
           count++;
         })
       }else{
+
+        if(albumCount == 1) output[i] = result[i] 
+
         dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t(`${length} audio files have been chosen. We limit this demo to the assessment of ${converter.toWords(config.limitFiles)} audio files, so we'll just send up to that number, whole albums only.`), notificationType: "danger" } })
         
         setTimeout(()=>{
@@ -139,6 +145,8 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
         
         break;
       }
+
+      albumCount++;
     }
 
     result = output;

@@ -4,7 +4,7 @@ export const appDefaultConfig = {
   height:"100%",
   queryDelay: 5000,
   endTimeout: 60000,
-  limitFiles: 60,
+  limitFiles: 65,
   prefix: "baasZcx-",
   showPoweredBy: true,
   previewStepHelpTitleHtml: "Scanned files",
