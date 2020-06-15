@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../../context/context";
 import { useTranslation } from "react-i18next";
 import { _p } from "../../defines/config";
+import { capitalize } from "../../utils";
 
 import "./Modals.scss";
 
@@ -23,7 +24,7 @@ const ModalDetails = ({ show, track, onClose }) => {
         content.no ? content.of ? result = `${content.no}/${content.of}` : result = content.no : null;
 
         return result && <div key={`${key}`} className={`${_p}track-detail`}>
-          <div><strong>{t(key)}</strong></div>
+          <div><strong>{t(capitalize(key))}</strong></div>
           <div>
             <p>{result}</p>
           </div>
@@ -32,7 +33,7 @@ const ModalDetails = ({ show, track, onClose }) => {
 
         return JSON.stringify(content).length > 2 &&
           <div key={`${key}`} className={`${_p}track-detail`}>
-            <div><strong>{t(key)}</strong></div>
+            <div><strong>{t(capitalize(key))}</strong></div>
             <div>
               {
                 typeof content == "string" || typeof content == "number" || typeof content == "boolean" ?
