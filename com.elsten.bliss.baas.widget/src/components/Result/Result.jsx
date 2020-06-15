@@ -11,6 +11,7 @@ import { _p } from "../../defines/config";
 import Modal from "../Modals/Modal";
 
 import "./Result.scss";
+import { forEach } from "lodash";
 
 const Artist = ({ ...props }) => {
   return (
@@ -49,14 +50,29 @@ const Result = ({ activeAlbum, ...props }) => {
   }
 
   const getDiscCount = (files) => {
-    let c = 1;
+    let c = 0;
 
-    files.forEach((file)=>{
+    files.forEach((file) => {
       file.disk.no > c ? c = file.disk.no : null;
     });
 
     return c;
   }
+
+  const isNodDisk = (files) => {
+    for (const i in files) {
+      if (!files[i].disk.no) return true;
+    }
+    return false;
+  }
+
+  const renderTrack = (track, i) => (
+    <div className={`${_p}result-track`} key={`t-${i}`}>
+      <div>{`${track.no ? track.no : "-"}`}</div>
+      <div>{`${track.title ? track.title : "-"}`}</div>
+      <div><div onClick={() => onShowDetails(track)}><Icon className={`${_p}icon-primary`} variant="info" /></div></div>
+    </div>
+  )
 
   const renderList = () => {
 
@@ -67,12 +83,14 @@ const Result = ({ activeAlbum, ...props }) => {
 
       active ? active == activeAlbum : active = Object.keys(files)[0];
 
-      if (files[active] && files[active][0].disk.no) {
+      if (files[active] && getDiscCount(files[active]) > 0) {
 
-        for (let i = 1; i < getDiscCount(files[active])+1; i++) {
+        const x = isNodDisk(files[active]) ? getDiscCount(files[active]) + 2 : getDiscCount(files[active]) + 1;
+
+        for (let i = 1; i < x; i++) {
           res.push(
             <div key={`d-${i}`}>
-              <h4 className={`${i > 1 ? `${_p}mt-2` : ""}`}>{`${t("Disk")} ${i}`}</h4>
+              <h4 className={`${i > 1 ? `${_p}mt-2` : ""}`}>{`${i < getDiscCount(files[active]) + 1 ? `${t("Disk")} ${i}` : t("[no disk number]")}`}</h4>
               <div className={`${_p}result-album-inner`}>
                 <div className={`${_p}result-tittle`}>
                   <div>{t('№')}</div>
@@ -80,12 +98,10 @@ const Result = ({ activeAlbum, ...props }) => {
                   <div></div>
                 </div>
                 {files[active] && files[active].map((track, z) => (
-                  track.disk.no == i &&
-                  <div className={`${_p}result-track`} key={`t-${z}`}>
-                    <div>{`${track.no ? track.no : "-"}`}</div>
-                    <div>{`${track.title ? track.title : "-"}`}</div>
-                    <div><div onClick={() => onShowDetails(track)}><Icon className={`${_p}icon-primary`} variant="info" /></div></div>
-                  </div>
+                  i < getDiscCount(files[active]) + 1 ? track.disk.no == i &&
+                    renderTrack(track,z) :
+                    !track.disk.no &&
+                    renderTrack(track,z)
                 ))}
               </div>
             </div>
