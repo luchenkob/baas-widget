@@ -90,7 +90,7 @@ const Result = ({ activeAlbum, ...props }) => {
         for (let i = 1; i < x; i++) {
           res.push(
             <div key={`d-${i}`}>
-              <h4 className={`${i > 1 ? `${_p}mt-2` : ""}`}>{`${i < getDiscCount(files[active]) + 1 ? `${t("Disk")} ${i}` : t("[no disk number]")}`}</h4>
+              {getDiscCount(files[active]) > 1 && <h4 className={`${i > 1 ? `${_p}mt-2` : ""}`}>{`${i < getDiscCount(files[active]) + 1 ? `${t("Disk")} ${i}` : t("[no disk number]")}`}</h4>}
               <div className={`${_p}result-album-inner`}>
                 <div className={`${_p}result-tittle`}>
                   <div>{t('№')}</div>
