@@ -67,7 +67,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
         break;
       case "file:":
       case "baas:":
-        const fileName = response.split("#")[0].split("/")[1];
+        const arrUrl = response.split("#")[0].split("/");
+        const fileName = arrUrl[arrUrl.length-1];
 
         if (fileName) {
           const ext = fileName.split(".")[1];
@@ -108,7 +109,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
         height = response.height;
         break;
       case "baas:":
-        const fileName = response.url.split("#")[0].split("/")[1];
+        const arrUrl = response.url.split("#")[0].split("/");
+        const fileName = arrUrl[arrUrl.length-1];
         if (fileName) {
           const ext = fileName.split(".")[1];
           file = filterIt(origFiles, fileName, "file")[0];
@@ -127,8 +129,6 @@ const Assessment = ({ activeAssessment, ...props }) => {
               height = file ? sizeOf(file.common.picture[0].data).height : 0;
               break;
           }
-
-
         }
 
         title = fileName;
