@@ -2,14 +2,13 @@ import React, { useContext } from "react";
 import { Context } from "../../context/context";
 import { useTranslation } from "react-i18next";
 import { _p } from "../../defines/config";
-import { capitalize } from "../../utils";
+import { capitalize, secondsToHms } from "../../utils";
 
 import "./Modals.scss";
 
 const ModalDetails = ({ show, track, onClose }) => {
 
   const { t } = useTranslation();
-  const { config, container } = useContext(Context);
 
   const filter = (key, content) => {
     switch (key) {
@@ -18,6 +17,13 @@ const ModalDetails = ({ show, track, onClose }) => {
       case "artist":
       case "disk":
         break;
+      case "duration":
+        return content && <div key={`${key}`} className={`${_p}track-detail`}>
+          <div><strong>{t(capitalize(key))}</strong></div>
+          <div>
+            <p>{secondsToHms(content)}</p>
+          </div>
+        </div>
       case "track":
         let result = "";
 
