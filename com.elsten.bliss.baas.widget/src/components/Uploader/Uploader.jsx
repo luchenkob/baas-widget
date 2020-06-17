@@ -13,7 +13,7 @@ import "./Uploader.scss";
 const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
   const { dispatch, state, config } = useContext(Context);
-  let length = 0, current = 0, errors = [], tempFiles = [], result = {};
+  let length = 0, current = 0, errors = [{type:"ext", files:[]}, {type:"exc", files:[]}], tempFiles = [], result = {};
 
   const { t } = useTranslation();
 
@@ -53,7 +53,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
           },
             error => {
               console.log(error)
-              errors.push(file.path)
+              errors[0].files.push(file.path);
               setProgress();
             });
         }
@@ -102,6 +102,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
             artist: tempFile.common.artist,
             no: tempFile.common.track.no,
             file: tempFile.file,
+            path: tempFile.path,
             disk: tempFile.common.disk
           })
       }
@@ -123,9 +124,12 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     let albumCount = 1;
     let count = 0;
     let output = {};
+    let acceptedAlbums = [];
+    let excludedFiles = [];
 
     for(const i in result) {
       if(count < config.limitFiles && (result[i].length < (config.limitFiles - count + 1))) {
+        acceptedAlbums.push(i);
         result[i].forEach((track)=>{
           if(!output[i]) output[i] = [];
           output[i].push(track);
@@ -133,13 +137,25 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
         })
       }else{
 
-        if(albumCount == 1) output[i] = result[i] 
+        if(albumCount == 1) {
+          output[i] = result[i] 
+        }else{
+          for(const i in result) {
+            if(acceptedAlbums.indexOf(i) == -1) {
+              excludedFiles.length > 0 ? excludedFiles = excludedFiles.concat(result[i]) : excludedFiles = result[i];
+            }
+          }
+        }
 
-        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t(`${length} audio files have been chosen. We limit this demo to the assessment of ${converter.toWords(config.limitFiles)} audio files, so we'll just send up to that number, whole albums only.`), notificationType: "danger" } })
+        excludedFiles.forEach((file)=>{
+          errors[1].files.push(file.path);
+        })
+
+        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t(`${length} audio files have been chosen. We limit this demo to the assessment of ${converter.toWords(config.limitFiles)} audio files, so we'll just send up to that number, whole albums only.`), errors: errors, notificationType: "danger" } })
         
         setTimeout(()=>{
           dispatch({ type: "SET_NOTIFICATION", data: { isNotification: false } })
-        }, 10000);
+        }, 5000);
         
         break;
       }

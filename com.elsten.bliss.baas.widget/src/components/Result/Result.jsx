@@ -11,7 +11,6 @@ import { _p } from "../../defines/config";
 import Modal from "../Modals/Modal";
 
 import "./Result.scss";
-import { forEach } from "lodash";
 
 const Artist = ({ ...props }) => {
   return (
@@ -38,6 +37,15 @@ const Result = ({ activeAlbum, ...props }) => {
         }
       });
     }
+  }
+
+  const getErrorsLength = () => {
+    let length = 0;
+    errors.forEach((error) => {
+      length += error.files.length;
+    })
+
+    return length;
   }
 
   const handleAlbumClick = (i) => {
@@ -99,9 +107,9 @@ const Result = ({ activeAlbum, ...props }) => {
                 </div>
                 {files[active] && files[active].map((track, z) => (
                   i < getDiscCount(files[active]) + 1 ? track.disk.no == i &&
-                    renderTrack(track,z) :
+                    renderTrack(track, z) :
                     !track.disk.no &&
-                    renderTrack(track,z)
+                    renderTrack(track, z)
                 ))}
               </div>
             </div>
@@ -147,10 +155,20 @@ const Result = ({ activeAlbum, ...props }) => {
     }
   }
 
+  const renderTitleByType = (type) => {
+    switch (type) {
+      case "ext":
+        return t('The following files will be ignored');
+      case "exc":
+        return t(`This widget is limited to assesing up to ${converter.toWords(config.limitFiles)} music files, rounded down to the nearest full album. We ignored`);
+    }
+
+  }
+
   return (
     <div className={`${_p}result`}>
-      {errors.length > 0 && (
-        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={() => setIsErrorsModal(true)}><span className={`${_p}d-none ${_p}d-md-block`}>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
+      {getErrorsLength() > 0 && (
+        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={() => setIsErrorsModal(true)}><Icon variant="warning"/></div>
       )}
       <div className={`${_p}result-title`}>
         <div className={`${_p}d-flex ${_p}align-items-center`}>
@@ -178,10 +196,20 @@ const Result = ({ activeAlbum, ...props }) => {
         <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.previewStepHelpContentHtml) }}></p>
       </Modal>
 
-      <Modal title={t("The following files will be ignored when assessing your music")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
-        {errors.length > 0 && errors.map((error, i) => (
-          <div key={`e-${i}`} className={`${_p}border-bottom ${_p}text-danger ${_p}p-2`}>{error}</div>
-        ))}
+      <Modal title={t("Scanning issues")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
+        {getErrorsLength() > 0 &&
+          errors.map((error, i) => (
+            <div className={`${_p}border-bottom`} key={`et-${i}`}>
+              <h6 className={`${_p}pt-4 ${_p}pb-2 ${_p}d-flex ${_p}align-items-start`}><span className={`${_p}text-warning ${_p}mr-2`}><Icon variant="warning"/></span>{renderTitleByType(error.type)}</h6>
+              <ul>
+                {error.files.map((item, z) => (
+                  <li key={`e-${i + z}`} className={`${_p}p-2`}><span className={`${_p}text-danger`}>{item}</span></li>
+                ))
+                }
+              </ul>
+            </div>
+          ))
+        }
       </Modal>
     </div>
   );
