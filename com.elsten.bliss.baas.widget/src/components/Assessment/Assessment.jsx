@@ -313,9 +313,6 @@ const Assessment = ({ activeAssessment, ...props }) => {
 
   return (
     <div className={`${_p}result ${isProcessing ? `${_p}processing` : ''}`}>
-      {errors.length > 0 && (
-        <div className={`${_p}result-errors`}><span>{t('Errors (wrong files)')}:</span><div className={`${_p}result-errors-count`}>{errors.length}</div></div>
-      )}
       <div className={`${_p}result-title`}>
         <div className={`${_p}d-flex ${_p}align-items-center`}>
           <h4 className={`${_p}mb-0`}>{t('Assessment')}</h4>

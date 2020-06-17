@@ -1,0 +1,45 @@
+[
+  {
+    "album": {
+      "title": "Album name",
+      "artists": [
+        "Artist"
+      ],
+      "tracks": [
+        {
+          "title": "Track 1",
+          "path": {
+            "lib": "/",
+            "path": "current-art/track1-1.mp3"
+          }
+        }
+      ]
+    },
+    "assessment": {
+      "compliance": {
+        "parts": [
+          {
+            "objectType": "Compliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "missing"
+            },
+            "state": "NONCOMPLIANT",
+            "summary": "Missing art",
+            "detail": "Missing /current-art/folder.jpg",
+            "responses": [
+              {
+                "url": "baas:/current-art/track1-1.mp3#coverart",
+                "width": 0,
+                "height": 0,
+                "realPath": "/current-art/track1-1.mp3",
+                "objectType": "InstallImageFromUrlResponse"
+              }
+            ]
+          }
+        ]
+      },
+      "cost": 0
+    }
+  }
+]
