@@ -24,6 +24,12 @@ Using the additional rules
 npm start --rules=rules
 ```
 
+Example for rules:
+
+```bash
+--rules={\"images\":{\"storage\":{\"embedded\":\"embed\",\"imageFileNamesRelative\":[\"folder\"]},\"maxHeight\":900,\"maxWidth\":900,\"maxDataSizeBytes\":600000,\"permittedFormats\":[\"jpeg\"]}}
+```
+
 ## Production
 
 ```bash
@@ -56,12 +62,6 @@ Required:
 
 *   `localapi`: url to the api
 *   `rules`: The app rules
-
-Example for rules:
-
-```bash
---rules={\"images\":{\"storage\":{\"embedded\":\"embed\",\"imageFileNamesRelative\":[\"folder\"]},\"maxHeight\":900,\"maxWidth\":900,\"maxDataSizeBytes\":600000,\"permittedFormats\":[\"jpeg\"]}}
-```
 
 Additional:
 
