@@ -93,6 +93,34 @@ h4 {
   overflow-x: hidden;
 }
 
+.cut-text { 
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  width: 160px; 
+  white-space: nowrap;
+}
+
+.btn-dots {
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 5px;
+  font-size: 1.2rem;
+  color: $primary;
+  border: 1px solid $primary;
+  transition: all $transition ease;
+
+  &:hover {
+    background-color: $primary;
+    color: $white;
+  }
+}
+
 @include media-breakpoint-down(md) {
   .h-md-auto {
     height: auto !important;

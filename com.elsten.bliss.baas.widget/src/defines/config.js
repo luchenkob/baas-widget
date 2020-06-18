@@ -1,6 +1,7 @@
 export const appDefaultConfig = {
   endpoint: "local",
   localapi: "/localapi/",
+  //testID: "7c4aac6e-32bb-4e82-88f8-b48fa5094b7e",
   height:"100%",
   queryDelay: 5000,
   endTimeout: 60000,

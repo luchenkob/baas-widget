@@ -39,7 +39,7 @@ const ViewAssessment = (state) => {
     switch (status) {
 
       case "Completed":
-        ApiService.get(`assessment/${id}`, config).then(result => {
+        ApiService.get(`assessment/${config.testID ? config.testID : id}`, config).then(result => {
           setIsMounted(true);
           dispatch({ type: "SET_ASSESSMENTS", data: { isProcessing: false, assessments: result.data, isNotification: false, isBussy: false } })
         }, error => {

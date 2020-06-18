@@ -34,6 +34,11 @@ i18n
           "Error: Unable to get Assessment": "Error: Unable to get Assessment",
           "The following files will be ignored": "The following files will be ignored:",
           "This widget is limited to assesing up to sixty music files, rounded down to the nearest full album. We ignored": "This widget is limited to assesing up to sixty music files, rounded down to the nearest full album. We ignored:",
+          "Embedded art": "Embedded art",
+          "Missing embedded art": "Missing embedded art",
+          "Image files": "Image files",
+          "Art was missing from": "Art was missing from",
+          "Art was found in": "Art was found in",
         }
       }
     },
