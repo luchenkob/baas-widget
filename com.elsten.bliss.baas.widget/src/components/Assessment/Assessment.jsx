@@ -28,6 +28,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
   const [complianceDetail, setComplianceDetail] = useState("");
   const [isComplDetail, setIsComplDetail] = useState(false);
   const [isArtDetail, setIsArtDetail] = useState(false);
+  const [mPart, setmPart] = useState(null);
   const [artType, setArtType] = useState(null);
 
 
@@ -154,8 +155,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
       if (locationType.type == "embedded") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1].split("#coverart")[0]}</span>
       if (locationType.type == "image-file") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1]}</span>
     } else {
-      if (locationType.type == "embedded") return <span className={`${_p}text-success ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1].split("#coverart")[0]}</span>
-      if (locationType.type == "image-file") return <span className={`${_p}text-success ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1]}</span>
+      if (locationType.type == "embedded") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1].split("#coverart")[0]}</span>
+      if (locationType.type == "image-file") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1]}</span>
     }
   }
 
@@ -165,10 +166,11 @@ const Assessment = ({ activeAssessment, ...props }) => {
       return part.locationTypes.map((locationType, i) => (
         <div className={`${_p}mb-3 ${_p}d-flex ${_p}justify-content-between ${_p}align-items-center`} key={`cmpl-${i}`}>
           <div>
-            {getBadge(locationType, t(`_comp_${part.source.category}_${part.source.policyDescriptor}_${locationType.type}_title`))}<span className={`${_p}ml-2 ${_p}d-inline-flex`}>{locationType.missing.length > 0 ? t("Art was missing from") : t("Art was found in")} {getDetails(locationType)}</span>
+            {getBadge(locationType, t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_${locationType.type.toLowerCase()}_title`))}
+            <span className={`${_p}ml-2 ${_p}d-inline-flex`}>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_detail_${locationType.type.toLowerCase()}_${locationType.state}_title`)} {getDetails(locationType)}</span>
           </div>
           {locationType.missing.length > 1 || locationType.extant.length > 1 ? <div>
-            <span className={`${_p}btn-dots`} onClick={() => showArtDetail(locationType)}>...</span>
+            <span className={`${_p}btn-dots`} onClick={() => showArtDetail(part, locationType)}>...</span>
           </div>
             : <></>
           }
@@ -177,7 +179,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
   }
 
-  const showArtDetail = (locationType) => {
+  const showArtDetail = (part, locationType) => {
+    setmPart(part);
     setArtType(locationType);
     setIsArtDetail(true);
   }
@@ -388,9 +391,9 @@ const Assessment = ({ activeAssessment, ...props }) => {
             <div>
               <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}>
                 <span className={`${_p}mr-2`}>
-                  <Badge variant={"danger"} label={t("Missing")} />
+                  <Badge variant={"danger"} label={t(`Missing`)} />
                 </span>
-                {t("Art was missing from")}
+                {t(`Art was missing from`)}
               </h6>
               <ul>
                 {artType.missing.map((item, i) => (
@@ -404,8 +407,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
             <div>
               <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}>
                 <span className={`${_p}mr-2`}>
-                  <Badge variant={"success"} label={t("Found")} />
-                </span>{t("Art was found in")}
+                  <Badge variant={"success"} label={t(`Found`)} />
+                </span>{t(`Art was found in`)}
               </h6>
               <ul>
                 {artType.extant.map((item, i) => (

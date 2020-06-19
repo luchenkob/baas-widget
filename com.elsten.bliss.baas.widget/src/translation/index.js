@@ -39,10 +39,13 @@ i18n
           "Image files": "Image files",
           "Art was missing from": "Art was missing from",
           "Art was found in": "Art was found in",
-          "_comp_CoverArtPolicy_missing_embedded_title": "Embedded art",
-          "_comp_CoverArtPolicy_missing_image-file_title": "Image files",
-          "_comp.CoverArtPolicy.missing.detail.NONCOMPLIANT.title":"Missing",
-          "_comp.CoverArtPolicy.missing.detail.COMPLIANT.title":"Found",
+          "_comp_coverartpolicy_missing_embedded_title": "Embedded art",
+          "_comp_coverartpolicy_missing_image-file_title": "Image files",
+          "_comp_coverartpolicy_missing_detail_NONCOMPLIANT_title":"Missing",
+          "_comp_coverartpolicy_missing_detail_COMPLIANT_title":"Found",
+          "_comp_coverartpolicy_missing_detail_embedded_NONCOMPLIANT_title":"Missing embedded art",
+          "_comp_coverartpolicy_missing_detail_image-file_COMPLIANT_title":"Art was found in",
+          "_comp_coverartpolicy_missing_detail_image-file_NONCOMPLIANT_title":"Art not found in"
         }
       }
     },
