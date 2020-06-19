@@ -168,7 +168,7 @@ const Result = ({ activeAlbum, ...props }) => {
   return (
     <div className={`${_p}result`}>
       {getErrorsLength() > 0 && (
-        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={() => setIsErrorsModal(true)}><Icon variant="warning"/></div>
+        <div className={`${_p}result-errors ${_p}cursor-pointer`} onClick={() => setIsErrorsModal(true)}><Icon variant="warning" /></div>
       )}
       <div className={`${_p}result-title`}>
         <div className={`${_p}d-flex ${_p}align-items-center`}>
@@ -199,8 +199,9 @@ const Result = ({ activeAlbum, ...props }) => {
       <Modal title={t("Scanning issues")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
         {getErrorsLength() > 0 &&
           errors.map((error, i) => (
+            error.files.length > 0 &&
             <div className={`${_p}border-bottom`} key={`et-${i}`}>
-              <h6 className={`${_p}pt-4 ${_p}pb-2 ${_p}d-flex ${_p}align-items-start`}><span className={`${_p}text-warning ${_p}mr-2`}><Icon variant="warning"/></span>{renderTitleByType(error.type)}</h6>
+              <h6 className={`${_p}pt-4 ${_p}pb-2 ${_p}d-flex ${_p}align-items-start`}><span className={`${_p}text-warning ${_p}mr-2`}><Icon variant="warning" /></span>{renderTitleByType(error.type)}</h6>
               <ul>
                 {error.files.map((item, z) => (
                   <li key={`e-${i + z}`} className={`${_p}p-2`}><span className={`${_p}text-danger`}>{item}</span></li>
