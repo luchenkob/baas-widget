@@ -145,13 +145,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
     </>
   }
 
-  const getBadge = (locationType) => {
-    switch (locationType.type) {
-      case "embedded":
-        return <Badge variant={locationType.missing.length > 0 ? "danger" : "success"} label={t("Embedded art")} />
-      case "image-file":
-        return <Badge variant={locationType.missing.length > 0 ? "danger" : "success"} label={t("Image files")} />
-    }
+  const getBadge = (locationType, label) => {
+    return <Badge variant={locationType.state == "NONCOMPLIANT" ? "danger" : "success"} label={label} />
   }
 
   const getDetails = (locationType) => {
@@ -159,8 +154,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
       if (locationType.type == "embedded") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1].split("#coverart")[0]}</span>
       if (locationType.type == "image-file") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1]}</span>
     } else {
-      if (locationType.type == "embedded") return <span className={`${_p}text-success ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].split(":/")[1].split("#coverart")[0]}</span>
-      if (locationType.type == "image-file") return <span className={`${_p}text-success ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].split(":/")[1]}</span>
+      if (locationType.type == "embedded") return <span className={`${_p}text-success ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1].split("#coverart")[0]}</span>
+      if (locationType.type == "image-file") return <span className={`${_p}text-success ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1]}</span>
     }
   }
 
@@ -170,7 +165,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       return part.locationTypes.map((locationType, i) => (
         <div className={`${_p}mb-3 ${_p}d-flex ${_p}justify-content-between ${_p}align-items-center`} key={`cmpl-${i}`}>
           <div>
-            {getBadge(locationType)}<span className={`${_p}ml-2 ${_p}d-inline-flex`}>{locationType.missing.length > 0 ? t("Art was missing from") : t("Art was found in")} {getDetails(locationType)}</span>
+            {getBadge(locationType, t(`_comp_${part.source.category}_${part.source.policyDescriptor}_${locationType.type}_title`))}<span className={`${_p}ml-2 ${_p}d-inline-flex`}>{locationType.missing.length > 0 ? t("Art was missing from") : t("Art was found in")} {getDetails(locationType)}</span>
           </div>
           {locationType.missing.length > 1 || locationType.extant.length > 1 ? <div>
             <span className={`${_p}btn-dots`} onClick={() => showArtDetail(locationType)}>...</span>
@@ -200,7 +195,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       }
     }
 
-    return alt.length > 0 ?
+    return alt.length || part.objectType == "ArtStorageCompliance" ?
       <div className={`${_p}caccordion-item`}>
         <div className={`${_p}result-compliance`}>
           <div className={`${_p}result-compliance-inner`}>
@@ -212,16 +207,19 @@ const Assessment = ({ activeAssessment, ...props }) => {
                   </Col>
                 </Row>
               }
-              {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('Alternative art')}</h5></Col></Row>}
-              <Row>
-                {alt.map((response, i) => (
-                  <Col lg={4} key={`alt-${i}`}>
-                    <div className={`${_p}result-compliance-alternative`}>
-                      {renderArt(response)}
-                    </div>
-                  </Col>
-                ))}
-              </Row>
+              {alt.length > 0 && <>
+                {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('Alternative art')}</h5></Col></Row>}
+                <Row>
+                  {alt.map((response, i) => (
+                    <Col lg={4} key={`alt-${i}`}>
+                      <div className={`${_p}result-compliance-alternative`}>
+                        {renderArt(response)}
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </>
+              }
             </Container>
           </div>
         </div>
@@ -308,7 +306,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                   <>
                     <div className={`${_p}collapsible-trigger-bg`} onClick={() => setSelectedIndex(selectedIndex == i ? -1 : i)}></div>
                     <Badge variant={part.state == "NONCOMPLIANT" ? "danger" : "success"} label={t(capitalize(part.summary))} />
-                    <Button variant="outline-primary" onClick={() => { setComplianceDetail(`<span class=${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}>${part.detail}</span>`); setIsComplDetail(true) }}><Icon className={`${_p}mr-1`} variant="info" />{t("More")}</Button>
+                    {part.objectType !== "ArtStorageCompliance" && <Button variant="outline-primary" onClick={() => { setComplianceDetail(`<span class=${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}>${part.detail}</span>`); setIsComplDetail(true) }}><Icon className={`${_p}mr-1`} variant="info" />{t("More")}</Button>}
                   </>
                 }>
                 <div className={`${_p}result-compliance`}>
@@ -388,7 +386,12 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <Modal title={t("Missing embedded art")} className={`${_p}small`} show={isArtDetail} onClose={() => setIsArtDetail(false)}>
           {artType && artType.missing.length > 0 &&
             <div>
-              <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}><span className={`${_p}mr-2`}><Badge variant={"danger"} label={t("Missing")} /></span>{t("Art was missing from")}</h6>
+              <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}>
+                <span className={`${_p}mr-2`}>
+                  <Badge variant={"danger"} label={t("Missing")} />
+                </span>
+                {t("Art was missing from")}
+              </h6>
               <ul>
                 {artType.missing.map((item, i) => (
                   <li key={`ntf-${i}`} className={`${_p}p-1`}><span className={`${_p}text-danger`}>{item.split(":/")[1].split("#coverart")[0]}</span></li>
@@ -399,10 +402,14 @@ const Assessment = ({ activeAssessment, ...props }) => {
           }
           {artType && artType.extant.length > 0 &&
             <div>
-              <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}><span className={`${_p}mr-2`}><Badge variant={"success"} label={t("Found")} /></span>{t("Art was found in")}</h6>
+              <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}>
+                <span className={`${_p}mr-2`}>
+                  <Badge variant={"success"} label={t("Found")} />
+                </span>{t("Art was found in")}
+              </h6>
               <ul>
                 {artType.extant.map((item, i) => (
-                  <li key={`fc-${i}`} className={`${_p}p-1`}><span className={`${_p}text-danger`}>{item.split(":/")[1].split("#coverart")[0]}</span></li>
+                  <li key={`fc-${i}`} className={`${_p}p-1`}><span className={`${_p}text-danger`}>{item.location.split(":/")[1].split("#coverart")[0]}</span></li>
                 ))
                 }
               </ul>

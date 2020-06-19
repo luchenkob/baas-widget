@@ -1,0 +1,109 @@
+[
+  {
+    "album": {
+      "title": "deja que sangre",
+      "artists": [
+        "the rolling stones"
+      ],
+      "tracks": [
+        {
+          "title": "midnight rambler",
+          "path": {
+            "lib": "/",
+            "path": "6-midnight_rambler.mp3"
+          }
+        },
+        {
+          "title": "GIMME SHELTER",
+          "path": {
+            "lib": "/",
+            "path": "1-GIMME_SHELTER.mp3"
+          }
+        },
+        {
+          "title": "YOU GOT THE SILVER",
+          "path": {
+            "lib": "/",
+            "path": "7-YOU_GOT_THE_SILVER.mp3"
+          }
+        },
+        {
+          "title": "let it bleed",
+          "path": {
+            "lib": "/",
+            "path": "5-let_it_bleed.mp3"
+          }
+        },
+        {
+          "title": "LOVE IN VAIN",
+          "path": {
+            "lib": "/",
+            "path": "2-LOVE_IN_VAIN.mp3"
+          }
+        },
+        {
+          "title": "MONKEY MAN",
+          "path": {
+            "lib": "/",
+            "path": "8-MONKEY_MAN.mp3"
+          }
+        },
+        {
+          "title": "country honk",
+          "path": {
+            "lib": "/",
+            "path": "3-country_honk.mp3"
+          }
+        },
+        {
+          "title": "live with me",
+          "path": {
+            "lib": "/",
+            "path": "4-live_with_me.mp3"
+          }
+        },
+        {
+          "title": "YOU CAN'T ALWAYS GET WHAT YOU WANT",
+          "path": {
+            "lib": "/",
+            "path": "9-YOU_CAN'T_ALWAYS_GET_WHAT_YOU_WANT.mp3"
+          }
+        }
+      ]
+    },
+    "assessment": {
+      "compliance": {
+        "parts": [
+          {
+            "locationTypes": [
+              {
+                "type": "image-file",
+                "state": "COMPLIANT",
+                "extant": [
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "file:/folder.jpg"
+                  }
+                ],
+                "missing": []
+              }
+            ],
+            "objectType": "ArtStorageCompliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "missing"
+            },
+            "state": "COMPLIANT",
+            "summary": "Art is installed in th...",
+            "detail": "Art is installed in this album",
+            "responses": []
+          }
+        ]
+      },
+      "cost": 0
+    }
+  }
+]

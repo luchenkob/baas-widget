@@ -1,30 +1,79 @@
 [
   {
     "album": {
-      "title": "Missing artwork album",
+      "title": "SCOTT 4",
       "artists": [
-        "Artist 1"
+        "scott walker"
       ],
       "tracks": [
         {
-          "title": "track1",
+          "title": "hero of the war",
           "path": {
             "lib": "/",
-            "path": "album1/track1.flac"
+            "path": "hero_of_the_war.flac"
           }
         },
         {
-          "title": "track2",
+          "title": "angels of ashes",
           "path": {
             "lib": "/",
-            "path": "album1/track2.flac"
+            "path": "angels_of_ashes.flac"
           }
         },
         {
-          "title": "track3",
+          "title": "the seventh seals",
           "path": {
             "lib": "/",
-            "path": "album1/track3.flac"
+            "path": "the_seventh_seals.flac"
+          }
+        },
+        {
+          "title": "boy child",
+          "path": {
+            "lib": "/",
+            "path": "boy_child.flac"
+          }
+        },
+        {
+          "title": "get behind me",
+          "path": {
+            "lib": "/",
+            "path": "get_behind_me.flac"
+          }
+        },
+        {
+          "title": "the old man\u0027s back again",
+          "path": {
+            "lib": "/",
+            "path": "the_old_man\u0027s_back_again.flac"
+          }
+        },
+        {
+          "title": "duchess",
+          "path": {
+            "lib": "/",
+            "path": "duchess.flac"
+          }
+        },
+        {
+          "title": "the world\u0027s strongest man",
+          "path": {
+            "lib": "/",
+            "path": "the_world\u0027s_strongest_man.flac"
+          }
+        },
+        {
+          "title": "rhymes of goodbye",
+          "path": {
+            "lib": "/",
+            "path": "rhymes_of_goodbye.flac"
+          }
+        },
+        {
+          "title": "on your own again",
+          "path": {
+            "lib": "/",
+            "path": "on_your_own_again.flac"
           }
         }
       ]
@@ -33,184 +82,163 @@
       "compliance": {
         "parts": [
           {
+            "locationTypes": [
+              {
+                "type": "embedded",
+                "state": "NONCOMPLIANT",
+                "extant": [
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/the_seventh_seals.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/the_seventh_seals.flac#coverart"
+                  }
+                ],
+                "missing": [
+                  "baas:/the_old_man\u0027s_back_again.flac#coverart",
+                  "baas:/duchess.flac#coverart",
+                  "baas:/hero_of_the_war.flac#coverart",
+                  "baas:/on_your_own_again.flac#coverart",
+                  "baas:/angels_of_ashes.flac#coverart",
+                  "baas:/the_world\u0027s_strongest_man.flac#coverart",
+                  "baas:/boy_child.flac#coverart",
+                  "baas:/get_behind_me.flac#coverart",
+                  "baas:/the_seventh_seals.flac#coverart",
+                  "baas:/rhymes_of_goodbye.flac#coverart"
+                ]
+              },
+              {
+                "type": "image-file",
+                "state": "NONCOMPLIANT",
+                "extant": [
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "file:/folder.jpg"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "file:/folder.jpg"
+                  }
+                ],
+                "missing": [
+                  "file:/folder",
+                  "file:/folder"
+                ]
+              }
+            ],
+            "objectType": "ArtStorageCompliance",
             "source": {
               "category": "CoverArtPolicy",
               "policyDescriptor": "missing"
             },
             "state": "NONCOMPLIANT",
             "summary": "Missing art",
-            "detail": "Missing embedded art",
+            "detail": "Missing embedded art from rhymes_of_goodbye.flac,Missing embedded art from get_behind_me.flac,Missing /folder.jpg,Missing embedded art from on_your_own_again.flac,Missing embedded art from angels_of_ashes.flac,Missing embedded art from the_world\u0027s_strongest_man.flac,Missing embedded art from the_seventh_seals.flac,Missing embedded art from hero_of_the_war.flac,Missing embedded art from duchess.flac,Missing embedded art from boy_child.flac,Missing embedded art from the_old_man\u0027s_back_again.flac",
             "responses": [
               {
-                "objectType": "InstallImageFromUrlResponse",
-                "url": "https://upload.wikimedia.org/wikipedia/en/6/6b/Pixies-Doolittle.jpg",
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/0",
+                "width": 1400,
+                "height": 1400,
+                "realPath": "/20170808/images/caa/ed708c57-029c-44c4-b178-f08dbe08bf63/22615867495",
+                "objectType": "InstallImageFromUrlResponse"
+              },
+              {
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/1",
                 "width": 500,
-                "height": 500
+                "height": 500,
+                "realPath": "/20170808/images/asin/B0000075YE.jpg",
+                "objectType": "InstallImageFromUrlResponse"
               },
               {
-                "objectType": "InstallImageFromUrlResponse",
-                "url": "https://upload.wikimedia.org/wikipedia/en/6/6b/Pixies-Doolittle.jpg",
-                "width": 500,
-                "height": 500
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/2",
+                "width": 1432,
+                "height": 1408,
+                "realPath": "/20170808/images/caa/7ec5637c-a197-3b3a-b3e7-dfdfd95412f7/2832019156.jpg",
+                "objectType": "InstallImageFromUrlResponse"
               },
               {
-                "objectType": "InstallImageFromUrlResponse",
-                "url": "https://upload.wikimedia.org/wikipedia/en/6/6b/Pixies-Doolittle.jpg",
-                "width": 500,
-                "height": 500
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/3",
+                "width": 1404,
+                "height": 1404,
+                "realPath": "/20170808/images/caa/7c41aa6e-72a6-34b9-8d14-d3abd5402b4f/8784681931.jpg",
+                "objectType": "InstallImageFromUrlResponse"
               },
               {
-                "objectType": "Response",
-                "title": "Shrink art",
-                "description": "Shrink the art to 500x500"
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/4",
+                "width": 600,
+                "height": 598,
+                "realPath": "/20170808/images/discogs/6718132/1481258701-6400.jpeg.jpg",
+                "objectType": "InstallImageFromUrlResponse"
               },
               {
-                "objectType": "Response",
-                "title": "Shrink art",
-                "description": "Shrink the art to 500x500"
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/5",
+                "width": 600,
+                "height": 510,
+                "realPath": "/20170808/images/discogs/2023876/1522332218-6337.jpeg.jpg",
+                "objectType": "InstallImageFromUrlResponse"
               },
               {
-                "objectType": "InstallImageFromUrlResponse",
-                "url": "baas:/folder.jpg#coverart",
-                "width": 500,
-                "height": 500
-              }
-            ]
-          },
-          {
-            "images": [
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/6",
+                "width": 600,
+                "height": 390,
+                "realPath": "/20170808/images/discogs/2023876/1493202230-6146.jpeg.jpg",
+                "objectType": "InstallImageFromUrlResponse"
+              },
               {
-                "info": {
-                  "width": 0,
-                  "height": 0
-                },
-                "location": "baas:/folder.jpg"
-              }
-            ],
-            "objectType": "ExtantArtCompliance",
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "missing"
-            },
-            "state": "COMPLIANT",
-            "summary": "Art is installed in th...",
-            "detail": "Art is installed in this album",
-            "responses": []
-          },
-          {
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "max-size"
-            },
-            "state": "NONCOMPLIANT",
-            "summary": "Art is too large",
-            "detail": "Art is 1024x1024 but should be no larger than 500x500",
-            "responses": [
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/7",
+                "width": 600,
+                "height": 600,
+                "realPath": "/20170808/images/discogs/2023876/1259174469.jpeg",
+                "objectType": "InstallImageFromUrlResponse"
+              },
               {
-                "objectType": "Response",
-                "title": "Shrink art",
-                "description": "Shrink the art to 500x500"
-              }
-            ]
-          }
-        ]
-      },
-      "cost": 0
-    }
-  },
-  {
-    "album": {
-      "title": "Compliant album",
-      "artists": [
-        "Artist 2"
-      ],
-      "tracks": [
-        {
-          "title": "track1",
-          "path": {
-            "lib": "/",
-            "path": "album2/track1.flac"
-          }
-        },
-        {
-          "title": "track2",
-          "path": {
-            "lib": "/",
-            "path": "album2/track2.flac"
-          }
-        },
-        {
-          "title": "track3",
-          "path": {
-            "lib": "/",
-            "path": "album2/track3.flac"
-          }
-        }
-      ]
-    },
-    "assessment": {
-      "compliance": {
-        "parts": [
-          {
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "missing"
-            },
-            "state": "COMPLIANT",
-            "summary": "Art is installed",
-            "detail": "Art is embedded"
-          }
-        ]
-      },
-      "cost": 0
-    }
-  },
-  {
-    "album": {
-      "title": "Too large album cover",
-      "artists": [
-        "Artist 3"
-      ],
-      "tracks": [
-        {
-          "title": "track1",
-          "path": {
-            "lib": "/",
-            "path": "album3/track1.flac"
-          }
-        },
-        {
-          "title": "track2",
-          "path": {
-            "lib": "/",
-            "path": "album3/track2.flac"
-          }
-        },
-        {
-          "title": "track3",
-          "path": {
-            "lib": "/",
-            "path": "album3/track3.flac"
-          }
-        }
-      ]
-    },
-    "assessment": {
-      "compliance": {
-        "parts": [
-          {
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "max-size"
-            },
-            "state": "NONCOMPLIANT",
-            "summary": "Art is too large",
-            "detail": "Art is 1024x1024 but should be no larger than 500x500",
-            "responses": [
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/8",
+                "width": 600,
+                "height": 596,
+                "realPath": "/20170808/images/discogs/9365126/1511636901-4817.jpeg.jpg",
+                "objectType": "InstallImageFromUrlResponse"
+              },
               {
-                "objectType": "Response",
-                "title": "Shrink art",
-                "description": "Shrink the art to 500x500"
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/9",
+                "width": 599,
+                "height": 591,
+                "realPath": "/20170808/images/discogs/1788077/1243353251.jpeg.jpg",
+                "objectType": "InstallImageFromUrlResponse"
+              },
+              {
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/10",
+                "width": 600,
+                "height": 600,
+                "realPath": "/20170808/images/discogs/415068/1462036020-8597.jpeg.jpg",
+                "objectType": "InstallImageFromUrlResponse"
+              },
+              {
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/11",
+                "width": 498,
+                "height": 505,
+                "realPath": "/20170808/images/discogs/5436742/1393351863-7624.jpeg.jpg",
+                "objectType": "InstallImageFromUrlResponse"
+              },
+              {
+                "url": "https://vnlqoz47el.execute-api.us-east-1.amazonaws.com/testing/assessment/7c4aac6e-32bb-4e82-88f8-b48fa5094b7e/SCOTT+4/scott+walker/CoverArtPolicy/missing/responses/12",
+                "width": 600,
+                "height": 600,
+                "realPath": "/20170808/images/discogs/7448141/1441694159-7384.jpeg.jpg",
+                "objectType": "InstallImageFromUrlResponse"
               }
             ]
           }
