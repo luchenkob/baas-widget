@@ -45,7 +45,9 @@ i18n
           "_comp_coverartpolicy_missing_detail_COMPLIANT_title":"Found",
           "_comp_coverartpolicy_missing_detail_embedded_NONCOMPLIANT_title":"Missing embedded art",
           "_comp_coverartpolicy_missing_detail_image-file_COMPLIANT_title":"Art was found in",
-          "_comp_coverartpolicy_missing_detail_image-file_NONCOMPLIANT_title":"Art not found in"
+          "_comp_coverartpolicy_missing_detail_image-file_NONCOMPLIANT_title":"Art not found in",
+          "_comp_coverartpolicy_missing_detail_NONCOMPLIANT_detail":"Art was missing from",
+          "_comp_coverartpolicy_missing_detail_COMPLIANT_detail":"Art was found in",
         }
       }
     },
