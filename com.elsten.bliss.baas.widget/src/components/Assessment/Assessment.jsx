@@ -49,7 +49,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
       if (compliance.parts) {
         for (const [i, part] of Object.entries(compliance.parts)) {
           if (part.state == "NONCOMPLIANT") {
-            badges.push(<span key={`b-${i}`} className={`${_p}badge ${_p}badge-danger`}><Icon variant="times" className={`${_p}mr-1`} />{t(capitalize(part.summary))}</span>);
+            badges.push(<Badge key={`b-${i}`} className="mr-2" variant={"danger"} label={t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_title`)} />);
           }
         }
         if (badges.length > 0) {
@@ -147,16 +147,16 @@ const Assessment = ({ activeAssessment, ...props }) => {
   }
 
   const getBadge = (locationType, label) => {
-    return <Badge variant={locationType.state == "NONCOMPLIANT" ? "danger" : "success"} label={label} />
+    return <Badge className="mr-2" variant={locationType.state == "NONCOMPLIANT" ? "danger" : "success"} label={label} />
   }
 
   const getDetails = (locationType) => {
     if (locationType.missing.length > 0) {
-      if (locationType.type == "embedded") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1].split("#coverart")[0]}</span>
-      if (locationType.type == "image-file") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1]}</span>
+      if (locationType.type == "embedded") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text`}>{locationType.missing[0].split(":/")[1].split("#coverart")[0]}</span>
+      if (locationType.type == "image-file") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text`}>{locationType.missing[0].split(":/")[1]}</span>
     } else {
-      if (locationType.type == "embedded") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1].split("#coverart")[0]}</span>
-      if (locationType.type == "image-file") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1]}</span>
+      if (locationType.type == "embedded") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text`}>{locationType.extant[0].location.split(":/")[1].split("#coverart")[0]}</span>
+      if (locationType.type == "image-file") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text`}>{locationType.extant[0].location.split(":/")[1]}</span>
     }
   }
 
@@ -165,15 +165,13 @@ const Assessment = ({ activeAssessment, ...props }) => {
     if (part.locationTypes) {
       return part.locationTypes.map((locationType, i) => (
         <div className={`${_p}mb-3 ${_p}d-flex ${_p}justify-content-between ${_p}align-items-center`} key={`cmpl-${i}`}>
-          <div>
+          <div className={`${_p}result-me`}>
             {getBadge(locationType, t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_${locationType.type.toLowerCase()}_title`))}
-            <span className={`${_p}ml-2 ${_p}d-inline-flex`}>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_detail_${locationType.type.toLowerCase()}_${locationType.state}_title`)} {getDetails(locationType)}</span>
+            <span className={`${_p}result-me-inner`}><span className={`${_p}mr-2`}>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_detail_${locationType.type.toLowerCase()}_${locationType.state}_title`)}</span> {getDetails(locationType)}</span>
           </div>
-          {locationType.missing.length > 1 || locationType.extant.length > 1 ? <div>
+          <div>
             <span className={`${_p}btn-dots`} onClick={() => showArtDetail(part, locationType)}>...</span>
           </div>
-            : <></>
-          }
         </div>
       ))
     }
@@ -308,7 +306,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                 easing="ease" trigger={
                   <>
                     <div className={`${_p}collapsible-trigger-bg`} onClick={() => setSelectedIndex(selectedIndex == i ? -1 : i)}></div>
-                    <Badge variant={part.state == "NONCOMPLIANT" ? "danger" : "success"} label={t(capitalize(part.summary))} />
+                    <Badge variant={part.state == "NONCOMPLIANT" ? "danger" : "success"} label={t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_title`)} />
                     {part.objectType !== "ArtStorageCompliance" && <Button variant="outline-primary" onClick={() => { setComplianceDetail(`<span class=${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}>${part.detail}</span>`); setIsComplDetail(true) }}><Icon className={`${_p}mr-1`} variant="info" />{t("More")}</Button>}
                   </>
                 }>
@@ -397,7 +395,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
               </h6>
               <ul>
                 {artType.missing.map((item, i) => (
-                  <li key={`ntf-${i}`} className={`${_p}p-1`}><span className={`${_p}text-monospace ${_p}text-code-small ${_p}text-code`}>{item.split(":/")[1].split("#coverart")[0]}</span></li>
+                  <li key={`ntf-${i}`} className={`${_p}p-1`}><span className={`${_p}text-monospace ${_p}lh-1-3 ${_p}text-code`}>{item.split(":/")[1].split("#coverart")[0]}</span></li>
                 ))
                 }
               </ul>
@@ -412,7 +410,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
               </h6>
               <ul>
                 {artType.extant.map((item, i) => (
-                  <li key={`fc-${i}`} className={`${_p}p-1`}><span className={`${_p}text-monospace ${_p}text-code-small ${_p}text-code`}>{item.location.split(":/")[1].split("#coverart")[0]}</span></li>
+                  <li key={`fc-${i}`} className={`${_p}p-1`}><span className={`${_p}text-monospace ${_p}lh-1-3 ${_p}text-code`}>{item.location.split(":/")[1].split("#coverart")[0]}</span></li>
                 ))
                 }
               </ul>

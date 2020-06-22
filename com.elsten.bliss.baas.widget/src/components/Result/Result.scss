@@ -23,6 +23,12 @@
     }
   }
 
+  .result-me {
+    .result-me-inner {
+      display: inline-flex;
+    }
+  }
+
   .result-content {
     height: calc(100% - #{$bottom-nav-height});
   }
@@ -81,7 +87,7 @@
         line-height: 1;
         align-items: center;
         position: relative;
-        z-index: 1
+        z-index: 1;
       }
     }
   }
@@ -144,7 +150,7 @@
       align-items: center;
       justify-content: center;
 
-      >div {
+      > div {
         width: 100%;
         height: 100%;
         background-position: center center !important;
@@ -323,6 +329,17 @@
             margin-bottom: 1rem;
           }
         }
+      }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    .result-me {
+      flex-direction: column;
+      margin-left: 0;
+
+      .result-me-inner {
+        flex-direction: column;
+        margin-left: 0;
       }
     }
   }

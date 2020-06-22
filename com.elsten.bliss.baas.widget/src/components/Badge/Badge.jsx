@@ -5,7 +5,7 @@ import "../Result/Result.scss";
 
 const Badge = ({ ...props }) => {
 
-  const { variant, label } = props;
+  const { variant, label, className } = props;
 
   const getIcon = () => {
     switch (variant) {
@@ -17,7 +17,7 @@ const Badge = ({ ...props }) => {
   }
 
   return (
-    <span className={`${_p}badge ${_p}badge-${variant}`}>
+    <span className={`${_p}badge ${_p}${className} ${_p}badge-${variant}`}>
       {getIcon()}{label}
     </span>
   );
