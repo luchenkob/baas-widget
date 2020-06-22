@@ -152,11 +152,11 @@ const Assessment = ({ activeAssessment, ...props }) => {
 
   const getDetails = (locationType) => {
     if (locationType.missing.length > 0) {
-      if (locationType.type == "embedded") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1].split("#coverart")[0]}</span>
-      if (locationType.type == "image-file") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1]}</span>
+      if (locationType.type == "embedded") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1].split("#coverart")[0]}</span>
+      if (locationType.type == "image-file") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text ${_p}ml-2`}>{locationType.missing[0].split(":/")[1]}</span>
     } else {
-      if (locationType.type == "embedded") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1].split("#coverart")[0]}</span>
-      if (locationType.type == "image-file") return <span className={`${_p}text-danger ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1]}</span>
+      if (locationType.type == "embedded") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1].split("#coverart")[0]}</span>
+      if (locationType.type == "image-file") return <span className={`${_p}text-monospace ${_p}text-code ${_p}cut-text ${_p}ml-2`}>{locationType.extant[0].location.split(":/")[1]}</span>
     }
   }
 
@@ -397,7 +397,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
               </h6>
               <ul>
                 {artType.missing.map((item, i) => (
-                  <li key={`ntf-${i}`} className={`${_p}p-1`}><span className={`${_p}text-danger`}>{item.split(":/")[1].split("#coverart")[0]}</span></li>
+                  <li key={`ntf-${i}`} className={`${_p}p-1`}><span className={`${_p}text-monospace ${_p}text-code-small ${_p}text-code`}>{item.split(":/")[1].split("#coverart")[0]}</span></li>
                 ))
                 }
               </ul>
@@ -412,7 +412,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
               </h6>
               <ul>
                 {artType.extant.map((item, i) => (
-                  <li key={`fc-${i}`} className={`${_p}p-1`}><span className={`${_p}text-danger`}>{item.location.split(":/")[1].split("#coverart")[0]}</span></li>
+                  <li key={`fc-${i}`} className={`${_p}p-1`}><span className={`${_p}text-monospace ${_p}text-code-small ${_p}text-code`}>{item.location.split(":/")[1].split("#coverart")[0]}</span></li>
                 ))
                 }
               </ul>

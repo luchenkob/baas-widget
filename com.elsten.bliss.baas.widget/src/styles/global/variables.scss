@@ -13,6 +13,7 @@ $white:                       #fff;
 $dark:                        #333333;
 $cover:                       #f9f9f9;
 $gray:                        #777777;
+$code:                        #e94590;
 
 $theme-colors: ();
 
@@ -27,6 +28,7 @@ $theme-colors: map-merge(
     "light":      $light,
     "dark":       $dark,
     "cover":      $cover,
+    "code":       $code
   ),
   $theme-colors
 );
