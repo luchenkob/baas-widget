@@ -167,7 +167,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <div className={`${_p}mb-3 ${_p}d-flex ${_p}justify-content-between ${_p}align-items-center`} key={`cmpl-${i}`}>
           <div className={`${_p}result-me`}>
             {getBadge(locationType, t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_${locationType.type.toLowerCase()}_title`))}
-            <span className={`${_p}result-me-inner`}><span className={`${_p}mr-2`}>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_detail_${locationType.type.toLowerCase()}_${locationType.state}_title`)}</span> {getDetails(locationType)}</span>
+            <span className={`${_p}result-me-inner`}><span className={`${_p}mr-2`}>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_${locationType.type.toLowerCase()}_${locationType.state}_description`)}</span> {getDetails(locationType)}</span>
           </div>
           <div>
             <span className={`${_p}btn-dots`} onClick={() => showArtDetail(part, locationType)}>...</span>
@@ -384,14 +384,14 @@ const Assessment = ({ activeAssessment, ...props }) => {
           <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: complianceDetail }}></p>
         </Modal>
 
-        <Modal title={mPart && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_detail_${artType.type.toLowerCase()}_${artType.state}_title`)} className={`${_p}small`} show={isArtDetail} onClose={() => setIsArtDetail(false)}>
+        <Modal title={mPart && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_${artType.type.toLowerCase()}_${artType.state}_title`)} className={`${_p}small`} show={isArtDetail} onClose={() => setIsArtDetail(false)}>
           {artType && artType.missing.length > 0 &&
             <div>
               <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}>
                 <span className={`${_p}mr-2`}>
                   <Badge variant={"danger"} label={t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_detail_NONCOMPLIANT_title`)} />
                 </span>
-                {t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_detail_NONCOMPLIANT_detail`)}
+                {t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_${artType.type.toLowerCase()}_NONCOMPLIANT_description`)}
               </h6>
               <ul>
                 {artType.missing.map((item, i) => (
@@ -406,7 +406,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
               <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}>
                 <span className={`${_p}mr-2`}>
                   <Badge variant={"success"} label={t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_detail_COMPLIANT_title`)} />
-                </span>{t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_detail_COMPLIANT_detail`)}
+                </span>{t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_${artType.type.toLowerCase()}_COMPLIANT_description`)}
               </h6>
               <ul>
                 {artType.extant.map((item, i) => (
