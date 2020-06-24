@@ -55,7 +55,11 @@ i18n
           "_comp_coverartpolicy_missing_embedded_NONCOMPLIANT_detail_description": "Missing embedded art from:",
           "_comp_coverartpolicy_missing_image-file_COMPLIANT_detail_description": "Art was found at:",
           "_comp_coverartpolicy_missing_image-file_NONCOMPLIANT_detail_description": "Art was missing at:",
-          "_comp_coverartpolicy_missing_title": "Album artwork"
+          "_comp_coverartpolicy_missing_title": "Album artwork",
+          "_comp_coverartpolicy_max-size_title": "Maximum artwork resolution",
+          "_comp_coverartpolicy_maxdatasizebytes_title": "Maximum artwork data size",
+          "_comp_coverartpolicy_img-formats_title": "Image format"
+
         }
       }
     },
