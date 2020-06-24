@@ -51,6 +51,10 @@ i18n
           "_comp_coverartpolicy_missing_embedded_NONCOMPLIANT_title": "Missing embedded art",
           "_comp_coverartpolicy_missing_image-file_COMPLIANT_title": "Art was found",
           "_comp_coverartpolicy_missing_image-file_NONCOMPLIANT_title": "Art was missing",
+          "_comp_coverartpolicy_missing_embedded_COMPLIANT_detail_description": "Embedded art was found in:",
+          "_comp_coverartpolicy_missing_embedded_NONCOMPLIANT_detail_description": "Missing embedded art from:",
+          "_comp_coverartpolicy_missing_image-file_COMPLIANT_detail_description": "Art was found at:",
+          "_comp_coverartpolicy_missing_image-file_NONCOMPLIANT_detail_description": "Art was missing at:",
           "_comp_coverartpolicy_missing_title": "Album artwork"
         }
       }
