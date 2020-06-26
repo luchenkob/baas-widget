@@ -58,8 +58,11 @@ i18n
           "_comp_coverartpolicy_missing_title": "Album artwork",
           "_comp_coverartpolicy_max-size_title": "Maximum artwork resolution",
           "_comp_coverartpolicy_maxdatasizebytes_title": "Maximum artwork data size",
-          "_comp_coverartpolicy_img-formats_title": "Image format"
-
+          "_comp_coverartpolicy_img-formats_title": "Image format",
+          "_comp_COMPLIANT": "Compliant",
+          "_comp_NONCOMPLIANT": "Non Compliant",
+          "_comp_coverartpolicy_max-size_COMPLIANT_description": "Artwork is the correct size",
+          "_comp_coverartpolicy_max-size_NONCOMPLIANT_description": "Artwork is the incorrect size"
         }
       }
     },

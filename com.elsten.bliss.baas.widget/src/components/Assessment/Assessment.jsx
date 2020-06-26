@@ -306,8 +306,14 @@ const Assessment = ({ activeAssessment, ...props }) => {
                 easing="ease" trigger={
                   <>
                     <div className={`${_p}collapsible-trigger-bg`} onClick={() => setSelectedIndex(selectedIndex == i ? -1 : i)}></div>
-                    <Badge variant={part.state == "NONCOMPLIANT" ? "danger" : "success"} label={t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_title`)} />
-                    {part.objectType !== "ArtStorageCompliance" && <Button variant="outline-primary" onClick={() => { setComplianceDetail(`<span class=${part.state == "NONCOMPLIANT" ? `${_p}text-danger` : `${_p}text-success`}>${part.detail}</span>`); setIsComplDetail(true) }}><Icon className={`${_p}mr-1`} variant="info" />{t("More")}</Button>}
+                    <div>
+                      <Badge
+                        variant={part.state == "NONCOMPLIANT" ? "danger" : "success"}
+                        label={t(`_comp_${part.state}`)}
+                      />
+                      <span className={`${_p}ml-1 ${_p}mr-1`}> - </span>
+                      <span>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_${part.state}_description`)}</span>
+                    </div>
                   </>
                 }>
                 <div className={`${_p}result-compliance`}>
