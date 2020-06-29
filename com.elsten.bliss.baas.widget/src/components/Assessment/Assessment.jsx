@@ -30,7 +30,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
   const [isArtDetail, setIsArtDetail] = useState(false);
   const [mPart, setmPart] = useState(null);
   const [artType, setArtType] = useState(null);
-
+  const [isFixModal, setIsFixModal] = useState(null);
 
   const getArtists = (artists) => {
     return artists.map(((artist, i) => (
@@ -252,6 +252,11 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
   }
 
+  const openFixModal = (part) => {
+    setmPart(part);
+    setIsFixModal(true);
+  }
+
   const checkComplianceOther = (part, isTitle) => {
 
     const other = [];
@@ -280,7 +285,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                           <span>{t(response.description)}</span>
                         </Col>
                         <Col lg={4} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-end ${_p}justify-content-center`}>
-                          <Button variant="primary" className={`${_p}m-2`}>{t('Fix')}</Button>
+                          <Button variant="primary" className={`${_p}m-2`} onClick={() => openFixModal(part)}>{t('Fix')}</Button>
                         </Col>
                       </Row>
                     </Container>
@@ -373,6 +378,11 @@ const Assessment = ({ activeAssessment, ...props }) => {
     ));
   }
 
+  const handleLinktoBliss = () => {
+    setIsFixModal(false);
+    window.location = config.completeLink;
+  }
+
   return (
     <div className={`${_p}result ${isProcessing ? `${_p}processing` : ''}`}>
       <div className={`${_p}result-title`}>
@@ -401,7 +411,14 @@ const Assessment = ({ activeAssessment, ...props }) => {
           <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: complianceDetail }}></p>
         </Modal>
 
-        <Modal title={mPart && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_${artType.type.toLowerCase()}_title`)} className={`${_p}small`} show={isArtDetail} onClose={() => setIsArtDetail(false)}>
+        <Modal show={isFixModal} className={`${_p}small`} onClose={() => setIsFixModal(false)}>
+          <h3 className={`${_p}text-center ${_p}w-100`}>{mPart && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_title`)}</h3>
+          <div className={`${_p}text-center ${_p}text-regular`}>{mPart && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_fix_description`)},</div>
+          <div className={`${_p}text-center ${_p}text-regular ${_p}mb-4`} dangerouslySetInnerHTML={{ __html: t(config.fixHtml) }}></div>
+          <div className={`${_p}text-center`}><Button variant="primary" onClick={handleLinktoBliss} dangerouslySetInnerHTML={{ __html: t(config.completeLabel) }}></Button></div>
+        </Modal>
+
+        <Modal title={mPart && artType && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_${artType.type.toLowerCase()}_title`)} className={`${_p}small`} show={isArtDetail} onClose={() => setIsArtDetail(false)}>
           {artType && artType.missing.length > 0 &&
             <div>
               <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}>

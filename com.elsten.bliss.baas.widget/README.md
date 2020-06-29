@@ -70,6 +70,7 @@ Additional:
 *   `completeHtml`: Message in the completion popup [`html`]
 *   `completeLabel`: Button text in the completion popup [`string`]
 *   `completeLink`: Link in the completion popup [`string`]
+*   `fixHtml`: Message in the fix popup [`string`]
 *   `previewStepHelpTitleHtml`: The help title for the preview help popup [`html`]
 *   `previewStepHelpContentHtml`: The help message for the preview help popup [`html`]
 *   `assessmentStepHelpTitleHtml`: The help title for the assesment help popup [`html`]

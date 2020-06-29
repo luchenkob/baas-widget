@@ -15,6 +15,7 @@ export const appDefaultConfig = {
   completeHtml: "To find the missing artwork for your albums,<br/> <a href='/download.html'>download and install bliss</a>",
   completeLabel: "Download and install bliss",
   completeLink: "./download.html",
+  fixHtml: "<a href='/download.html'>download and install bliss</a>",
 }
 
 export const _p = appDefaultConfig.prefix;
