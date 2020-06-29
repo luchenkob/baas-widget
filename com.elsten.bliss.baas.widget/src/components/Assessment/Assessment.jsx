@@ -188,7 +188,6 @@ const Assessment = ({ activeAssessment, ...props }) => {
     const alt = [];
 
     if (part.responses) {
-
       for (let response of part.responses) {
         if (response.objectType == "InstallImageFromUrlResponse") {
           alt.push(response);
@@ -196,35 +195,49 @@ const Assessment = ({ activeAssessment, ...props }) => {
       }
     }
 
-    return alt.length || part.objectType == "ArtStorageCompliance" ?
-      <div className={`${_p}caccordion-item`}>
-        <div className={`${_p}result-compliance`}>
-          <div className={`${_p}result-compliance-inner`}>
-            <Container fluid className={`${_p}p-0`}>
-              {part.objectType == "ArtStorageCompliance" &&
-                <Row className={`${_p}mb-4`}>
-                  <Col md={12}>
-                    {renderArtStorageCompliance(part)}
-                  </Col>
-                </Row>
+    switch (part.objectType) {
+      case "ArtStorageCompliance":
+      case "Compliance":
+        return <div className={`${_p}caccordion-item`}>
+          <div className={`${_p}result-compliance`}>
+            <div className={`${_p}result-compliance-inner`}>
+              {part.objectType != "ArtStorageCompliance" &&
+                <div>
+                  <Badge
+                    variant={part.state == "NONCOMPLIANT" ? "danger" : "success"}
+                    label={t(`_comp_${part.state}`)}
+                  />
+                  <span className={`${_p}ml-1 ${_p}mr-1`}> - </span>
+                  <span>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_${part.state}_description`)}</span>
+                </div>
+
               }
-              {alt.length > 0 && <>
-                {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('Alternative art')}</h5></Col></Row>}
-                <Row>
-                  {alt.map((response, i) => (
-                    <Col lg={4} key={`alt-${i}`}>
-                      <div className={`${_p}result-compliance-alternative`}>
-                        {renderArt(response)}
-                      </div>
+              <Container fluid className={`${_p}p-0`}>
+                {part.objectType == "ArtStorageCompliance" &&
+                  <Row className={`${_p}mb-4`}>
+                    <Col md={12}>
+                      {renderArtStorageCompliance(part)}
                     </Col>
-                  ))}
-                </Row>
-              </>
-              }
-            </Container>
+                  </Row>
+                }
+                {alt.length > 0 && <>
+                  {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('Alternative art')}</h5></Col></Row>}
+                  <Row>
+                    {alt.map((response, i) => (
+                      <Col lg={4} key={`alt-${i}`}>
+                        <div className={`${_p}result-compliance-alternative`}>
+                          {renderArt(response)}
+                        </div>
+                      </Col>
+                    ))}
+                  </Row>
+                </>
+                }
+              </Container>
+            </div>
           </div>
         </div>
-      </div> : <></>
+    }
   }
 
   const isHasAlternativeArt = (part) => {
@@ -309,10 +322,8 @@ const Assessment = ({ activeAssessment, ...props }) => {
                     <div>
                       <Badge
                         variant={part.state == "NONCOMPLIANT" ? "danger" : "success"}
-                        label={t(`_comp_${part.state}`)}
+                        label={t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_title`)}
                       />
-                      <span className={`${_p}ml-1 ${_p}mr-1`}> - </span>
-                      <span>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_${part.state}_description`)}</span>
                     </div>
                   </>
                 }>
