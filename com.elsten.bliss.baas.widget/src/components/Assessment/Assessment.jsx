@@ -198,16 +198,16 @@ const Assessment = ({ activeAssessment, ...props }) => {
     switch (part.objectType) {
       case "ArtStorageCompliance":
       case "Compliance":
-        return <div className={`${_p}caccordion-item`}>
+        return <div className={`${_p}accordion-item`}>
           <div className={`${_p}result-compliance`}>
             <div className={`${_p}result-compliance-inner`}>
               {part.objectType != "ArtStorageCompliance" &&
                 <div>
                   <Badge
+                    className="mr-1"
                     variant={part.state == "NONCOMPLIANT" ? "danger" : "success"}
                     label={t(`_comp_${part.state}`)}
                   />
-                  <span className={`${_p}ml-1 ${_p}mr-1`}> - </span>
                   <span>{t(`_comp_${part.source.category.toLowerCase()}_${part.source.policyDescriptor.toLowerCase()}_${part.state}_description`)}</span>
                 </div>
 
@@ -271,7 +271,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
     }
 
     return other.length > 0 ?
-      <div className={`${_p}caccordion-item ${_p}pl-0 ${_p}pr-0`}>
+      <div className={`${_p}accordion-item ${_p}pl-0 ${_p}pr-0`}>
         <div className={`${_p}result-compliance`}>
           <div className={`${_p}result-compliance-inner`}>
             <Container fluid className={`${_p}p-0`}>

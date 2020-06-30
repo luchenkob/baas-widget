@@ -158,9 +158,9 @@ const Result = ({ activeAlbum, ...props }) => {
   const renderTitleByType = (type) => {
     switch (type) {
       case "ext":
-        return t('The following files will be ignored');
+        return t('_warning_ignorefiles_description');
       case "exc":
-        return t(`This widget is limited to assesing up to ${converter.toWords(config.limitFiles)} music files, rounded down to the nearest full album. We ignored`);
+        return t('_warning_filecount_description');
     }
 
   }
