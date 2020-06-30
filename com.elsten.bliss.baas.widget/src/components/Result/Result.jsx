@@ -21,7 +21,7 @@ const Artist = ({ ...props }) => {
 const Result = ({ activeAlbum, ...props }) => {
 
   const { files, origFiles, errors } = props;
-  const { dispatch, config } = useContext(Context);
+  const { dispatch, config, container } = useContext(Context);
   const { t } = useTranslation();
   const [details, setDetails] = useState({ isActive: false, track: {} });
   const [isHelpModal, setIsHelpModal] = useState(false);
@@ -188,15 +188,15 @@ const Result = ({ activeAlbum, ...props }) => {
           </Row>
         </Container>
       </div>
-      <Modal title={t('Track details')} show={details.isActive} onClose={() => setDetails(previuos => ({ ...previuos, isActive: false }))}>
+      <Modal container={container.current} title={t('Track details')} show={details.isActive} onClose={() => setDetails(previuos => ({ ...previuos, isActive: false }))}>
         <ModalDetails track={details.track} />
       </Modal>
 
-      <Modal title={t(config.previewStepHelpTitleHtml)} className={`${_p}small`} show={isHelpModal} onClose={() => setIsHelpModal(false)}>
+      <Modal container={container.current} title={t(config.previewStepHelpTitleHtml)} className={`${_p}small`} show={isHelpModal} onClose={() => setIsHelpModal(false)}>
         <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.previewStepHelpContentHtml) }}></p>
       </Modal>
 
-      <Modal title={t("Scanning issues")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
+      <Modal container={container.current} title={t("Scanning issues")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
         {getErrorsLength() > 0 &&
           errors.map((error, i) => (
             error.files.length > 0 &&

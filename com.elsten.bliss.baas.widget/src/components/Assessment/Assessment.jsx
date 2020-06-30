@@ -21,7 +21,7 @@ const Artist = ({ ...props }) => {
 const Assessment = ({ activeAssessment, ...props }) => {
 
   const { isProcessing, assessments, errors, origFiles } = props;
-  const { dispatch, config } = useContext(Context);
+  const { dispatch, config, container } = useContext(Context);
   const { t } = useTranslation();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isHelpModal, setIsHelpModal] = useState(false);
@@ -403,22 +403,22 @@ const Assessment = ({ activeAssessment, ...props }) => {
           </Row>
         </Container>
 
-        <Modal title={t(config.assessmentStepHelpTitleHtml)} className={`${_p}small`} show={isHelpModal} onClose={() => setIsHelpModal(false)}>
+        <Modal container={container.current} title={t(config.assessmentStepHelpTitleHtml)} className={`${_p}small`} show={isHelpModal} onClose={() => setIsHelpModal(false)}>
           <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.assessmentStepHelpContentHtml) }}></p>
         </Modal>
 
-        <Modal title={t("The compliance details")} className={`${_p}small`} show={isComplDetail} onClose={() => setIsComplDetail(false)}>
+        <Modal container={container.current} title={t("The compliance details")} className={`${_p}small`} show={isComplDetail} onClose={() => setIsComplDetail(false)}>
           <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: complianceDetail }}></p>
         </Modal>
 
-        <Modal show={isFixModal} className={`${_p}small`} onClose={() => setIsFixModal(false)}>
+        <Modal container={container.current} show={isFixModal} className={`${_p}small`} onClose={() => setIsFixModal(false)}>
           <h3 className={`${_p}text-center ${_p}w-100`}>{mPart && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_title`)}</h3>
           <div className={`${_p}text-center ${_p}text-regular`}>{mPart && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_fix_description`)},</div>
           <div className={`${_p}text-center ${_p}text-regular ${_p}mb-4`} dangerouslySetInnerHTML={{ __html: t(config.fixHtml) }}></div>
           <div className={`${_p}text-center`}><Button variant="primary" onClick={handleLinktoBliss} dangerouslySetInnerHTML={{ __html: t(config.completeLabel) }}></Button></div>
         </Modal>
 
-        <Modal title={mPart && artType && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_${artType.type.toLowerCase()}_title`)} className={`${_p}small`} show={isArtDetail} onClose={() => setIsArtDetail(false)}>
+        <Modal container={container.current} title={mPart && artType && t(`_comp_${mPart.source.category.toLowerCase()}_${mPart.source.policyDescriptor.toLowerCase()}_${artType.type.toLowerCase()}_title`)} className={`${_p}small`} show={isArtDetail} onClose={() => setIsArtDetail(false)}>
           {artType && artType.missing.length > 0 &&
             <div>
               <h6 className={`${_p}pt-2 ${_p}pb-1 ${_p}d-flex ${_p}align-items-center`}>
