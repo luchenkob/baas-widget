@@ -17,7 +17,7 @@ i18n
 
           "uploader_uploader_cta": "Drag 'n' drop music files here, or click to select",
           "uploader_missed_album_title": "Unknown",
-
+          
           "notification_processing_title": "Processing",
           "notification_processing_separator": "of",
           "notification_empty_files": "Please choose files",
