@@ -77,7 +77,7 @@ Additional:
 *   `assessmentStepHelpContentHtml`: The help message for the assesment help popup [`html`]
 *   `showPoweredBy`: Copyright. [`true, false`] default `true`
 *   `height`: The height of the app. [`%, px`] default `100%`
-*   `translations`: { key : value }
+*   `translation`: { key : value }
 
 ## Callbacks
 
