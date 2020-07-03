@@ -31,7 +31,7 @@ const ViewResult = (state) => {
       dispatch({
         type: "SET_NOTIFICATION", data: {
           isProcessing: true,
-          processingMessage: "Submitting music for assessment",
+          processingMessage: t('notification_submitting'),
           isBussy: true
         }
       })
@@ -88,7 +88,7 @@ const ViewResult = (state) => {
         ApiService.post("assessment", data, config).then(result => {
           if (result.headers.location) {
             localStorage.setItem('assessment', result.headers.location);
-            dispatch({ type: "SET_STEP", data: { step: 3, processingMessage: "Checking for missing artwork", } })
+            dispatch({ type: "SET_STEP", data: { step: 3, processingMessage: t('notification_checking'), } })
           }
         }, error => {
           dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${error}`, notificationType: "danger", isProcessing: false, isBussy: false } })
@@ -102,8 +102,8 @@ const ViewResult = (state) => {
   return (
     <LayoutContent slots={[
       <Result {...state} />,
-      <Button variant="light" disabled={isBussy ? true : false} onClick={handleUploadAgain}>{t("Choose files")}</Button>,
-      <Button variant="secondary" disabled={isBussy ? true : false} className={`${_p}ml-4`} onClick={handleAssess}>{t("Find missing artwork")}</Button>
+      <Button variant="light" disabled={isBussy ? true : false} onClick={handleUploadAgain}>{t("result_nav_cancel")}</Button>,
+      <Button variant="secondary" disabled={isBussy ? true : false} className={`${_p}ml-4`} onClick={handleAssess}>{t("result_nav_next")}</Button>
     ]} />
   );
 }

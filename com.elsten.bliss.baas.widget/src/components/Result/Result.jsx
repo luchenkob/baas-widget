@@ -98,11 +98,11 @@ const Result = ({ activeAlbum, ...props }) => {
         for (let i = 1; i < x; i++) {
           res.push(
             <div key={`d-${i}`}>
-              {getDiscCount(files[active]) > 1 && <h4 className={`${i > 1 ? `${_p}mt-2` : ""}`}>{`${i < getDiscCount(files[active]) + 1 ? `${t("Disk")} ${i}` : t("[no disk number]")}`}</h4>}
+              {getDiscCount(files[active]) > 1 && <h4 className={`${i > 1 ? `${_p}mt-2` : ""}`}>{`${i < getDiscCount(files[active]) + 1 ? `${t("result_list_disk")} ${i}` : t("result_list_nodisk")}`}</h4>}
               <div className={`${_p}result-album-inner`}>
                 <div className={`${_p}result-tittle`}>
-                  <div>{t('№')}</div>
-                  <div>{t('Name')}</div>
+                  <div>{t('result_list_header_num')}</div>
+                  <div>{t('result_list_header_name')}</div>
                   <div></div>
                 </div>
                 {files[active] && files[active].map((track, z) => (
@@ -123,8 +123,8 @@ const Result = ({ activeAlbum, ...props }) => {
           return (
             <div className={`${_p}result-album-inner`}>
               <div className={`${_p}result-tittle`}>
-                <div>{t('№')}</div>
-                <div>{t('Name')}</div>
+                <div>{t('result_list_header_num')}</div>
+                <div>{t('result_list_header_name')}</div>
                 <div></div>
               </div>
               {files[active] && files[active].map((track, i) => (
@@ -172,7 +172,7 @@ const Result = ({ activeAlbum, ...props }) => {
       )}
       <div className={`${_p}result-title`}>
         <div className={`${_p}d-flex ${_p}align-items-center`}>
-          <h4 className={`${_p}mb-0`}>{t('Found')} {converter.toWords(Object.keys(files).length)} {Object.keys(files).length > 1 ? t('albums') : t('album')}</h4>
+          <h4 className={`${_p}mb-0`}>{t('result_header_part_1')} {converter.toWords(Object.keys(files).length)} {Object.keys(files).length > 1 ? t('result_header_part_3') : t('result_header_part_2')}</h4>
           <div className={`${_p}result-title-icon ${_p}ml-2`} onClick={() => setIsHelpModal(true)}><Icon variant="help" /></div>
         </div>
       </div>
@@ -188,7 +188,7 @@ const Result = ({ activeAlbum, ...props }) => {
           </Row>
         </Container>
       </div>
-      <Modal container={container.current} title={t('Track details')} show={details.isActive} onClose={() => setDetails(previuos => ({ ...previuos, isActive: false }))}>
+      <Modal container={container.current} title={t('result_modal_detail_title')} show={details.isActive} onClose={() => setDetails(previuos => ({ ...previuos, isActive: false }))}>
         <ModalDetails track={details.track} />
       </Modal>
 
@@ -196,7 +196,7 @@ const Result = ({ activeAlbum, ...props }) => {
         <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.previewStepHelpContentHtml) }}></p>
       </Modal>
 
-      <Modal container={container.current} title={t("Scanning issues")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
+      <Modal container={container.current} title={t("result_modal_scanning_title")} className={`${_p}small`} show={isErrorsModal} onClose={() => setIsErrorsModal(false)}>
         {getErrorsLength() > 0 &&
           errors.map((error, i) => (
             error.files.length > 0 &&

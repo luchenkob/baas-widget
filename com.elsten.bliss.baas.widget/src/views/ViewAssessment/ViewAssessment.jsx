@@ -30,7 +30,7 @@ const ViewAssessment = (state) => {
     endTimeout = setTimeout(() => {
       clearInterval(interval);
       clearTimeout(endTimeout);
-      dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t('Error: Unable to get Assessment'), notificationType: "danger", isProcessing: false, isBussy: false } })
+      dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t('notification_assessment_failed_get'), notificationType: "danger", isProcessing: false, isBussy: false } })
     }, config.endTimeout);
   }, [])
 
@@ -62,7 +62,7 @@ const ViewAssessment = (state) => {
   const checkJob = (callback) => {
     ApiService.get(`job/${id}`, config).then(result => {
 
-      dispatch({ type: "SET_STEP", data: { processingMessage: t('Retrieving results'), } })
+      dispatch({ type: "SET_STEP", data: { processingMessage: t('assessment_processing_retrieving'), } })
 
       switch (result.data.status) {
 
@@ -75,7 +75,7 @@ const ViewAssessment = (state) => {
         case "Failed":
           clearInterval(interval);
           clearTimeout(endTimeout);
-          callback(result.data.status, result.data.failureMsg ? t(result.data.failureMsg) : t('Failed to start assessment'));
+          callback(result.data.status, result.data.failureMsg ? t(result.data.failureMsg) : t('notification_assessment_failed_start'));
           break;
 
         default:
@@ -112,8 +112,8 @@ const ViewAssessment = (state) => {
     <>
       <LayoutContent slots={[
         isMounted ? failed ? <div className={`${_p}msg-box ${_p}failed`}>{failed}</div> : <Assessment {...state} /> : null,
-        <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>{t("Choose files")}</Button>,
-        <Button variant="secondary" disabled={isBussy ? true : false} className={`${_p}ml-4 ${_p}btn-lg`} onClick={handleAssess}>{t("Fix missing artwork")}</Button>
+        <Button variant="light" disabled={isBussy ? true : false} onClick={handleBack}>{t("result_nav_cancel")}</Button>,
+        <Button variant="secondary" disabled={isBussy ? true : false} className={`${_p}ml-4 ${_p}btn-lg`} onClick={handleAssess}>{t("result_nav_next")}</Button>
       ]} />
 
       <Modal container={container.current} show={show} className={`${_p}small`} onClose={() => setShow(false)}>

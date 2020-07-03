@@ -26,7 +26,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
     if (length > 0) {
 
-      dispatch({ type: "SET_DATA", data: { isProcessing: true, len: length, cur: current, errors: errors, processingMessage: `Processing ${current} of ${length}` } })
+      dispatch({ type: "SET_DATA", data: { isProcessing: true, len: length, cur: current, errors: errors, processingMessage: `${t('notification_processing_title')} ${current} ${t('notification_processing_separator')} ${length}` } })
 
       acceptedFiles.forEach(file => {
 
@@ -59,7 +59,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
         }
       });
     }else{
-      dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t("Please choose files"), notificationType: "danger", isProcessing: false, isBussy: false } })
+      dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t("notification_empty_files"), notificationType: "danger", isProcessing: false, isBussy: false } })
       setTimeout(()=>{
         dispatch({ type: "SET_NOTIFICATION", data: { isNotification: false, }})
       },4000)
@@ -71,7 +71,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
   const setProgress = () => {
 
     current++;
-    dispatch({ type: "SET_DATA", data: { isProcessing: true, cur: current, len: length, errors: errors, processingMessage: `${t('Processing')} ${current} ${t('of')} ${length}` } })
+    dispatch({ type: "SET_DATA", data: { isProcessing: true, cur: current, len: length, errors: errors, processingMessage: `${t('notification_processing_title')} ${current} ${current} ${t('notification_processing_separator')} ${length}` } })
 
     if (current == length) {
       filterData();
@@ -92,7 +92,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
       if (tempFile.type !== "image/jpeg" && tempFile.type !== "image/png") {
 
-        let key = typeof tempFile.common.album === "undefined" ? t('Unknown') : tempFile.common.album;
+        let key = typeof tempFile.common.album === "undefined" ? t('uploader_missed_album_title') : tempFile.common.album;
 
         if (!result[key]) result[key] = [];
 
@@ -151,7 +151,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
           errors[1].files.push(file.path);
         })
 
-        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t(`${length} audio files have been chosen. We limit this demo to the assessment of ${converter.toWords(config.limitFiles)} audio files, so we'll just send up to that number, whole albums only.`), errors: errors, notificationType: "danger" } })
+        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${length} ${t("notification_limit_part_1")} ${converter.toWords(config.limitFiles)} ${t("notification_limit_part_2")}`, errors: errors, notificationType: "danger" } })
         
         setTimeout(()=>{
           dispatch({ type: "SET_NOTIFICATION", data: { isNotification: false } })
@@ -184,7 +184,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
         <input {...getInputProps()} />
         {config.uploaderCtaHtml ?
           <div dangerouslySetInnerHTML={{ __html: t(config.uploaderCtaHtml) }}></div>
-          : <div><p className={`${_p}mb-0`}>{t("Drag 'n' drop music files here, or click to select")}</p></div>
+          : <div><p className={`${_p}mb-0`}>{t("uploader_uploader_cta")}</p></div>
         }
       </div>
     </div>

@@ -275,7 +275,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
         <div className={`${_p}result-compliance`}>
           <div className={`${_p}result-compliance-inner`}>
             <Container fluid className={`${_p}p-0`}>
-              {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('Other fixes')}</h5></Col></Row>}
+              {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('assessment_list_other_fixes')}</h5></Col></Row>}
               {other.map((response, i) => (
                 <Row className={`${_p}mb-2`} key={`resp-${i}`}>
                   <Col>
@@ -285,7 +285,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                           <span>{t(response.description)}</span>
                         </Col>
                         <Col lg={4} className={`${_p}d-flex ${_p}align-items-center ${_p}pt-2 ${_p}pb-2 ${_p}justify-content-lg-end ${_p}justify-content-center`}>
-                          <Button variant="primary" className={`${_p}m-2`} onClick={() => openFixModal(part)}>{t('Fix')}</Button>
+                          <Button variant="primary" className={`${_p}m-2`} onClick={() => openFixModal(part)}>{t('assessment_list_fix')}</Button>
                         </Col>
                       </Row>
                     </Container>
@@ -387,7 +387,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
     <div className={`${_p}result ${isProcessing ? `${_p}processing` : ''}`}>
       <div className={`${_p}result-title`}>
         <div className={`${_p}d-flex ${_p}align-items-center`}>
-          <h4 className={`${_p}mb-0`}>{t('Assessment')}</h4>
+          <h4 className={`${_p}mb-0`}>{t('assessment_header_title')}</h4>
           <div className={`${_p}result-title-icon ${_p}ml-2`} onClick={() => setIsHelpModal(true)}><Icon variant="help" /></div>
         </div>
       </div>
@@ -407,7 +407,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
           <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: t(config.assessmentStepHelpContentHtml) }}></p>
         </Modal>
 
-        <Modal container={container.current} title={t("The compliance details")} className={`${_p}small`} show={isComplDetail} onClose={() => setIsComplDetail(false)}>
+        <Modal container={container.current} title={t("assessment_modal_detail_title")} className={`${_p}small`} show={isComplDetail} onClose={() => setIsComplDetail(false)}>
           <p className={`${_p}mb-0 ${_p}text-regular`} dangerouslySetInnerHTML={{ __html: complianceDetail }}></p>
         </Modal>
 
