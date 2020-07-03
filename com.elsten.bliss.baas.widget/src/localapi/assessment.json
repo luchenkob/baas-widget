@@ -1,79 +1,30 @@
 [
   {
     "album": {
-      "title": "scott 4",
+      "title": "THE ABBEY ROAD EP",
       "artists": [
-        "scott walker"
+        "Spiritualized"
       ],
       "tracks": [
         {
-          "title": "hero of the war",
+          "title": "come together",
           "path": {
             "lib": "/",
-            "path": "hero_of_the_war.flac"
+            "path": "1-come_together.mp3"
           }
         },
         {
-          "title": "angels of ashes",
+          "title": "broken heart (instrumental)",
           "path": {
             "lib": "/",
-            "path": "angels_of_ashes.flac"
+            "path": "3-broken_heart_(instrumental).mp3"
           }
         },
         {
-          "title": "the seventh seals",
+          "title": "broken heart",
           "path": {
             "lib": "/",
-            "path": "the_seventh_seals.flac"
-          }
-        },
-        {
-          "title": "boy child",
-          "path": {
-            "lib": "/",
-            "path": "boy_child.flac"
-          }
-        },
-        {
-          "title": "get behind me",
-          "path": {
-            "lib": "/",
-            "path": "get_behind_me.flac"
-          }
-        },
-        {
-          "title": "the old man\u0027s back again",
-          "path": {
-            "lib": "/",
-            "path": "the_old_man\u0027s_back_again.flac"
-          }
-        },
-        {
-          "title": "duchess",
-          "path": {
-            "lib": "/",
-            "path": "duchess.flac"
-          }
-        },
-        {
-          "title": "the world\u0027s strongest man",
-          "path": {
-            "lib": "/",
-            "path": "the_world\u0027s_strongest_man.flac"
-          }
-        },
-        {
-          "title": "rhymes of goodbye",
-          "path": {
-            "lib": "/",
-            "path": "rhymes_of_goodbye.flac"
-          }
-        },
-        {
-          "title": "on your own again",
-          "path": {
-            "lib": "/",
-            "path": "on_your_own_again.flac"
+            "path": "2-broken_heart.mp3"
           }
         }
       ]
@@ -92,81 +43,38 @@
                       "width": 0,
                       "height": 0
                     },
-                    "location": "baas:/rhymes_of_goodbye.flac#coverart"
+                    "location": "baas:/track1-1.mp3#coverart"
                   },
                   {
                     "info": {
                       "width": 0,
                       "height": 0
                     },
-                    "location": "baas:/angels_of_ashes.flac#coverart"
+                    "location": "baas:/2-broken_heart.mp3#coverart"
                   },
                   {
                     "info": {
                       "width": 0,
                       "height": 0
                     },
-                    "location": "baas:/the_seventh_seals.flac#coverart"
-                  },
-                  {
-                    "info": {
-                      "width": 0,
-                      "height": 0
-                    },
-                    "location": "baas:/boy_child.flac#coverart"
-                  },
-                  {
-                    "info": {
-                      "width": 0,
-                      "height": 0
-                    },
-                    "location": "baas:/get_behind_me.flac#coverart"
-                  },
-                  {
-                    "info": {
-                      "width": 0,
-                      "height": 0
-                    },
-                    "location": "baas:/the_world\u0027s_strongest_man.flac#coverart"
-                  },
-                  {
-                    "info": {
-                      "width": 0,
-                      "height": 0
-                    },
-                    "location": "baas:/duchess.flac#coverart"
-                  },
-                  {
-                    "info": {
-                      "width": 0,
-                      "height": 0
-                    },
-                    "location": "baas:/the_old_man\u0027s_back_again.flac#coverart"
-                  },
-                  {
-                    "info": {
-                      "width": 0,
-                      "height": 0
-                    },
-                    "location": "baas:/hero_of_the_war.flac#coverart"
-                  },
-                  {
-                    "info": {
-                      "width": 0,
-                      "height": 0
-                    },
-                    "location": "baas:/on_your_own_again.flac#coverart"
+                    "location": "baas:/1-come_together.mp3#coverart"
                   }
                 ],
                 "missing": []
               },
               {
                 "type": "image-file",
-                "state": "NONCOMPLIANT",
-                "extant": [],
-                "missing": [
-                  "baas:/folder"
-                ]
+                "state": "COMPLIANT",
+                "extant": [
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/folder.jpg"
+                  }
+                ],
+                "missing": []
               }
             ],
             "objectType": "ArtStorageCompliance",
@@ -174,50 +82,9 @@
               "category": "CoverArtPolicy",
               "policyDescriptor": "missing"
             },
-            "state": "NONCOMPLIANT",
-            "summary": "Missing art",
-            "detail": "Missing /folder.jpg",
-            "responses": [
-              {
-                "url": "baas:/rhymes_of_goodbye.flac#coverart",
-                "width": 0,
-                "height": 0,
-                "realPath": "/rhymes_of_goodbye.flac",
-                "objectType": "InstallImageFromUrlResponse"
-              }
-            ]
-          },
-          {
-            "objectType": "Compliance",
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "max-size"
-            },
             "state": "COMPLIANT",
-            "summary": "Artwork is the correct...",
-            "detail": "Artwork is the correct size",
-            "responses": []
-          },
-          {
-            "objectType": "Compliance",
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "maxDataSizeBytes"
-            },
-            "state": "COMPLIANT",
-            "summary": "compliant",
-            "detail": "compliant",
-            "responses": []
-          },
-          {
-            "objectType": "Compliance",
-            "source": {
-              "category": "CoverArtPolicy",
-              "policyDescriptor": "img-formats"
-            },
-            "state": "COMPLIANT",
-            "summary": "compliant",
-            "detail": "compliant",
+            "summary": "Art is installed in th...",
+            "detail": "Art is installed in this album",
             "responses": []
           }
         ]

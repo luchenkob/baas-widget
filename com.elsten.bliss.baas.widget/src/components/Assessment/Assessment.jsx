@@ -353,6 +353,9 @@ const Assessment = ({ activeAssessment, ...props }) => {
       if (part.objectType == "ExtantArtCompliance") {
         cover = getArt(part.images[0].location);
       }
+      if (part.objectType == "ArtStorageCompliance") {
+        cover = getArt(part.locationTypes[0].extant[0].location);
+      }
     })
 
     return cover ? <div style={{ background: `url(${cover})` }}></div> : <Icon variant="empty" />;

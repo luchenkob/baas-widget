@@ -1,0 +1,228 @@
+[
+  {
+    "album": {
+      "title": "scott 4",
+      "artists": [
+        "scott walker"
+      ],
+      "tracks": [
+        {
+          "title": "hero of the war",
+          "path": {
+            "lib": "/",
+            "path": "hero_of_the_war.flac"
+          }
+        },
+        {
+          "title": "angels of ashes",
+          "path": {
+            "lib": "/",
+            "path": "angels_of_ashes.flac"
+          }
+        },
+        {
+          "title": "the seventh seals",
+          "path": {
+            "lib": "/",
+            "path": "the_seventh_seals.flac"
+          }
+        },
+        {
+          "title": "boy child",
+          "path": {
+            "lib": "/",
+            "path": "boy_child.flac"
+          }
+        },
+        {
+          "title": "get behind me",
+          "path": {
+            "lib": "/",
+            "path": "get_behind_me.flac"
+          }
+        },
+        {
+          "title": "the old man\u0027s back again",
+          "path": {
+            "lib": "/",
+            "path": "the_old_man\u0027s_back_again.flac"
+          }
+        },
+        {
+          "title": "duchess",
+          "path": {
+            "lib": "/",
+            "path": "duchess.flac"
+          }
+        },
+        {
+          "title": "the world\u0027s strongest man",
+          "path": {
+            "lib": "/",
+            "path": "the_world\u0027s_strongest_man.flac"
+          }
+        },
+        {
+          "title": "rhymes of goodbye",
+          "path": {
+            "lib": "/",
+            "path": "rhymes_of_goodbye.flac"
+          }
+        },
+        {
+          "title": "on your own again",
+          "path": {
+            "lib": "/",
+            "path": "on_your_own_again.flac"
+          }
+        }
+      ]
+    },
+    "assessment": {
+      "compliance": {
+        "parts": [
+          {
+            "locationTypes": [
+              {
+                "type": "embedded",
+                "state": "COMPLIANT",
+                "extant": [
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/rhymes_of_goodbye.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/angels_of_ashes.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/the_seventh_seals.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/boy_child.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/get_behind_me.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/the_world\u0027s_strongest_man.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/duchess.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/the_old_man\u0027s_back_again.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/hero_of_the_war.flac#coverart"
+                  },
+                  {
+                    "info": {
+                      "width": 0,
+                      "height": 0
+                    },
+                    "location": "baas:/on_your_own_again.flac#coverart"
+                  }
+                ],
+                "missing": []
+              },
+              {
+                "type": "image-file",
+                "state": "NONCOMPLIANT",
+                "extant": [],
+                "missing": [
+                  "baas:/folder"
+                ]
+              }
+            ],
+            "objectType": "ArtStorageCompliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "missing"
+            },
+            "state": "NONCOMPLIANT",
+            "summary": "Missing art",
+            "detail": "Missing /folder.jpg",
+            "responses": [
+              {
+                "url": "baas:/rhymes_of_goodbye.flac#coverart",
+                "width": 0,
+                "height": 0,
+                "realPath": "/rhymes_of_goodbye.flac",
+                "objectType": "InstallImageFromUrlResponse"
+              }
+            ]
+          },
+          {
+            "objectType": "Compliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "max-size"
+            },
+            "state": "COMPLIANT",
+            "summary": "Artwork is the correct...",
+            "detail": "Artwork is the correct size",
+            "responses": []
+          },
+          {
+            "objectType": "Compliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "maxDataSizeBytes"
+            },
+            "state": "COMPLIANT",
+            "summary": "compliant",
+            "detail": "compliant",
+            "responses": []
+          },
+          {
+            "objectType": "Compliance",
+            "source": {
+              "category": "CoverArtPolicy",
+              "policyDescriptor": "img-formats"
+            },
+            "state": "COMPLIANT",
+            "summary": "compliant",
+            "detail": "compliant",
+            "responses": []
+          }
+        ]
+      },
+      "cost": 0
+    }
+  }
+]
