@@ -8,6 +8,13 @@ i18n
     resources: {
       en: {
         translation: {
+
+          "Scanned files": "Scanned files",
+          "Displays the scanned files.": "Displays the scanned files.",
+          "Assessment files": "Assessment files",
+          "Displays the assessment files.": "Displays the assessment files.",
+          "Download and install bliss": "Download and install bliss",
+
           "uploader_uploader_cta": "Drag 'n' drop music files here, or click to select",
           "uploader_missed_album_title": "Unknown",
 
