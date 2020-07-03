@@ -89,7 +89,7 @@ Additional:
 
 default values:
 
-```json
+```javascript
 "Scanned files": "Scanned files",
 "Displays the scanned files.": "Displays the scanned files.",
 "Assessment files": "Assessment files",
