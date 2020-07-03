@@ -69,6 +69,7 @@ i18n
           "_comp_coverartpolicy_max-size_NONCOMPLIANT_description": "Artwork is the incorrect size",
           "_comp_coverartpolicy_missing_fix_description": "To find the missing artwork for your albums",
           "_comp_coverartpolicy_img_formats_fix_description": "To fix image formats in your music library",
+          "_comp_artstoragecompliance_InstallImageFromUrlResponse_title": "Alternative art"
         }
       }
     },

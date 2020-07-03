@@ -221,7 +221,7 @@ const Assessment = ({ activeAssessment, ...props }) => {
                   </Row>
                 }
                 {alt.length > 0 && <>
-                  {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t('Alternative art')}</h5></Col></Row>}
+                  {isTitle && <Row><Col><h5 className={`${_p}mb-4 ${_p}pb-2 ${_p}border-bottom`}>{t(`_comp_${part.objectType.toLowerCase()}_${part.responses[0].objectType}_title`)}</h5></Col></Row>}
                   <Row>
                     {alt.map((response, i) => (
                       <Col lg={4} key={`alt-${i}`}>
