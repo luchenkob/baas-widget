@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { useDropzone } from 'react-dropzone';
 import { Context } from "../../context/context";
 import { useTranslation } from "react-i18next";
-import { getFileExtension, isArrayEqualByFileName } from "../../utils";
+import { getFileExtension, isArrayEqualByFileName, getFromKey } from "../../utils";
 import converter from 'number-to-words';
 import { _p } from "../../defines/config";
 
@@ -13,7 +13,12 @@ import "./Uploader.scss";
 const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
   const { dispatch, state, config } = useContext(Context);
-  let length = 0, current = 0, errors = [{type:"ext", files:[]}, {type:"exc", files:[]}], tempFiles = [], result = {};
+  let length = 0, current = 0, errors = [
+    {type:"type", files:[]},
+    {type:"ext", files:[]},
+    {type:"exc", files:[]},
+    {type:"typ", files:[]},
+  ], tempFiles = [], result = {};
 
   const { t } = useTranslation();
 
@@ -39,7 +44,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
             image.src = entry.target.result;
             image.onload = () => {
 
-              tempFiles.push({ file: file.name, data: entry.target.result, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)), width: image.width, height: image.height });
+              tempFiles.push({ file: file.name, data: entry.target.result, size: file.size, path: file.path, type: renameMimeType(file.type ? file.type : getTypeFromExtension(file.path), getFileExtension(file.path)), width: image.width, height: image.height });
               setProgress();
             };
           });
@@ -48,12 +53,12 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
         } else {
           musicMetadata.parseBlob(file).then(metadata => {
-            tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path, type: renameMimeType(file.type, getFileExtension(file.path)) });
+            if(getTypeFromExtension(file.path)) tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path, type: renameMimeType(file.type ? file.type : getTypeFromExtension(file.path), getFileExtension(file.path)) });
             setProgress();
           },
             error => {
               console.log(error)
-              errors[0].files.push(file.path);
+              errors[1].files.push(file.path);
               setProgress();
             });
         }
@@ -75,6 +80,19 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
     if (current == length) {
       filterData();
+    }
+  }
+
+  const getTypeFromExtension = (fname) => {
+    const ext = getFileExtension(fname);
+    let type = getFromKey(config.mimeTypes, ext);
+
+    if(type) {
+      errors[3].files.push(fname);
+      return type;
+    }else{
+      errors[0].files.push(fname);
+      return false;
     }
   }
 
@@ -148,7 +166,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
         }
 
         excludedFiles.forEach((file)=>{
-          errors[1].files.push(file.path);
+          errors[2].files.push(file.path);
         })
 
         dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${length} ${t("notification_limit_part_1")} ${converter.toWords(config.limitFiles)} ${t("notification_limit_part_2")}`, errors: errors, notificationType: "danger" } })

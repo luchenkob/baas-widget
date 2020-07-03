@@ -52,6 +52,12 @@ export const filterIt = (array, value, key) => {
   );
 }
 
+export const getFromKey = (array, value) => {
+  for (const property in Object.keys(array)) {
+    if(Object.keys(array)[property] == value) return array[Object.keys(array)[property]];
+  }
+}
+
 export const isArrayEqual = (x, y) => {
   return _(x).differenceWith(y, _.isEqual).isEmpty();
 };
