@@ -14,10 +14,10 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
   const { dispatch, state, config } = useContext(Context);
   let length = 0, current = 0, errors = [
-    {type:"type", files:[]},
-    {type:"ext", files:[]},
-    {type:"exc", files:[]},
-    {type:"typ", files:[]},
+    { type: "type", files: [] },
+    { type: "ext", files: [] },
+    { type: "exc", files: [] },
+    { type: "typ", files: [] },
   ], tempFiles = [], result = {};
 
   const { t } = useTranslation();
@@ -53,7 +53,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
         } else {
           musicMetadata.parseBlob(file).then(metadata => {
-            if(getTypeFromExtension(file.path)) tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path, type: renameMimeType(file.type ? file.type : getTypeFromExtension(file.path), getFileExtension(file.path)) });
+            if(checkTypeFromExtension(file.path)) tempFiles.push({ ...metadata, file: file.name, size: file.size, path: file.path, type: renameMimeType(file.type ? file.type : getTypeFromExtension(file.path), getFileExtension(file.path)) });
             setProgress();
           },
             error => {
@@ -63,11 +63,11 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
             });
         }
       });
-    }else{
+    } else {
       dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: t("notification_empty_files"), notificationType: "danger", isProcessing: false, isBussy: false } })
-      setTimeout(()=>{
-        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: false, }})
-      },4000)
+      setTimeout(() => {
+        dispatch({ type: "SET_NOTIFICATION", data: { isNotification: false, } })
+      }, 4000)
     }
   }, [])
 
@@ -76,10 +76,21 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
   const setProgress = () => {
 
     current++;
-    dispatch({ type: "SET_DATA", data: { isProcessing: true, cur: current, len: length, errors: errors, processingMessage: `${t('notification_processing_title')} ${current} ${current} ${t('notification_processing_separator')} ${length}` } })
+    dispatch({ type: "SET_DATA", data: { isProcessing: true, cur: current, len: length, errors: errors, processingMessage: `${t('notification_processing_title')} ${current} ${t('notification_processing_separator')} ${length}` } })
 
     if (current == length) {
       filterData();
+    }
+  }
+
+  const checkTypeFromExtension = (fname) => {
+    const ext = getFileExtension(fname);
+    let type = getFromKey(config.mimeTypes, ext);
+
+    if (type) {
+      return type;
+    } else {
+      return false;
     }
   }
 
@@ -87,10 +98,10 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     const ext = getFileExtension(fname);
     let type = getFromKey(config.mimeTypes, ext);
 
-    if(type) {
+    if (type) {
       errors[3].files.push(fname);
       return type;
-    }else{
+    } else {
       errors[0].files.push(fname);
       return false;
     }
@@ -135,7 +146,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
       dispatch({ type: "SET_DATA", data: { isProcessing: false, isSkipAssesment: false, files: result, origFiles: tempFiles, errors: errors, step: 2 } })
     }
 
-    if(config.onFilesUploaded) config.onFilesUploaded(tempFiles);
+    if (config.onFilesUploaded) config.onFilesUploaded(tempFiles);
   }
 
   const trim = () => {
@@ -145,36 +156,36 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     let acceptedAlbums = [];
     let excludedFiles = [];
 
-    for(const i in result) {
-      if(count < config.limitFiles && (result[i].length < (config.limitFiles - count + 1))) {
+    for (const i in result) {
+      if (count < config.limitFiles && (result[i].length < (config.limitFiles - count + 1))) {
         acceptedAlbums.push(i);
-        result[i].forEach((track)=>{
-          if(!output[i]) output[i] = [];
+        result[i].forEach((track) => {
+          if (!output[i]) output[i] = [];
           output[i].push(track);
           count++;
         })
-      }else{
+      } else {
 
-        if(albumCount == 1) {
-          output[i] = result[i] 
-        }else{
-          for(const i in result) {
-            if(acceptedAlbums.indexOf(i) == -1) {
+        if (albumCount == 1) {
+          output[i] = result[i]
+        } else {
+          for (const i in result) {
+            if (acceptedAlbums.indexOf(i) == -1) {
               excludedFiles.length > 0 ? excludedFiles = excludedFiles.concat(result[i]) : excludedFiles = result[i];
             }
           }
         }
 
-        excludedFiles.forEach((file)=>{
+        excludedFiles.forEach((file) => {
           errors[2].files.push(file.path);
         })
 
         dispatch({ type: "SET_NOTIFICATION", data: { isNotification: true, notificationMessage: `${length} ${t("notification_limit_part_1")} ${converter.toWords(config.limitFiles)} ${t("notification_limit_part_2")}`, errors: errors, notificationType: "danger" } })
-        
-        setTimeout(()=>{
+
+        setTimeout(() => {
           dispatch({ type: "SET_NOTIFICATION", data: { isNotification: false } })
         }, 5000);
-        
+
         break;
       }
 
