@@ -22,6 +22,10 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
 
   const { t } = useTranslation();
 
+  const onFileDialogCancel = useCallback(e => {
+    if (config.onFilesUploaded) config.onFilesUploaded([]);
+  })
+
   const onDrop = useCallback(acceptedFiles => {
 
     length = acceptedFiles.length;
@@ -71,7 +75,7 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
     }
   }, [])
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, onFileDialogCancel })
 
   const setProgress = () => {
 
