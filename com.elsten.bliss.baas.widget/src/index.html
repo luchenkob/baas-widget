@@ -22,8 +22,8 @@
       completeHtml: "To find the missing artwork for your albums,<br/> <a href='/download.html'>download and install bliss</a>",
       completeLabel: "<i class='fa fa-download'></i> Download bliss",
       completeLink: "./download.html",
-      onFilesUploaded: function (e) {
-        console.log(e);
+      onFilesUploaded: function (e, notifications) {
+        console.log(e, notifications);
       },
       onAssessment: function (e) {
         console.log(e);

@@ -150,7 +150,11 @@ const Uploader = ({ len, cur, isProcessing, ...props }) => {
       dispatch({ type: "SET_DATA", data: { isProcessing: false, isSkipAssesment: false, files: result, origFiles: tempFiles, errors: errors, step: 2 } })
     }
 
-    if (config.onFilesUploaded) config.onFilesUploaded(tempFiles);
+    const notifications = errors.filter((error)=>{
+      return error.files.length > 0;
+    })
+
+    if (config.onFilesUploaded) config.onFilesUploaded(tempFiles, notifications);
   }
 
   const trim = () => {
